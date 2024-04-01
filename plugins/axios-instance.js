@@ -1,7 +1,7 @@
 export default ({ $axios, redirect, error }, inject) => {
   const tokenKey = "auth_token";
   const axiosInstance = $axios.create({
-    baseURL: process.env.BASE_URL || 'https://test-api.hirelancer.ndc.uz',
+    baseURL: process.env.BASE_URL || 'https://api.logistic.ndc.uz',
   });
   // axiosInstance.setHeader("Content-Type", "application/json");
 

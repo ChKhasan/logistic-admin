@@ -1,7 +1,7 @@
 export default function ({ $axios, redirect, error }, inject) {
   console.log(process.env.BASE_URL);
   const axios = $axios.create({
-    baseURL: process.env.BASE_URL || "https://test-api.hirelancer.ndc.uz",
+    baseURL: process.env.BASE_URL || "https://api.logistic.ndc.uz",
   });
   axios.setHeader("Content-Type", "application/json");
 
