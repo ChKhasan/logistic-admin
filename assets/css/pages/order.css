@@ -1,0 +1,752 @@
+.order-links {
+  font-family: "Inter", Helvetica, "sans-serif";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000;
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: 5.46px;
+  margin-top: 16px;
+  margin-right: 5px;
+  transition: all 0.4s ease-in;
+}
+.btn_group .add-btn {
+  margin-right: 16px;
+}
+.order-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 16px;
+}
+.order-service-btns .add-btn {
+  margin-right: 16px;
+  height: 40px;
+  padding: 0 20px;
+  font-size: 14px !important;
+}
+.calendar-order-btn {
+  min-height: 50px;
+  font-size: 18px !important;
+}
+.order-list-header-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr 40px 150px;
+  grid-gap: 8px;
+}
+.order-links:hover {
+  color: #000;
+  background: rgba(66 57 57 / 10%) !important;
+}
+.order-links span {
+  margin-right: 5px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.active-orders {
+  color: #000;
+  background: rgba(66 57 57 / 10%) !important;
+}
+.order-light-blue {
+  background: rgb(71, 182, 234);
+}
+.order-black {
+  background: #000;
+}
+.order-blue {
+  background: rgb(27, 69, 236);
+}
+.order-yellow {
+  background: rgb(206, 243, 18);
+}
+.order-purple {
+  background: rgb(243, 18, 213);
+}
+.order-green {
+  background: rgb(11, 95, 55);
+}
+.order-red {
+  background: rgb(243, 18, 18);
+}
+.order-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.order-detail-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 16px;
+}
+.order-details-items:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.order-details-items span svg {
+  width: 19.5px;
+  height: 19.5px;
+  margin-right: 6.5px;
+}
+.order-details-items span {
+  color: #a1a5b7;
+  font-family: "Inter", Helvetica, "sans-serif";
+  font-size: 13.975px;
+  font-weight: 500;
+}
+.order-details-items p {
+  color: #7e8299;
+  font-family: "Inter", Helvetica, "sans-serif";
+  font-size: 13.975px;
+  font-weight: 600;
+}
+.order-details-items .order-user-avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 9.5px;
+}
+.order-details-items .order-user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.order-details-items {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16.25px;
+  padding-bottom: 16.25px;
+  box-shadow: inset 0 0 0 9999px transparent;
+  border-bottom: 1px solid #f4f4f4;
+}
+.order-user {
+  display: flex;
+  align-items: center;
+}
+.abs_img {
+  position: absolute;
+  opacity: 0.3;
+  width: 175px;
+  height: 175px;
+  right: 10px;
+  top: 0;
+}
+.abs_img svg {
+  width: 100%;
+  height: 100%;
+}
+.order-adress-list li {
+  font-family: "Inter", Helvetica, "sans-serif";
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(0, 0, 0, 0.7);
+  margin-bottom: 3px;
+}
+
+.order-edit-grid {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  grid-gap: 16px;
+}
+
+/* form */
+.order-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 24px;
+}
+.order-client-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 2fr 3fr;
+  grid-gap: 24px;
+}
+.order-grid {
+  display: grid;
+  grid-gap: 13px;
+  grid-template-columns: 5fr 2.3fr;
+}
+
+/* bilet */
+
+.bilet-card {
+  background: #fff;
+  border-radius: 8px;
+}
+.bilet-card-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 24px 19px 24px;
+}
+.bilet-card-header h5 {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #020105;
+}
+.bilet-card-header .bilet-card-header-text {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 130%;
+  color: #9a999b;
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+}
+.prodduct-list-header-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr 40px;
+  grid-gap: 8px;
+}
+
+.oroder-filter-grid {
+  display: grid;
+  grid-template-columns: 4fr 2fr 2fr 2fr 40px;
+  grid-gap: 8px;
+}
+.bilet-card-header .bilet-card-header-text p {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #020105;
+  margin-left: 8px;
+}
+
+.bilet-card-body {
+  padding: 0 24px 20px 24px;
+  border-bottom: 1px solid #ebebeb;
+  display: flex;
+  gap: 16px;
+}
+.bilet-card-body .bilet-card-services span {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #1878f3;
+  margin-right: 16px;
+  position: relative;
+}
+.bilet-card-body .bilet-card-services span::after {
+  content: "-";
+  position: absolute;
+  right: -10px;
+}
+.bilet-card-body .bilet-card-services span:last-child:after {
+  content: ":";
+  position: absolute;
+}
+.bilet-card-body p {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #020105;
+}
+.bilet-card-body p span {
+  font-weight: 400;
+  color: #5d5d5f;
+}
+.bilet-card-footer {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bilet-card-footer h6 {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 26px;
+  color: #020105;
+}
+.bilet-card-footer div span {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #9a999b;
+  margin-right: 8px;
+}
+.bilet-card-footer div div {
+  background: #ffffff;
+  padding: 12px 16px;
+  border: 1px solid #e4e6ef;
+  border-radius: 8px;
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+}
+.order-bilets {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 24px;
+}
+/* calendar */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 24px;
+}
+.calendar-date-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 19px;
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+}
+.calendar-date-box .ant-calendar-picker {
+  width: calc(100% - 60px);
+}
+.ant-calendar-picker-input {
+  display: flex;
+  justify-content: space-around;
+}
+.calendar-date-box input {
+  /* background: #ffffff;
+  border: 1px solid #e4e6ef;
+  border-radius: 8px;
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 11px;
+  line-height: 24px;
+  color: #020105;
+  width: 137px; */
+}
+.calendar-date-box input:focus {
+  outline: none;
+}
+.calendar-date-box .ant-time-picker-icon {
+  display: none;
+}
+input[type="date"] {
+  position: relative;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: none;
+  position: absolute;
+  top: -5px;
+  left: -10px;
+  width: 100%;
+  height: 100%;
+}
+.calendar-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
+  height: 75vh;
+  overflow-y: scroll;
+}
+.calendar-days::-webkit-scrollbar,
+.calendar-order-grid::-webkit-scrollbar {
+  width: 5px;
+}
+.calendar-days::-webkit-scrollbar-track,
+.calendar-order-grid::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+.calendar-days::-webkit-scrollbar-thumb,
+.calendar-order-grid::-webkit-scrollbar-thumb {
+  background: rgb(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+.calendar-order-grid {
+  height: 75vh;
+  overflow-y: scroll;
+}
+.calendar-day-card {
+  background: #fff;
+  border-radius: 8px;
+}
+.calendar-day-card-header {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.calendar-day-card-header span {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 150%;
+  color: #353437;
+}
+.calendar-day-card-header p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #020105;
+}
+
+.calendar-day-card-body .calendar-day-card-body-list {
+  display: grid;
+  grid-template-columns: 100px 3fr 45px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-top: 1px solid #e6eef5;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.calendar-day-card-body .calendar-day-card-body-list:hover {
+  background: rgb(24, 144, 255, 0.1);
+}
+.calendar-day-card-body .calendar-day-card-body-list .time {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #5d5d5f;
+}
+.calendar-day-card-body .calendar-day-card-body-list .day {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: right;
+  color: #000;
+}
+.calendar-day-card-body .calendar-day-card-body-list .day span {
+  color: #1878f3;
+}
+.calendar-day-card-body .calendar-day-card-body-list .name {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #020105;
+}
+.calendar-day-card-body .no-place {
+  background: #fdf0f0;
+}
+.calendar-day-card-body .no-place .time,
+.calendar-day-card-body .no-place .name,
+.calendar-day-card-body .no-place .day,
+.calendar-day-card-body .no-place .day span {
+  color: #eb5757;
+}
+
+.calendar-order-card {
+  display: flex;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  justify-content: space-between;
+}
+.calendar-order-card-left h6 {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #020105;
+}
+.calendar-order-card-left .calendar-order-card-services {
+  display: flex;
+  align-items: flex-end;
+}
+.calendar-order-card-left .calendar-order-card-services span {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #1878f3;
+  display: flex;
+  margin-top: 8px;
+  position: relative;
+  margin-right: 20px;
+}
+.calendar-order-card-left .calendar-order-card-services span:nth-last-child(2) {
+  margin-right: 5px;
+}
+.calendar-order-card-left .calendar-order-card-services span::after {
+  content: ">";
+  position: absolute;
+  right: -15px;
+  color: #000;
+}
+.calendar-order-card-left
+  .calendar-order-card-services
+  span:nth-last-child(2)::after {
+  display: none;
+}
+.calendar-order-card-left .calendar-order-card-services p {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #5d5d5f;
+  margin-left: 5px;
+}
+.calendar-order-card-center span {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #9a999b;
+  display: flex;
+  align-items: center;
+}
+.calendar-order-card-center span p {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  margin-left: 24px;
+}
+.calendar-order-card-center h6 {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #1878f3;
+  margin-top: 5px;
+}
+.calendar-order-card-center h5 {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #00cd69;
+  margin-top: 5px;
+}
+.calendar-order-grid {
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: 1fr; */
+  gap: 22px;
+}
+.order-client-tariffs {
+  border-top: 1px solid #d6dee9;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
+}
+.order-client-card {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  justify-content: space-between;
+}
+.order-client-card-tariffs {
+  background: #ffffff;
+  border: 1px solid #e4e6ef;
+  border-radius: 8px;
+  padding: 15px;
+}
+.order-client-card-tariffs span {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1878f3;
+  position: relative;
+  margin-right: 15px;
+}
+.order-client-card-tariffs span::after {
+  content: ">";
+  position: absolute;
+  right: -10px;
+  color: #000;
+}
+.order-client-card-tariffs span:last-child::after {
+  display: none;
+}
+.order-client-card-count {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  color: #020105;
+}
+.order-client-card-count .order-client-card-btn {
+  background: #f8f8f8;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 28px;
+}
+@media (max-width: 1500px) {
+  .calendar-date-box .ant-calendar-picker {
+    width: calc(100% - 40px);
+  }
+  .calendar-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .calendar-order-btn {
+    min-height: 45px;
+    font-size: 14px !important;
+  }
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    grid-gap: 24px;
+  }
+  .calendar-order-card {
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .calendar-order-card-left h6 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .calendar-order-card-left .calendar-order-card-services span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .calendar-order-card-left .calendar-order-card-services p {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    margin-left: 16px;
+  }
+  .calendar-order-card-center span {
+    font-size: 15px;
+    line-height: 24px;
+  }
+  .calendar-order-card-center span p {
+    font-size: 15px;
+    line-height: 24px;
+  }
+  .calendar-order-card-center h6 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .calendar-order-card-center h5 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .calendar-order-card-right {
+    display: flex;
+    align-items: center;
+  }
+  .calendar-date-box {
+    padding: 12px 16px;
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .calendar-date-box input {
+    font-size: 14px;
+    padding: 6px;
+    width: 110px;
+    border-radius: 6px;
+  }
+  .calendar-date-box input:focus {
+    outline: none;
+  }
+  .calendar-date-box .ant-time-picker-icon {
+    display: none;
+  }
+  .calendar-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+  }
+
+  .calendar-day-card-header {
+    padding: 16px 24px;
+  }
+  .calendar-day-card-header span {
+    font-size: 13px;
+  }
+  .calendar-day-card-header p {
+    font-size: 15px;
+  }
+
+  .calendar-day-card-body .calendar-day-card-body-list {
+    padding: 14px 24px;
+  }
+  .calendar-day-card-body .calendar-day-card-body-list .time {
+    font-size: 15px;
+  }
+  .calendar-day-card-body .calendar-day-card-body-list .day {
+    font-size: 14px;
+  }
+  .calendar-day-card-body .calendar-day-card-body-list .day span {
+    color: #1878f3;
+  }
+  .calendar-day-card-body .calendar-day-card-body-list .name {
+    font-size: 15px;
+  }
+  .calendar-day-card-body .no-place {
+    background: #fdf0f0;
+  }
+  .calendar-day-card-body .no-place .time,
+  .calendar-day-card-body .no-place .name,
+  .calendar-day-card-body .no-place .day,
+  .calendar-day-card-body .no-place .day span {
+    color: #eb5757;
+  }
+  .order-client-card {
+    grid-template-columns: 1fr 160px;
+  }
+  .order-client-card-tariffs {
+    padding: 11px;
+  }
+  .order-client-card-tariffs span {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .order-client-card-count {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .order-client-card-count .order-client-card-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,286 @@
+.main-table .ant-table-thead .column-name,
+.main-table .ant-table-thead .column-service,
+.main-table .ant-table-thead .column-actions,
+.main-table .ant-table-thead .column-btns,
+.main-table .ant-table-thead .column-subservice,
+.main-table .ant-table-thead .column-tags,
+.main-table .ant-table-thead .column-client,
+.main-table .ant-table-thead .column-date,
+.main-table .ant-table-thead .column-text{
+  font-family: "TT Interfaces";
+  font-style: normal;
+  background-color: #fff;
+  font-weight: 600 !important;
+  color: #b5b5c3 !important;
+  font-size: 11.7px !important;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  white-space: nowrap;
+}
+
+.service-table .ant-table-thead .column-times,
+.service-table .ant-table-thead .column-additional {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  background-color: #fff;
+  font-weight: 600 !important;
+  color: #b5b5c3;
+  font-size: 11.7px !important;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+}
+.service-table .ant-table-thead .column-name .ant-table-column-title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  color: #181c32;
+}
+.column-service,
+.column-actions,
+.column-subservice,
+.column-client,
+.column-additional {
+  font-size: 14.04px;
+  font-family: "TT Interfaces";
+  font-weight: 500 !important;
+  font-style: normal;
+  line-height: 18px;
+  color: #b5b5c3;
+}
+.column-text {
+  font-size: 14.04px;
+  font-family: "TT Interfaces";
+  font-weight: 500 !important;
+  font-style: normal;
+  line-height: 18px;
+  color: #181c32 !important;
+}
+.column-date {
+  color: #3699ff !important;
+  font-size: 14.04px;
+  font-family: "TT Interfaces";
+  font-weight: 600 !important;
+  font-style: normal;
+  line-height: 18px;
+}
+.column-client {
+  color: #3699ff;
+}
+.column-name {
+  color: #181c32 !important;
+  font-family: "TT Interfaces";
+  font-size: 14.04px;
+  font-weight: 700;
+}
+.tag_success {
+  background: #c9f7f5;
+  color: #18b3bd;
+}
+.tag_mode {
+  background: rgba(164, 171, 182, 0.3);
+  color: #808080;
+}
+.tag_inProgress {
+  background: #fff4de;
+  color: #ffa909;
+}
+.tag_rejected {
+  background: #ffe2e5;
+  color: #f65160;
+}
+.tag_approved {
+  color: #3699ff;
+  background: #e1f0ff;
+}
+.column-tags .tags-style {
+  line-height: 0.6px;
+  border-radius: 5.46px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "TT Interfaces";
+  font-size: 11.7px;
+  font-weight: 500;
+  padding: 0 9.75px;
+  white-space: nowrap;
+}
+.table-image {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+
+  background-color: #f5f8fa;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  border-radius: 6.175px;
+  background: #ffffff;
+  border: 1px solid #ebeef5;
+}
+@media (max-width: 1440px) {
+  .table-image {
+    width: 40px;
+    height: 40px;
+  }
+  .column-service,
+  .column-actions,
+  .column-subservice {
+    font-size: 14px;
+  }
+  .column-name {
+    font-size: 14.04px;
+    color: #181c32 !important;
+  }
+  .service-table .ant-table-thead .column-name .ant-table-column-title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .ant-table-thead .column-name,
+  .ant-table-thead .column-service,
+  .ant-table-thead .column-actions,
+  .ant-table-thead .column-subservice {
+    font-size: 11.7px !important;
+  }
+}
+.ant-table-thead > tr > th {
+  background: #fff !important;
+  border-bottom: 1px dashed #f4f4f4 !important;
+  padding: 14.25px 9.75px 14.25px 0 !important;
+}
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  padding: 9.7px 9.7px 9.7px 0 !important;
+}
+.column-btns span .action-btn {
+  background: #f3f6f9;
+  border-radius: 5.46px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.column-btns .el-dropdown .el-dropdown-link {
+  display: flex;
+  padding: 8px 17.25px;
+  color: #7e8299;
+  background: #f9f9f9;
+  border-radius: 5.525px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12.35px;
+  line-height: 18px;
+  align-items: center;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.column-btns .el-dropdown .el-dropdown-link:hover {
+  background: #f1faff;
+  color: #009ef7;
+}
+.column-btns .el-dropdown .el-dropdown-link svg {
+  width: 15px;
+  height: 15px;
+}
+.ant-table-thead
+  > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td,
+.ant-table-tbody
+  > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td,
+.ant-table-thead
+  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td,
+.ant-table-tbody
+  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td {
+  background: transparent !important;
+}
+.option-items ul {
+  margin-left: 20px;
+}
+.option-items {
+  padding: 8px 16px;
+  background: #eff2f5;
+  border-radius: 8px;
+  font-family: "TT Interfaces";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #6c7b9a;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+.option-items:last-child {
+  margin-right: 0;
+}
+.table-image {
+  width: 50px;
+  height: 50px;
+  object-fit: contain !important;
+  background-color: #f5f8fa !important;
+  background-repeat: no-repeat !important;
+  background-position: center center;
+  background-size: contain !important;
+  border-radius: 6.175px;
+  background: #ffffff;
+}
+.table-page-size .ant-select-selection--single {
+  height: 34px;
+  width: 72px;
+  background: #f9f9f9;
+  border: none;
+}
+.table-page-size .ant-select-selection-selected-value {
+  background: #f9f9f9;
+}
+.table-pagination .ant-pagination-item-active {
+  background: #009ef7;
+  color: #ffffff !important;
+}
+.table-pagination .ant-pagination-item-active:hover,
+.table-pagination .ant-pagination-item-active:focus {
+  background: #009ef7 !important;
+}
+.table-pagination .ant-pagination-item-active:hover a,
+.table-pagination .ant-pagination-item-active:focus a {
+  color: #ffffff !important;
+}
+
+.table-pagination .ant-pagination-item-active a {
+  pointer-events: none !important;
+}
+.table-pagination .ant-pagination-item a {
+  font-weight: 600;
+  pointer-events: none !important;
+}
+.table-pagination .ant-pagination-item {
+  border: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.475rem;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+.table-pagination .ant-pagination-item:hover {
+  color: #009ef7;
+  background: #f9f9f9;
+}
+.ant-pagination-item-link:hover {
+  color: #009ef7;
+  background: #f9f9f9 !important;
+}
+.ant-pagination-item-link {
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}

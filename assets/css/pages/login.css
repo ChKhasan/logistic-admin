@@ -1,0 +1,76 @@
+.login_container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 100%;
+  background-color: #181c32;
+  background-image: url(../../images/bg-login.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: contain;
+  background-position-y: bottom;
+}
+.login_block {
+  width: 500px;
+  padding: 48px !important;
+  border-radius: 0.475rem !important;
+  background-color: #fff;
+}
+.login_header {
+  display: flex;
+  justify-content: center;
+}
+.login_header h1 {
+  color: #181c32 !important;
+  font-family: "Poppins", Helvetica, "sans-serif";
+  font-weight: 600 !important;
+  font-size: 22px !important;
+}
+.login_btn {
+  background: #009ef7;
+  color: #fff;
+  font-family: "Poppins", Helvetica, "sans-serif";
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  padding: 11.7px 23.7px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1.25rem !important;
+  border: none;
+  width: 100%;
+}
+.login_input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+.login_input a,
+.login_input label {
+  font-family: "Poppins", Helvetica, "sans-serif";
+  font-weight: 600 !important;
+  font-size: 15px !important;
+}
+.login_input label {
+  color: #181c32 !important;
+  margin-bottom: 0.5rem;
+}
+.login_input input {
+  padding: 10.5px 19.5px;
+  font-family: "Poppins", Helvetica, "sans-serif";
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  line-height: 24px;
+  border-radius: 0.625rem;
+  color: #181c32 !important;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  background-color: #e8f0fe !important;
+  border: none;
+}
+.login_input a,
+.login_input label {
+  font-family: "Poppins", Helvetica, "sans-serif";
+  font-weight: 600 !important;
+  font-size: 15px !important;
+}

@@ -1,0 +1,56 @@
+.services-grid {
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: 1fr;
+}
+
+.grid-with-img {
+  display: grid;
+  grid-template-columns: auto 273px;
+  grid-gap: 24px;
+}
+.grid-with-img .clearfix {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.grid-with-img .ant-upload-list-picture-card-container,
+.grid-with-img .ant-upload-list-picture-card .ant-upload-list-item,
+.grid-with-img .ant-upload.ant-upload-select-picture-card {
+  width: 100%;
+  height: 273px;
+}
+.service-upload-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 24px;
+}
+.service-upload .ant-upload-list-picture-card-container,
+.service-upload .ant-upload-list-picture-card .ant-upload-list-item,
+.service-upload .ant-upload.ant-upload-select-picture-card {
+  width: 100%;
+  height: 150px;
+}
+
+.faqs-grid {
+  margin-bottom: 24px;
+}
+.faqs-grid:last-child {
+  margin-bottom: 0;
+}
+.grid-with-btn {
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  grid-gap: 24px;
+}
+.statistic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 12px;
+}
+.btn_group .add-btn {
+  margin-right: 16px;
+}
+.padding-editor .ql-snow {
+  padding-right: 11px;
+}

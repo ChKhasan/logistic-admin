@@ -1,0 +1,129 @@
+.prodduct-list-header-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr 40px;
+  grid-gap: 8px;
+}
+.card_header {
+  padding: 16.25px 0;
+}
+
+.grid-3 {
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-3-with-2delete {
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: 2fr 1fr auto;
+}
+.grid-2-with-2delete {
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: 1fr auto !important;
+}
+.grid-2-with {
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: auto 1fr auto !important;
+}
+.index-block {
+  width: 42px;
+  height: 100%;
+  background: #fff;
+  border: 1px solid #e4e6ef;
+  border-radius: 6.175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.statistic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 12px;
+}
+
+.seans-card {
+  background: #ffffff;
+  border: 1px solid #e4e6ef;
+  border-radius: 8px;
+}
+
+.seans-card .seans-card-header {
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.seans-card .seans-card-header h5 {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #020105;
+}
+.seans-card .seans-card-header span {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #5d5d5f;
+  margin-left: 20px;
+}
+.seans-card .seans-card-body {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 16px;
+}
+.seans-card .seans-card-body > span {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ff0000;
+  margin-bottom: 6px;
+}
+.seans-card .seans-card-body > p {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #5d5d5f;
+}
+.seans-card .seans-card-body > p > span {
+  font-weight: 500;
+  color: #020105;
+}
+.seans-card .seans-card-footer {
+  border-top: 1px solid #ebebeb;
+  padding: 17px 24px 24px 24px;
+}
+.seans-card .seans-card-footer span {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 26px;
+  text-decoration-line: underline;
+  color: #40bff4;
+}
+.seans-card .seans-card-footer span svg {
+  margin-right: 5px;
+}
+.seans-card .seans-card-footer h6 {
+  font-family: "TT Interfaces";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 26px;
+  text-align: right;
+  color: #020105;
+}
+.tariff-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
+}

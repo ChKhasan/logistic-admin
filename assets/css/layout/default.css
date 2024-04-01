@@ -1,0 +1,270 @@
+.ant-menu {
+  background: #1e1e2d !important;
+  padding-left: 12px;
+}
+.layout-logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 17px;
+  position: relative;
+  transition: all 5s !important;
+  background: transparent;
+  border-bottom: 1px dashed #393945;
+  height: 70px;
+}
+.logo-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #fff;
+}
+.ant-layout-sider {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  left: 0;
+  z-index: 2000;
+}
+.ant-menu-sub .ant-menu-item {
+  /* padding-left: 12px !important; */
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.a_menu {
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 20px;
+}
+.a_menu::-webkit-scrollbar {
+  width: 10px;
+}
+.a_menu::-webkit-scrollbar-track {
+  background: transparent;
+  scroll-padding: 2px;
+}
+.a_menu::-webkit-scrollbar-thumb {
+  background: #646477;
+  opacity: 0;
+  border-radius: 5px;
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+.ant-layout-sider-children {
+  display: grid;
+  grid-template-rows: 65px auto 70px;
+  background: #1e1e2d !important;
+}
+.menu-bullet {
+  display: flex;
+  align-items: center;
+  width: 1.25rem;
+  margin-right: 0.5rem;
+  transition: 0s;
+}
+.el-menu-item-group .is-active .bullet-dot {
+  background: #fff;
+}
+.menu-bullet .bullet-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 100% !important;
+  background-color: #9899ac;
+}
+/* #components-layout-demo-top-side-2 .logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 28px 16px 0;
+  float: left;
+} */
+.ant-menu-submenu-title {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.ant-menu-submenu-title svg {
+  margin-right: 10px;
+}
+.ant-menu-submenu-vertical
+  > .ant-menu-submenu-title:hover
+  .ant-menu-submenu-arrow::after,
+.ant-menu-submenu-vertical-left
+  > .ant-menu-submenu-title:hover
+  .ant-menu-submenu-arrow::after,
+.ant-menu-submenu-vertical-right
+  > .ant-menu-submenu-title:hover
+  .ant-menu-submenu-arrow::after,
+.ant-menu-submenu-inline
+  > .ant-menu-submenu-title:hover
+  .ant-menu-submenu-arrow::after,
+.ant-menu-submenu-vertical
+  > .ant-menu-submenu-title:hover
+  .ant-menu-submenu-arrow::before,
+.ant-menu-submenu-vertical-left
+  > .ant-menu-submenu-title:hover
+  .ant-menu-submenu-arrow::before,
+.ant-menu-submenu-vertical-right
+  > .ant-menu-submenu-title:hover
+  .ant-menu-submenu-arrow::before,
+.ant-menu-submenu-inline
+  > .ant-menu-submenu-title:hover
+  .ant-menu-submenu-arrow::before {
+  background: linear-gradient(to right, #fff, #fff) !important;
+}
+.ant-menu-sub.ant-menu-inline {
+  padding-right: 16px;
+}
+.ant-menu-item a {
+  display: flex;
+  color: #9d9da6;
+  font-family: "Poppins", Helvetica, "sans-serif";
+  height: auto !important;
+  font-family: "Poppins", Helvetica, "sans-serif";
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  line-height: 24px !important;
+}
+.ant-menu-item,
+.ant-menu-submenu-title {
+  display: flex;
+  color: #9d9da6;
+  font-family: "Poppins", Helvetica, "sans-serif";
+  line-height: 24px;
+  height: auto !important;
+  padding: 0.65rem 1rem !important;
+  font-family: "Poppins", Helvetica, "sans-serif";
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  line-height: 24px !important;
+}
+.ant-menu-submenu-title:hover,
+.ant-menu-item:hover,
+.ant-menu-item a:hover {
+  color: #fff;
+}
+.ant-menu-item-selected {
+  background: transparent !important;
+  border-radius: 0.475rem !important;
+}
+.ant-menu-item-selected::after {
+  border-right: 0 !important;
+}
+.layout-right {
+  margin-left: 265px;
+  transition: all 0.2s;
+}
+.logo-collapsed {
+  width: 100%;
+  overflow: hidden;
+}
+
+.menu-collabsed {
+  padding-left: 0 !important;
+}
+
+.menu-collabsed .ant-menu-item-selected {
+  border-radius: 0 !important;
+}
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+  border-right: none;
+}
+.sidebar_toggle {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  background-color: #fff;
+  position: fixed;
+  left: 250px;
+  z-index: 1000;
+  transition: all 0.2s;
+  cursor: pointer;
+  color: #a1a5b7;
+  box-shadow: 0 0 10px rgba(113, 121, 136, 0.1);
+}
+.sidebar_toggle,
+.toolbar-setting a {
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.475rem;
+}
+.sidebar_toggle:hover {
+  color: #009ef7;
+}
+.logo-collapsed .sidebar_toggle {
+  left: 65px;
+  transform: rotate(180deg);
+}
+.layout-header {
+  position: fixed;
+  top: 0;
+  left: 265px;
+  transition: all 0.2s;
+
+  width: calc(100% - 265px);
+  background-color: #fff;
+  color: #333;
+  line-height: 65px;
+  z-index: 100;
+  border-bottom: 1px solid #f4f4f4;
+  padding: 0 30px !important;
+  height: 65px !important;
+}
+.layout-body {
+  margin-top: 65px !important;
+}
+
+.ant-menu-item:active,
+.ant-menu-submenu-title:active {
+  background-color: transparent !important;
+}
+.right-collapsed {
+  margin-left: 80px;
+}
+.right-collapsed .layout-header {
+  left: 80px;
+  width: calc(100% - 80px);
+}
+.ant-layout-sider-trigger {
+  display: none;
+}
+.ant-layout-sider-has-trigger {
+  padding-bottom: 0 !important;
+}
+.ant-layout.ant-layout-has-sider > .ant-layout,
+.ant-layout.ant-layout-has-sider > .ant-layout-content {
+  overflow-x: clip !important;
+}
+.is-active {
+  background: #2a2a3c !important;
+  border-radius: 0.475rem !important;
+  pointer-events: none;
+}
+.is-active,
+.is-active a {
+  color: #fff !important;
+}
+.menu-collabsed .ant-menu-sub {
+  padding-left: 0 !important;
+}
+.menu-collabsed ul {
+  padding-left: 0 !important;
+}
+.ant-menu-inline-collapsed > .ant-menu-item,
+.ant-menu-inline-collapsed
+  > .ant-menu-item-group
+  > .ant-menu-item-group-list
+  > .ant-menu-item,
+.ant-menu-inline-collapsed
+  > .ant-menu-item-group
+  > .ant-menu-item-group-list
+  > .ant-menu-submenu
+  > .ant-menu-submenu-title,
+.ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
+  padding: 0.65rem 1rem !important;
+  display: flex;
+  justify-content: center;
+}

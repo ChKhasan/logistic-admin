@@ -1,0 +1,564 @@
+.form-item label {
+  font-family: "Inter", sans-serif;
+  font-weight: 500 !important;
+  font-size: 13.65px !important;
+  line-height: 24px;
+  margin-bottom: 6.5px;
+  color: #181c32;
+  position: relative;
+  white-space: nowrap;
+  padding-bottom: 0 !important;
+}
+.form-item .ant-select-selection--single .ant-select-selection__rendered {
+  width: 100%;
+  margin-left: 0;
+}
+.select-placeholder
+  .ant-select-selection--single
+  .ant-select-selection__rendered
+  .ant-select-selection__placeholder {
+  display: block !important;
+}
+.form-item
+  .ant-select-selection--single
+  .ant-select-selection__rendered
+  .ant-select-selection__placeholder {
+  color: #a1a5bf;
+  font-family: "Inter", sans-serif;
+  font-weight: 400 !important;
+  font-size: 14.3px !important;
+  line-height: 21.5px !important;
+  min-height: 42px !important;
+}
+.form-item .ant-form-item-required::before {
+  content: "*" !important;
+  position: absolute !important;
+  top: 2px !important;
+  right: -15px;
+  color: #3699ff !important;
+}
+.form-item input,
+.form-item .ant-select-selection {
+  background: #fff;
+  padding: 10px 13px !important;
+  border: 1px solid #e4e6ef;
+  border-radius: 6.175px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400 !important;
+  font-size: 14.3px !important;
+  line-height: 21.5px !important;
+  color: #181c32 !important;
+  min-height: 42px !important;
+}
+.form-item .ant-input-number {
+  width: 100%;
+  background: #fff;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-weight: 400 !important;
+  font-size: 14.3px !important;
+  line-height: 21.5px !important;
+  color: #181c32 !important;
+  min-height: 42px !important;
+}
+.form-item .ant-input-number-focused {
+  box-shadow: none;
+}
+.form-item .ant-select-selection {
+  display: flex;
+  align-items: center;
+}
+.form-item input:focus {
+  border-color: #e4e6ef;
+  box-shadow: none;
+}
+.form-item input::placeholder {
+  color: #a1a5bf;
+}
+.ant-col-14 {
+  width: 100%;
+}
+@media (max-width: 1440px) {
+  .form-item label {
+    font-size: 14px;
+  }
+  .form-item input {
+    height: 40px;
+  }
+}
+
+.quill-editor {
+  border-radius: 0.475rem;
+}
+.ql-toolbar.ql-snow {
+  border: 1px solid #eff2f5;
+  border-radius: 0.475rem;
+}
+.ql-container.ql-snow {
+  border: 1px solid #eff2f5;
+  border-radius: 0.475rem;
+}
+.ql-container {
+  height: 447px !important;
+}
+.ql-toolbar {
+  border-radius: 8px 8px 0 0 !important;
+  border: 1px solid #e4e6ef !important;
+  border-bottom: 0 !important;
+}
+.ql-container {
+  border-radius: 0px 0px 8px 8px !important;
+  border: 1px solid #e4e6ef !important;
+}
+.product-editor .ql-container {
+  height: 173px !important;
+}
+.status-style label {
+  position: relative;
+}
+.status-style label::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  right: -19px;
+}
+
+.status-inactive label::before {
+  background-color: #f1416c;
+}
+.status-process label::before {
+  background-color: #fce83a;
+}
+.status-accepted label::before {
+  background-color: #18b3bd;
+}
+@media (max-width: 1440px) {
+  .ql-container {
+    height: 200px !important;
+  }
+  .product-editor .ql-container {
+    height: 173px !important;
+  }
+}
+.ant-form-vertical .ant-form-item {
+  /* margin-bottom: 0 !important; */
+  padding-bottom: 0 !important;
+}
+
+@media (max-width: 1440px) {
+  .create-inner-variant {
+    border-radius: 5.46px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    font-family: "TT Interfaces";
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    font-style: normal;
+    line-height: 18px;
+  }
+}
+
+.create-inner-variant {
+  border: 1px dashed #3699ff;
+  border-radius: 8px;
+  padding: 15px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "TT Interfaces";
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  font-style: normal;
+  line-height: 18px;
+  color: #3699ff;
+  cursor: pointer;
+  /*margin-top: 24px;*/
+}
+.create-inner-variant svg {
+  margin-right: 6px;
+}
+.variant-btn {
+  border-radius: 5.46px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.variant-btn-delete {
+  color: #f64e60;
+  background-color: #ffe2e5;
+  border-color: transparent;
+  transition: color 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.variant-btn-delete:hover {
+  color: #fff;
+  background-color: #f64e60;
+  border-color: transparent;
+}
+.variant-btn-delete:hover svg path {
+  stroke: #fff;
+}
+.from_hr_top {
+  border-top: 1px solid #d6dee9;
+}
+.outline-light-blue-btn {
+  background: #e1f0ff;
+  color: #5899ff;
+}
+@media (max-width: 1440px) {
+  .form-btn,
+  .outline-btn {
+    border-radius: 5.46px;
+    font-family: "TT Interfaces";
+    font-weight: 600 !important;
+    font-style: normal;
+  }
+}
+.outline-light-blue-btn:hover {
+  color: #fff;
+  background-color: #3699ff;
+  border-color: transparent;
+}
+.outline-light-blue-btn:hover svg path {
+  stroke: #fff;
+}
+.outline-btn {
+  border-radius: 5.46px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-family: "TT Interfaces";
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  font-style: normal;
+  transition: color 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-light-primary {
+  color: #3699ff;
+  background-color: #e1f0ff;
+  border-color: transparent;
+  font-family: "Inter", sans-serif;
+  font-weight: 600 !important;
+  font-size: 12.025px !important;
+}
+
+.add-header-btn-padding {
+  padding: 7.15px 9.75px !important;
+}
+.btn-light-primary:hover {
+  color: #fff;
+  background-color: #3699ff;
+  border-color: transparent;
+}
+.add-btn svg {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+.add-btn svg path {
+  fill: #fff;
+}
+.add-btn {
+  transition: color 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease, box-shadow 0.15s ease;
+  border-radius: 5.46px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600 !important;
+  font-size: 12.025px !important;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.time_picker {
+  padding-left: 16px;
+  padding-right: 16px;
+  background: #eff2f5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  min-height: 43px;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.time_picker .ant-time-picker {
+  width: 40px;
+}
+.time_picker input {
+  padding: 0 !important;
+  border: none;
+  background: #eff2f5;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+
+  color: #6c7b9a;
+}
+.time_picker .ant-time-picker-icon {
+  display: none;
+}
+@media (max-width: 1440px) {
+  .time_picker input {
+    font-weight: 400;
+    font-size: 12px;
+  }
+  .time_picker {
+    padding-left: 12px;
+    padding-right: 12px;
+
+    background: #eff2f5;
+    border-radius: 8px;
+  }
+  .time-add-btn {
+    width: 43px;
+    height: 43px;
+    background: #f3f6f9;
+    border-radius: 8px;
+  }
+}
+.time-add-btn {
+  width: 43px;
+  height: 43px;
+  background: #f3f6f9;
+  border-radius: 8px;
+}
+@media (max-width: 1440px) {
+  .column-btns span .action-btn {
+    background: #f3f6f9;
+    border-radius: 5.46px !important;
+    width: 30px !important;
+    height: 30px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .column-btns span .action-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+.search-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 6.5px;
+  margin-left: 0;
+}
+.status-select .ant-select {
+  width: 100%;
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+.status-select .ant-select-selection:focus {
+  outline: none;
+  box-shadow: none;
+}
+.status-select .ant-select-selection,
+.status-select .ant-calendar-picker-input {
+  background: #f9f9f9;
+  border-color: #f9f9f9;
+  color: #000;
+  transition: color 0.2s ease;
+  appearance: none;
+  background-clip: padding-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: none;
+  height: 100%;
+
+  padding: 10px 13px;
+  font-family: "Inter", sans-serif;
+  font-size: 14.3px;
+  font-weight: 500;
+  border-radius: 6.175px;
+  line-height: 1.5;
+}
+.search-input input {
+  background: #f9f9f9;
+  border-color: #f9f9f9;
+  color: #000;
+  transition: color 0.2s ease;
+  appearance: none;
+  background-clip: padding-box;
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 10px 13px;
+  padding-left: 45px;
+  font-family: "Inter", sans-serif;
+  font-size: 14.3px;
+  font-weight: 500;
+  border-radius: 6.175px;
+  line-height: 1.5;
+}
+.search-input input:focus {
+  outline: none;
+}
+.search-input input::placeholder {
+  color: #a1a5b7;
+}
+.search-input span {
+  position: absolute;
+  left: 10px;
+  color: #a1a5b7;
+}
+.search-input span svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+.form_tab {
+  display: inline-flex;
+  position: relative;
+  transition: transform 0.3s;
+  float: left;
+  z-index: 2;
+}
+.form_tab > div {
+  display: inline-flex;
+  border-radius: 8.125px 8.125px 0 0;
+  background: #fff;
+  padding: 10px;
+  white-space: nowrap;
+  position: relative;
+  transition: transform 0.3s;
+  float: left;
+  z-index: 2;
+}
+.form_tab span {
+  padding: 7px 14px;
+  margin-right: 0;
+  border-right: 1px solid #e4e6ef;
+  font-family: "TT Interfaces";
+  font-weight: 500;
+  font-size: 16px;
+  font-style: normal;
+  height: auto;
+  line-height: 16px;
+  color: #a1a5bf;
+  cursor: pointer;
+}
+.form_tab span:last-child {
+  border-right: 0px solid transparent;
+}
+
+.avtive-formTab {
+  color: #3699ff !important;
+}
+.avtive-formTabModal {
+  color: #fff !important;
+  background: #3699ff !important;
+  border-radius: 5px;
+}
+.border-left-radius {
+  border-top-left-radius: 0 !important;
+}
+.ant-time-picker-input[disabled] {
+  background-color: transparent !important;
+}
+.ant-time-picker:last-child::after {
+  display: none;
+}
+.ant-time-picker::after {
+  content: "-";
+  position: absolute;
+  right: -2px;
+  top: 4px;
+}
+.disabledTime {
+  pointer-events: none;
+  color: #c0c9da !important;
+}
+.disabledTime::after {
+  color: #c0c9da;
+}
+
+input[type="time"] {
+  position: relative;
+  max-width: 40px;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+  position: absolute;
+  top: -5px;
+  left: -10px;
+  width: 100%;
+  height: 100%;
+}
+.without_ampm::-webkit-datetime-edit-ampm-field {
+  display: none;
+}
+input[type="time"]::-webkit-clear-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  margin: -10px;
+}
+input[type="time"]::-webkit-datetime-edit-ampm-field {
+  position: absolute;
+  display: none;
+}
+input[type="time"]:focus {
+  outline: none;
+}
+.delete-time-picker {
+  position: absolute;
+  right: -3px;
+  top: -9px;
+  z-index: 5;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+}
+.delete-time-picker svg path {
+  stroke: #fff;
+}
+.delete-time-picker svg {
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  background: red;
+}
+
+.time_picker:hover .delete-time-picker {
+  opacity: 1 !important;
+}
+.bounce-enter-active {
+  transition: 0.2s;
+}
+.bounce-enter-active .form-item {
+  animation: bounce-in 0.2s;
+}
+.bounce-leave-active .form-item {
+  animation: bounce-in 0.2s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
