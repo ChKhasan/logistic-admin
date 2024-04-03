@@ -19,7 +19,7 @@
           <div class="prodduct-list-header-grid w-100 align-items-center">
             <SearchInput
               placeholder="Поиск"
-              @changeSearch="changeSearch($event, '/regions', '__GET_REGIONS')"
+              @changeSearch="changeSearch($event, '__GET_REGIONS')"
             />
             <div></div>
             <a-button
@@ -189,7 +189,7 @@ const columns = [
 export default {
   name: "IndexPage",
   head: {
-    title: "Страны",
+    title: "Тип груза",
   },
   mixins: [status, global, authAccess],
   data() {

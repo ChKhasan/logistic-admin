@@ -10,6 +10,7 @@
               placeholder="Поиск"
               @changeSearch="($event) => changeSearch($event, '__GET_ORDERS')"
             />
+            <span></span>
             <div class="input status-select w-100">
               <a-form-model-item class="form-item mb-0">
                 <a-select v-model="filter.region" placeholder="Тип транспорта">
@@ -28,18 +29,18 @@
                 </a-select>
               </a-form-model-item>
             </div>
-            <div class="input status-select w-100">
-              <a-form-model-item class="form-item mb-0">
-                <a-select v-model="value" placeholder="Тип активности">
-                  <a-select-option
-                    v-for="filterItem in statusFilter"
-                    :key="filterItem?.id"
-                  >
-                    {{ filterItem?.name?.ru }}
-                  </a-select-option>
-                </a-select>
-              </a-form-model-item>
-            </div>
+<!--            <div class="input status-select w-100">-->
+<!--              <a-form-model-item class="form-item mb-0">-->
+<!--                <a-select v-model="value" placeholder="Тип активности">-->
+<!--                  <a-select-option-->
+<!--                    v-for="filterItem in statusFilter"-->
+<!--                    :key="filterItem?.id"-->
+<!--                  >-->
+<!--                    {{ filterItem?.name?.ru }}-->
+<!--                  </a-select-option>-->
+<!--                </a-select>-->
+<!--              </a-form-model-item>-->
+<!--            </div>-->
             <div class="input status-select w-100">
               <a-form-model-item class="form-item mb-0">
                 <a-select v-model="filter.online" placeholder="Статус">
@@ -71,7 +72,7 @@
     <div class="container_xl app-container main-table">
       <div class="card_block main-table px-4 py-4">
         <a-table
-          :columns="columnsFreelancers"
+          :columns="columnsDrivers"
           :data-source="freelancers"
           :pagination="false"
           :loading="loading"
@@ -89,7 +90,7 @@
           >
 
           <span
-            slot="online"
+            slot="isActive"
             slot-scope="tags"
             class="tags-style"
             :class="{
@@ -98,7 +99,7 @@
             }"
           >
             <!-- 'new', 'canceled', 'accepted', 'in_process' -->
-            {{ status[tags] }}
+            {{ tags ? 'Активный':'Неактивный' }}
           </span>
           <span slot="specialities" slot-scope="text">
             <a-tag color="red" v-if="text?.length == 0"> {{ text?.length }} </a-tag>
@@ -113,22 +114,22 @@
           </span>
 
           <span slot="btns" slot-scope="text">
-            <!-- <span
-                  v-if="checkAccess('orders', 'put')"
+            <span
+                  v-if="checkAccess('drivers', 'put')"
                   class="action-btn"
                   v-html="eyeIcon"
-                  @click="$router.push(`/orders/order/${text}`)"
+                  @click="$router.push(`/drivers/${text}`)"
                 >
-                </span> -->
-            <span
+                </span>
+            <!-- <span
               v-if="checkAccess('orders', 'put')"
               class="action-btn"
               @click="$router.push(`/freelancers/${text}`)"
               v-html="editIcon"
             >
-            </span>
-            <span class="action-btn" @click="deleteAction(text)" v-html="deleteIcon">
-            </span>
+            </span> -->
+            <!-- <span class="action-btn" @click="deleteAction(text)" v-html="deleteIcon">
+            </span> -->
           </span>
         </a-table>
         <div class="d-flex justify-content-between mt-4">
@@ -286,16 +287,17 @@ export default {
           ...this.$route.query,
         },
       });
+      console.log(data);
       this.loading = false;
-      const pageIndex = this.indexPage(data?.meta?.current_page, data?.meta?.per_page);
-      this.freelancers = data?.data.map((item, index) => {
+      const pageIndex = this.indexPage(data?.number, data?.size);
+      this.freelancers = data?.content.map((item, index) => {
         return {
           ...item,
           key: index + pageIndex,
         };
       });
       // console.log(this.freelancers);
-      this.totalPage = data?.meta?.total;
+      this.totalPage = data?.totalPages;
       // this.orders.dataAdd = moment(data?.orders?.created_at).format("DD/MM/YYYY");
     },
     indexPage(current_page, per_page) {
@@ -303,6 +305,7 @@ export default {
     },
   },
   watch: {
+
     async current(val) {
       this.changePagination(val, "__GET_ORDERS");
     },

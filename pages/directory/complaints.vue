@@ -1,12 +1,12 @@
 <template>
   <div class="">
-    <TitleBlock title="Регионы" :breadbrumb="['Настройки сайта']" lastLink="Регионы">
+    <TitleBlock title="Жалобы" :breadbrumb="['Настройки сайта']" lastLink="Жалобы">
       <div class="d-flex">
         <a-button
           class="add-btn add-header-btn btn-primary d-flex align-items-center"
           type="primary"
           @click="addCountries"
-          v-if="checkAccess('regions', 'post')"
+          v-if="checkAccess('countries', 'post')"
         >
           <span v-if="!loadingBtn" class="svg-icon" v-html="addIcon"></span>
           Добавить
@@ -19,37 +19,37 @@
           <div class="prodduct-list-header-grid w-100 align-items-center">
             <SearchInput
               placeholder="Поиск"
-              @changeSearch="changeSearch($event,  '__GET_REGIONS')"
+              @changeSearch="changeSearch($event, '/countries', '__GET_COUNTRIES')"
             />
             <div></div>
             <a-button
-              @click="clearQuery('/regions', '__GET_REGIONS')"
+              @click="clearQuery('/countries', '__GET_COUNTRIES')"
               type="primary"
               class="d-flex align-items-center justify-content-center"
               style="height: 38px"
-            >
-              <a-icon type="reload" />
-            </a-button>
+              ><a-icon type="reload"
+            /></a-button>
           </div>
         </div>
         <a-table
           :columns="columns"
           :pagination="false"
-          :data-source="regions"
+          :data-source="countries"
           :loading="loading"
         >
           <span slot="indexId" slot-scope="text">#{{ text?.key }}</span>
+
           <span
-            @click="editAction(text.id)"
-            class="title-link"
-            slot="name"
-            slot-scope="text"
-            >{{ text?.name?.ru }}
+              @click="editAction(text.id)"
+              class="title-link"
+              slot="name"
+              slot-scope="text"
+          >{{ text?.name?.ru }}
           </span>
           <span slot="id" slot-scope="text">
             <span
               class="action-btn"
-              v-if="checkAccess('regions', 'put')"
+              v-if="checkAccess('countries', 'put')"
               v-html="editIcon"
               @click="editAction(text)"
             >
@@ -59,7 +59,7 @@
               ok-text="Yes"
               cancel-text="No"
               @confirm="deleteAction(text)"
-              v-if="checkAccess('regions', 'delete')"
+              v-if="checkAccess('countries', 'delete')"
             >
               <span class="action-btn" v-html="deleteIcon"> </span>
             </a-popconfirm>
@@ -71,7 +71,7 @@
             class="table-page-size"
             style="width: 120px"
             @change="
-              ($event) => changePageSizeGlobal($event, '/regions', '__GET_REGIONS')
+              ($event) => changePageSizeGlobal($event, '/countries', '__GET_COUNTRIES')
             "
           >
             <a-select-option
@@ -97,7 +97,7 @@
       centered
       :title="title"
       :closable="false"
-      width="768px"
+      width="524px"
       @ok="handleOk"
     >
       <div class="d-flex flex-column">
@@ -120,33 +120,10 @@
           <a-form-model :model="form" ref="ruleForm" :rules="rules" layout="vertical">
             <a-form-model-item
               class="form-item mb-3"
-              label="Название"
+              label="Название региона"
               prop="name.ru"
             >
               <a-input v-model="form.name[`${item.index}`]" placeholder="Название..." />
-            </a-form-model-item>
-
-            <a-form-model-item label="Местоположения" class="form-item mb-3">
-              <yandex-map
-                :coords="coords"
-                :settings="mapSettings"
-                class="min-h-[350px]"
-                style="height: 350px"
-                @click="onClick"
-              >
-                <ymap-marker :coords="coords" hint-content="some hint" marker-id="123" />
-              </yandex-map>
-            </a-form-model-item>
-            <a-form-model-item label="Города" prop="cityId" class="form-item mb-3">
-              <a-select v-model="form.cityId" placeholder="please select your zone">
-                <a-select-option
-                  v-for="item in countries"
-                  :key="item?.id"
-                  :value="item?.id"
-                >
-                  {{ item?.name.ru }}
-                </a-select-option>
-              </a-select>
             </a-form-model-item>
           </a-form-model>
         </div>
@@ -193,8 +170,8 @@ const columns = [
   {
     title: "Название ",
     slots: { title: "customTitle" },
-    scopedSlots: { customRender: "name" },
     className: "column-name",
+    scopedSlots: { customRender: "name" },
     align: "left",
   },
 
@@ -212,7 +189,7 @@ const columns = [
 export default {
   name: "IndexPage",
   head: {
-    title: "Страны",
+    title: "Жалобы",
   },
   mixins: [status, global, authAccess],
   data() {
@@ -220,12 +197,6 @@ export default {
       headers: {
         authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
-      mapSettings: {
-        zoom: 1,
-        maxZoom: 4,
-        minZoom: 4,
-      },
-      coords: [41.311081, 69.240562],
       title: "Добавить",
       editId: null,
       formTab: "ru",
@@ -250,44 +221,33 @@ export default {
       addIcon: require("../../assets/svg/add-icon.svg?raw"),
       loading: false,
       columns,
-      regions: [],
+      countries: [],
       rules: {
-        name: {
+        name:{
           ru: [
-            { required: true, message: "This field is required", trigger: "change" },
-          ]
-        },
-        cityId: [
           { required: true, message: "This field is required", trigger: "change" },
         ],
+        }
       },
       form: {
         name: {
           ru: "",
-          en: "",
-        },
-        lat: 0,
-        lon: 0,
-        cityId: undefined,
+          uz: ''
+        }
       },
-      countries: [],
     };
   },
   async mounted() {
-    this.getFirstData("__GET_REGIONS");
-    this.__GET_COUNTRIES();
-    // this.checkAllActions("regions");
+    this.getFirstData("__GET_COUNTRIES");
+    // this.checkAllActions("countries");
   },
   methods: {
-    onClick(e) {
-      this.coords = e.get("coords");
-      this.form.lat = this.coords[0];
-      this.form.lon = this.coords[1];
-    },
     saveData() {
       this.$refs["ruleForm"][0].validate((valid) => {
         if (valid) {
-          this.editId ? this.__EDIT_REGIONS(this.form) : this.__POST_REGIONS(this.form);
+          this.editId
+            ? this.__EDIT_COUNTRIES(this.form)
+            : this.__POST_COUNTRIES(this.form);
         } else {
           return false;
         }
@@ -297,23 +257,23 @@ export default {
     editAction(id) {
       this.title = "Изменить";
       this.editId = id;
-      this.__GET_REGIONS_BY_ID(id);
+      this.__GET_COUNTRIES_BY_ID(id);
     },
     deleteAction(id) {
       this.__DELETE_GLOBAL(
         id,
-        "fetchRegions/deleteRegions",
+        "fetchCountries/deleteCountries",
         "Успешно удален",
-        "__GET_REGIONS"
+        "__GET_COUNTRIES"
       );
     },
-    async __GET_REGIONS() {
+    async __GET_COUNTRIES() {
       this.loading = true;
-      const data = await this.$store.dispatch("fetchRegions/getRegions", {
+      const data = await this.$store.dispatch("fetchCountries/getCountries", {
         ...this.$route.query,
       });
       this.loading = false;
-      this.regions = data?.content.map((item, index) => {
+      this.countries = data?.content.map((item, index) => {
         return {
           ...item,
           key: index + 1,
@@ -329,27 +289,25 @@ export default {
     handleOk() {
       this.visible = false;
     },
-    async __POST_REGIONS(data) {
+    async __POST_COUNTRIES(data) {
       try {
-        await this.$store.dispatch("fetchRegions/postRegions", data);
+        await this.$store.dispatch("fetchCountries/postCountries", data);
         this.notification("success", "success", "Успешно добавлен");
         this.handleOk();
-        this.__GET_REGIONS();
+        this.__GET_COUNTRIES();
       } catch (e) {
         this.statusFunc(e);
       }
     },
-    async __GET_COUNTRIES() {
-      const data = await this.$store.dispatch("fetchCities/getCities");
-      this.countries = data?.content;
-    },
-    async __GET_REGIONS_BY_ID(targetId) {
+    async __GET_COUNTRIES_BY_ID(targetId) {
       try {
-        const data = await this.$store.dispatch("fetchRegions/getRegionsById", targetId);
+        const data = await this.$store.dispatch(
+          "fetchCountries/getCountriesById",
+          targetId
+        );
         this.visible = true;
         const { created_at, updated_at, id, ...rest } = data;
         this.form = { ...rest };
-        this.coords = [rest.lat,rest.lon]
       } catch (e) {
         this.statusFunc(e);
       }
@@ -358,22 +316,19 @@ export default {
       this.form = {
         name: {
           ru: "",
-          en: "",
-        },
-        lat: 0,
-        lon: 0,
-        cityId: undefined,
+          uz: ""
+        }
       };
     },
-    async __EDIT_REGIONS(res) {
+    async __EDIT_COUNTRIES(res) {
       try {
-        await this.$store.dispatch("fetchRegions/editRegions", {
+        await this.$store.dispatch("fetchCountries/editCountries", {
           id: this.editId,
           data: { ...res, _method: "PUT" },
         });
         this.handleOk();
 
-        this.__GET_REGIONS();
+        this.__GET_COUNTRIES();
         this.notification("success", "success", "Успешно изменена");
       } catch (e) {
         this.statusFunc(e);
@@ -382,7 +337,7 @@ export default {
   },
   watch: {
     async current(val) {
-      this.changePagination(val, "/regions", "__GET_REGIONS");
+      this.changePagination(val, "/countries", "__GET_COUNTRIES");
     },
     visible(val) {
       if (val == false) {
@@ -399,7 +354,6 @@ export default {
   grid-template-columns: 3fr 2fr 40px;
   grid-gap: 8px;
 }
-
 .card_header {
   padding: 16.25px 0;
 }

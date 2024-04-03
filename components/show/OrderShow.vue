@@ -72,7 +72,7 @@
         </div>
         <div class="item">
           <p class="question">Тип груза</p>
-          <p class="answer">{{ order?.loadType?.name }}</p>
+          <p class="answer"><span v-for="type in order?.loadType" :key="type?.id">{{type?.name}}, </span></p>
         </div>
         <div class="item">
           <p class="question">Вес груза</p>

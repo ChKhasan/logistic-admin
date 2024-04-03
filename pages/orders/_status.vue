@@ -23,53 +23,45 @@
                 @changeSearch="($event) => changeSearch($event, '__GET_ORDERS')"
             />
             <div class="input status-select w-100">
-              <a-form-model-item
-                  class="form-item mb-0"
-                  :class="{ 'select-placeholder': !value }"
-              >
-                <a-select v-model="value" placeholder="Статус">
-                  <a-select-option
-                      v-for="filterItem in statusFilter"
-                      :key="filterItem?.id"
-                      placeholder="good"
-                  >
-                    {{ filterItem?.name?.ru }}
-                  </a-select-option>
-                </a-select>
-              </a-form-model-item>
+<!--              <a-form-model-item-->
+<!--                  class="form-item mb-0"-->
+<!--                  :class="{ 'select-placeholder': !value }"-->
+<!--              >-->
+<!--                <a-select v-model="value" placeholder="Статус">-->
+<!--                  <a-select-option-->
+<!--                      v-for="filterItem in statusFilter"-->
+<!--                      :key="filterItem?.id"-->
+<!--                      placeholder="good"-->
+<!--                  >-->
+<!--                    {{ filterItem?.name?.ru }}-->
+<!--                  </a-select-option>-->
+<!--                </a-select>-->
+<!--              </a-form-model-item>-->
             </div>
             <div class="input status-select w-100">
-              <a-form-model-item
-                  class="form-date mb-0"
-                  :class="{ 'select-placeholder': !value }"
-              >
-                <a-range-picker @change="onChange"/>
-                <!-- <a-select v-model="value" placeholder="Дата">
-                  <a-select-option
-                    v-for="filterItem in statusFilter"
-                    :key="filterItem?.id"
-                    placeholder="good"
-                  >
-                    {{ filterItem?.name?.ru }}
-                  </a-select-option>
-                </a-select> -->
-              </a-form-model-item>
+<!--              <a-form-model-item-->
+<!--                  class="form-date mb-0"-->
+<!--                  :class="{ 'select-placeholder': !value }"-->
+<!--              >-->
+<!--                <a-range-picker @change="onChange"/>-->
+<!--             -->
+<!--              </a-form-model-item>-->
             </div>
             <div class="input status-select w-100">
-              <a-form-model-item
-                  class="form-item mb-0"
-                  :class="{ 'select-placeholder': !value }"
-              >
-                <a-select v-model="value" placeholder="Категория">
-                  <a-select-option
-                      v-for="filterItem in statusFilter"
-                      :key="filterItem?.id"
-                      placeholder="good"
-                  >
-                    {{ filterItem?.name?.ru }}
-                  </a-select-option>
-                </a-select>
-              </a-form-model-item>
+<!--              <a-form-model-item-->
+<!--                  class="form-item mb-0"-->
+<!--                  :class="{ 'select-placeholder': !value }"-->
+<!--              >-->
+<!--                <a-select v-model="value" placeholder="Категория">-->
+<!--                  <a-select-option-->
+<!--                      v-for="filterItem in statusFilter"-->
+<!--                      :key="filterItem?.id"-->
+<!--                      placeholder="good"-->
+<!--                  >-->
+<!--                    {{ filterItem?.name?.ru }}-->
+<!--                  </a-select-option>-->
+<!--                </a-select>-->
+<!--              </a-form-model-item>-->
             </div>
             <a-button
                 type="primary"
@@ -93,29 +85,16 @@
             :pagination="false"
             :loading="loading"
             align="center"
-            :scroll="{ x: 1400 }"
         >
-          <nuxt-link
-              class="title-link"
-              :to="`/orders/order/${text?.id}`"
-              slot="name"
-              slot-scope="text"
-          >{{ text?.name }}
-          </nuxt-link>
-
-          <span slot="specialities" slot-scope="text">
-            <a-tag color="red" v-if="text?.length == 0"> {{ text?.length }} </a-tag>
-            <a-tag
-                color="blue"
-                v-else
-                style="cursor: pointer"
-                @click="currentFreelancer(text)"
-            >
-              {{ text?.length }}
-            </a-tag>
+          <span slot="consumer" slot-scope="text">
+          <nuxt-link :to="`/users/${text?.id}`">{{ text ? `${text?.firstName} - ${text?.id}` : "----" }}</nuxt-link>,
+          </span>
+          <span slot="driver" slot-scope="text">
+          <nuxt-link v-if="text?.driver" :to="`/driver/${text?.id}`">{{ `${text?.driver?.firstName} - ${text?.driver?.id}` }}</nuxt-link>
+          <nuxt-link v-else-if="text?.company" :to="`/company/${text?.id}`">{{ `${text?.company?.firstName} - ${text?.company?.id}`}}</nuxt-link>
+            <span v-else>----</span>
           </span>
           <span slot="orderId" slot-scope="text">#{{ text?.id }}</span>
-
           <span
               slot="status"
               slot-scope="tags"
@@ -130,23 +109,13 @@
           >
             {{ tags.split("_").join(' ').toLowerCase() }}
           </span>
-          <span slot="btns" slot-scope="text">
-            <!-- <span
-                v-if="checkAccess('orders', 'put')"
-                class="action-btn"
-                v-html="eyeIcon"
-                @click="$router.push(`/orders/order/${text}`)"
-              >
-              </span> -->
+          <span slot="btn" slot-scope="text">
             <span
-                v-if="checkAccess('orders', 'put')"
                 class="action-btn"
                 @click="$router.push(`/orders/order/${text}`)"
                 v-html="eyeIcon"
             >
             </span>
-            <!-- <span class="action-btn" @click="deleteAction(text)" v-html="deleteIcon">
-            </span> -->
           </span>
         </a-table>
         <div class="d-flex justify-content-between mt-4">

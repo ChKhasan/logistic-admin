@@ -20,7 +20,7 @@
             <SearchInput
               placeholder="Поиск"
               @changeSearch="
-                ($event) => changeSearch($event, '/settings/users', '__GET_USERS')
+                ($event) => changeSearch($event,  '__GET_USERS')
               "
             />
             <div></div>

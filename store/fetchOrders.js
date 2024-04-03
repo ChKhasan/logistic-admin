@@ -49,6 +49,7 @@ export const actions = {
     );
     return res;
   },
+
   async deleteOrders({}, id) {
     const res = await this.$axios.$delete(`/api/admin/orders/${id}`);
     return res;

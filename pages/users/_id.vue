@@ -186,6 +186,11 @@
                 :loading="loading"
                 align="center"
               >
+                 <span slot="driver" slot-scope="text">
+          <nuxt-link v-if="text?.driver" :to="`/driver/${text?.id}`">{{ `${text?.driver?.firstName} - ${text?.driver?.id}` }}</nuxt-link>
+          <nuxt-link v-else-if="text?.company" :to="`/company/${text?.id}`">{{ `${text?.company?.firstName} - ${text?.company?.id}`}}</nuxt-link>
+            <span v-else>----</span>
+          </span>
                 <span
                   @click="$router.push(`/drivers/${text?.id}`)"
                   slot="freelancer"
@@ -217,8 +222,8 @@
                       : "Tanlanmagan"
                   }}
                 </span>
-                <span slot="btns" slot-scope="text">
-                  <span class="action-btn" v-html="deleteIcon"> </span>
+                <span slot="btns" @click="$router.push(`/orders/order/${text}`)" slot-scope="text">
+                  <span class="action-btn" v-html="eyeIcon"> </span>
                 </span>
               </a-table>
               <div class="d-flex justify-content-between mt-4">
@@ -422,7 +427,7 @@ export default {
       disabledBtn: true,
       ticketIcon: require("@/assets/svg/ticket.svg?raw"),
       editIcon: require("@/assets/svg/edit.svg?raw"),
-      deleteIcon: require("@/assets/svg/delete.svg?raw"),
+      eyeIcon: require("@/assets/svg/Eye.svg?raw"),
       statusValue: 1,
       statusData: [
         {
