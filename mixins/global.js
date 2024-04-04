@@ -114,7 +114,6 @@ export default {
           },
         });
       }
-        console.log("func",dataFunc)
       this[dataFunc]();
       this.current = Number(this.$route.query.page);
       this.params.pageSize = Number(this.$route.query.pageSize);

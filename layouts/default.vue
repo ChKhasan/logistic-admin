@@ -34,22 +34,22 @@
               :open-keys.sync="openKeys"
               :inline-collapsed="collapsed"
           >
-            <a-menu-item
-                class="menu_item"
-                v-if="menuList.dashboard.show"
-                :key="menuList.dashboard.key"
-                @click="$router.push(menuList.dashboard.to)"
-                :class="{
-                'is-active': $route.name == 'dashboard',
-              }"
-            >
-              <a-icon v-html="menuList.dashboard.icon"></a-icon>
-              <span>
-                <nuxt-link :to="menuList.dashboard.to">
-                  <span>{{ d(menuList.dashboard) }}</span>
-                </nuxt-link>
-              </span>
-            </a-menu-item>
+<!--            <a-menu-item-->
+<!--                class="menu_item"-->
+<!--                v-if="menuList.dashboard.show"-->
+<!--                :key="menuList.dashboard.key"-->
+<!--                @click="$router.push(menuList.dashboard.to)"-->
+<!--                :class="{-->
+<!--                'is-active': $route.name == 'dashboard',-->
+<!--              }"-->
+<!--            >-->
+<!--              <a-icon v-html="menuList.dashboard.icon"></a-icon>-->
+<!--              <span>-->
+<!--                <nuxt-link :to="menuList.dashboard.to">-->
+<!--                  <span>{{ d(menuList.dashboard) }}</span>-->
+<!--                </nuxt-link>-->
+<!--              </span>-->
+<!--            </a-menu-item>-->
             <a-menu-item
                 class="menu_item"
                 v-if="menuList.freelancers.show"
@@ -63,6 +63,22 @@
               <span>
                 <nuxt-link :to="menuList.freelancers.to">
                   <span>{{ d(menuList.freelancers) }}</span>
+                </nuxt-link>
+              </span>
+            </a-menu-item>
+            <a-menu-item
+                class="menu_item"
+                v-if="menuList.companies.show"
+                :key="menuList.companies.key"
+                @click="$router.push(menuList.companies.to)"
+                :class="{
+                'is-active': $route.name == 'companies',
+              }"
+            >
+              <a-icon v-html="menuList.companies.icon"></a-icon>
+              <span>
+                <nuxt-link :to="menuList.companies.to">
+                  <span>{{ d(menuList.companies) }}</span>
                 </nuxt-link>
               </span>
             </a-menu-item>
@@ -203,8 +219,15 @@ export default {
           show: true,
           to: "/",
         },
-        users: {
+        companies: {
           key: "3",
+          icon: require("../assets/svg/clients.svg?raw"),
+          name: "Компании",
+          show: true,
+          to: "/companies",
+        },
+        users: {
+          key: "4",
           icon: require("../assets/svg/clients.svg?raw"),
           name: "Клиенты",
           show: true,
@@ -212,7 +235,7 @@ export default {
         },
         orders: {
           name: "Все заказы",
-          key: "4",
+          key: "5",
           to: "/orders/all-orders",
           icon: require("../assets/svg/orderIcon.svg?raw"),
           show: true,
@@ -250,14 +273,14 @@ export default {
         sub: "7",
         icon: require("../assets/svg/derictory.svg?raw"),
         menuItems: [
-          {
-            key: "71",
-            name: "Cправочник",
-            to: "/directory/directory",
-            add: "directory-directory",
-            edit: "directory-directory",
-            show: true,
-          },
+          // {
+          //   key: "71",
+          //   name: "Cправочник",
+          //   to: "/directory/directory",
+          //   add: "directory-directory",
+          //   edit: "directory-directory",
+          //   show: true,
+          // },
           {
             key: "72",
             name: "Причины отказа ( Водитель )",
@@ -274,14 +297,22 @@ export default {
             edit: "directory-cancel-reasons",
             show: true,
           },
-          // {
-          //   key: "74",
-          //   name: "Уведомления",
-          //   to: "/directory/notifications",
-          //   add: "directory-notifications",
-          //   edit: "directory-notifications",
-          //   show: true,
-          // },
+          {
+            key: "74",
+            name: "Жалобы",
+            to: "/directory/complaints",
+            add: "directory-complaints",
+            edit: "directory-complaints",
+            show: true,
+          },
+          {
+            key: "75",
+            name: "Критерии",
+            to: "/directory/criteria",
+            add: "directory-criteria",
+            edit: "directory-criteria",
+            show: true,
+          },
         ],
       },
       {
@@ -289,22 +320,22 @@ export default {
         sub: "6",
         icon: require("../assets/svg/settings.svg?raw"),
         menuItems: [
-          {
-            key: "23",
-            name: "Общие данные",
-            to: "/settings/site-info",
-            add: "settings-site-info",
-            edit: "settings-site-info",
-            show: true,
-          },
-          {
-            key: "24",
-            name: "Переводы",
-            to: "/settings/translations",
-            add: "settings-translations",
-            edit: "settings-translations",
-            show: true,
-          },
+          // {
+          //   key: "23",
+          //   name: "Общие данные",
+          //   to: "/settings/site-info",
+          //   add: "settings-site-info",
+          //   edit: "settings-site-info",
+          //   show: true,
+          // },
+          // {
+          //   key: "24",
+          //   name: "Переводы",
+          //   to: "/settings/translations",
+          //   add: "settings-translations",
+          //   edit: "settings-translations",
+          //   show: true,
+          // },
           {
             key: "25",
             name: "Регионы",
@@ -329,16 +360,9 @@ export default {
             edit: "settings-load-types",
             show: true,
           },
+
           {
             key: "28",
-            name: "Специальности",
-            to: "/settings/specialities",
-            add: "settings-specialities",
-            edit: "settings-specialities",
-            show: true,
-          },
-          {
-            key: "29",
             name: "Страны",
             to: "/settings/countries",
             add: "settings-countries",

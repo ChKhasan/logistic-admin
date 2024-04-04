@@ -306,6 +306,7 @@ export default {
           key: index + 1,
         };
       });
+      this.totalPage = data?.totalElements;
     },
 
     addCountries() {

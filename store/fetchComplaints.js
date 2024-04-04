@@ -1,30 +1,30 @@
 export const actions = {
-  async getComplains({}, payload) {
+  async getComplaints({}, payload) {
     const res = await this.$axiosInstance.$get(`/api/admin/complains`, {
       params: payload,
     });
     return res;
   },
-  async getAllComplains() {
+  async getAllComplaints() {
     const res = await this.$axiosInstance.$get(`/api/admin/complains/all`);
     return res;
   },
-  async getComplainsById({}, id) {
+  async getComplaintsById({}, id) {
     const res = await this.$axiosInstance.$get(`/api/admin/complains/${id}`);
     return res;
   },
-  async postComplains({}, data) {
+  async postComplaints({}, data) {
     const res = await this.$axiosInstance.$post(`/api/admin/complains`, data);
     return res;
   },
-  async editComplains({}, payload) {
+  async editComplaints({}, payload) {
     const res = await this.$axiosInstance.$put(
       `/api/admin/complains/${payload.id}`,
       payload.data
     );
     return res;
   },
-  async deleteComplains({}, id) {
+  async deleteComplaints({}, id) {
     const res = await this.$axiosInstance.$delete(`/api/admin/complains/${id}`);
     return res;
   },

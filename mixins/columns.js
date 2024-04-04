@@ -326,6 +326,53 @@ export default {
         },
 
       ],
+      columnsDriverComp: [
+        {
+          title: "№",
+          dataIndex: "key",
+          slots: {title: "customTitle"},
+          scopedSlots: {customRender: "orderId"},
+          className: "column-service",
+        },
+        {
+          title: "Джалоба по заказу",
+          dataIndex: 'orderId',
+          scopedSlots: {customRender: "order_id"},
+          className: "column-name cursor-pointer",
+          key: "order_id",
+        },
+
+        {
+          title: "Клиент",
+          scopedSlots: {customRender: "client"},
+          className: "column-name",
+          key: "client",
+        },
+        {
+          title: "Время отправки",
+          dataIndex: "createdAt",
+          scopedSlots: {customRender: "createdAt"},
+          className: "column-date",
+          customRender: (text) => moment(text).format("DD.MM.YYYY"),
+          key: "createdAt",
+        },
+        {
+          title: "Причина джалоби",
+          dataIndex: "complain",
+          scopedSlots: {customRender: "complain"},
+          className: "column-name",
+          key: "complain",
+        },
+        {
+          fixed: "right",
+          title: "ДЕЙСТВИЯ",
+          key: "id",
+          dataIndex: "id",
+          scopedSlots: {customRender: "btns"},
+          className: "column-btns",
+          width: "100px",
+          align: "center",
+        },],
       columnsUsers: [
         {
           title: "ID",
@@ -520,33 +567,27 @@ export default {
           align: "center",
         },
       ],
-      columnsComp: [
+      columnsConsumerComp: [
         {
         title: "№",
         dataIndex: "key",
         slots: {title: "customTitle"},
         scopedSlots: {customRender: "orderId"},
         className: "column-service",
-      },
+         },
         {
-          title: "Заказ №",
+          title: "Джалоба по заказу",
+          dataIndex: 'orderId',
           scopedSlots: {customRender: "order_id"},
           className: "column-name cursor-pointer",
           key: "order_id",
         },
+
         {
-          title: "Джалоба по заказу",
-          dataIndex: "order",
-          scopedSlots: {customRender: "order"},
+          title: "Водитель",
+          scopedSlots: {customRender: "driver"},
           className: "column-name",
-          key: "order",
-        },
-        {
-          title: "Клиент",
-          dataIndex: "order",
-          scopedSlots: {customRender: "order"},
-          className: "column-name",
-          key: "order1",
+          key: "driver",
         },
         {
           title: "Время отправки",
@@ -558,10 +599,10 @@ export default {
         },
         {
           title: "Причина джалоби",
-          dataIndex: "order",
-          scopedSlots: {customRender: "order"},
+          dataIndex: "complain",
+          scopedSlots: {customRender: "complain"},
           className: "column-name",
-          key: "order2",
+          key: "complain",
         },
         {
           fixed: "right",
@@ -608,16 +649,16 @@ export default {
           className: "column-text",
           key: 'createdAt',
         },
-        {
-          fixed: "right",
-          title: "ДЕЙСТВИЯ",
-          key: "id",
-          dataIndex: "id",
-          scopedSlots: {customRender: "btns"},
-          className: "column-btns",
-          width: "100px",
-          align: "center",
-        },
+        // {
+        //   fixed: "right",
+        //   title: "ДЕЙСТВИЯ",
+        //   key: "id",
+        //   dataIndex: "id",
+        //   scopedSlots: {customRender: "btns"},
+        //   className: "column-btns",
+        //   width: "100px",
+        //   align: "center",
+        // },
       ]
     };
   },

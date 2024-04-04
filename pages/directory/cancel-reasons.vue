@@ -418,6 +418,7 @@ export default {
           key: index + 1,
         };
       });
+      this.totalPage = data?.totalElements;
     },
 
     addCountries() {
@@ -475,7 +476,7 @@ export default {
   },
   watch: {
     async current(val) {
-      this.changePagination(val, "/regions", "__GET_REASONS");
+      this.changePagination(val,  "__GET_REASONS");
     },
     visible(val) {
       if (val == false) {

@@ -45,6 +45,10 @@ export default {
       return Object.keys(this.$route.query).length;
     },
   },
+  mounted() {
+    if(this.$route.query.search)
+      this.value = this.$route.query.search
+  },
   watch: {
     routerName(newVal, lastVal) {
       if (newVal < lastVal && this.value.length > 0) {

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <TitleBlock title="Жалобы" :breadbrumb="['Настройки сайта']" lastLink="Жалобы">
+    <TitleBlock title="Жалобы" :breadbrumb="['Cправочник']" lastLink="Жалобы">
       <div class="d-flex">
         <a-button
           class="add-btn add-header-btn btn-primary d-flex align-items-center"
@@ -120,7 +120,7 @@
           <a-form-model :model="form" ref="ruleForm" :rules="rules" layout="vertical">
             <a-form-model-item
               class="form-item mb-3"
-              label="Название региона"
+              label="Название"
               prop="name.ru"
             >
               <a-input v-model="form.name[`${item.index}`]" placeholder="Название..." />
@@ -262,14 +262,14 @@ export default {
     deleteAction(id) {
       this.__DELETE_GLOBAL(
         id,
-        "fetchCountries/deleteCountries",
+        "fetchComplaints/deleteComplaints",
         "Успешно удален",
         "__GET_COUNTRIES"
       );
     },
     async __GET_COUNTRIES() {
       this.loading = true;
-      const data = await this.$store.dispatch("fetchCountries/getCountries", {
+      const data = await this.$store.dispatch("fetchComplaints/getComplaints", {
         ...this.$route.query,
       });
       this.loading = false;
@@ -279,6 +279,7 @@ export default {
           key: index + 1,
         };
       });
+      this.totalPage = data?.totalElements;
     },
 
     addCountries() {
@@ -291,7 +292,7 @@ export default {
     },
     async __POST_COUNTRIES(data) {
       try {
-        await this.$store.dispatch("fetchCountries/postCountries", data);
+        await this.$store.dispatch("fetchComplaints/postComplaints", data);
         this.notification("success", "success", "Успешно добавлен");
         this.handleOk();
         this.__GET_COUNTRIES();
@@ -302,7 +303,7 @@ export default {
     async __GET_COUNTRIES_BY_ID(targetId) {
       try {
         const data = await this.$store.dispatch(
-          "fetchCountries/getCountriesById",
+          "fetchComplaints/getComplaintsById",
           targetId
         );
         this.visible = true;
@@ -322,9 +323,9 @@ export default {
     },
     async __EDIT_COUNTRIES(res) {
       try {
-        await this.$store.dispatch("fetchCountries/editCountries", {
+        await this.$store.dispatch("fetchComplaints/editComplaints", {
           id: this.editId,
-          data: { ...res, _method: "PUT" },
+          data: { ...res },
         });
         this.handleOk();
 
@@ -337,7 +338,7 @@ export default {
   },
   watch: {
     async current(val) {
-      this.changePagination(val, "/countries", "__GET_COUNTRIES");
+      this.changePagination(val,  "__GET_COUNTRIES");
     },
     visible(val) {
       if (val == false) {

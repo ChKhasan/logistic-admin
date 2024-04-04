@@ -1,7 +1,6 @@
 export const actions = {
   async getConsumers({}, payload) {
-    const res = await this.$axios.$get(`/api/admin/consumers`, payload);
-    return res;
+    return await this.$axios.$get(`/api/admin/consumers`, payload);
   },
   async putConsumer({}, { id, data }) {
     const formData = new URLSearchParams();
@@ -19,11 +18,12 @@ export const actions = {
     );
   },
   async getConsumerById({}, id) {
-    const res = await this.$axios.$get(`/api/admin/consumers/${id}`);
-    return res;
+    return await this.$axios.$get(`/api/admin/consumers/${id}`);
   },
-  async getConsumerOrdersById({}, id) {
-    const res = await this.$axios.$get(`/api/admin/consumers/${id}/orders`);
-    return res;
+  async getConsumerOrdersById({}, {id,params}) {
+    return await this.$axios.$get(`/api/admin/consumers/${id}/orders`,{params: {...params}});
   },
+    async getConsumerCompById({}, {id,params}) {
+        return await this.$axios.$get(`/api/admin/consumers/${id}/complains`,{params: {...params}});
+    },
 };

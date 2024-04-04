@@ -19,11 +19,11 @@
           <div class="prodduct-list-header-grid w-100 align-items-center">
             <SearchInput
                 placeholder="Поиск"
-                @changeSearch="changeSearch($event,  '__GET_REGIONS')"
+                @changeSearch="changeSearch($event,  '__GET_TRANSPORTS')"
             />
             <div></div>
             <a-button
-                @click="clearQuery('/regions', '__GET_REGIONS')"
+                @click="clearQuery('/regions', '__GET_TRANSPORTS')"
                 type="primary"
                 class="d-flex align-items-center justify-content-center"
                 style="height: 38px"
@@ -79,7 +79,7 @@
               class="table-page-size"
               style="width: 120px"
               @change="
-              ($event) => changePageSizeGlobal($event, '/regions', '__GET_REGIONS')
+              ($event) => changePageSizeGlobal($event, '/regions', '__GET_TRANSPORTS')
             "
           >
             <a-select-option
@@ -333,7 +333,7 @@ export default {
     };
   },
   async mounted() {
-    this.getFirstData("__GET_REGIONS");
+    this.getFirstData("__GET_TRANSPORTS");
     this.__GET_COUNTRIES();
     // this.checkAllActions("regions");
   },
@@ -346,7 +346,7 @@ export default {
     saveData() {
       this.$refs["ruleForm"][0].validate((valid) => {
         if (valid) {
-          this.editId ? this.__EDIT_REGIONS(this.form) : this.__POST_REGIONS(this.form);
+          this.editId ? this.__EDIT_TRANSPORTS(this.form) : this.__POST_TRANSPORTS(this.form);
         } else {
           return false;
         }
@@ -356,17 +356,17 @@ export default {
     editAction(id) {
       this.title = "Изменить";
       this.editId = id;
-      this.__GET_REGIONS_BY_ID(id);
+      this.__GET_TRANSPORTS_BY_ID(id);
     },
     deleteAction(id) {
       this.__DELETE_GLOBAL(
           id,
           "fetchVehilces/deleteVehilces",
           "Успешно удален",
-          "__GET_REGIONS"
+          "__GET_TRANSPORTS"
       );
     },
-    async __GET_REGIONS() {
+    async __GET_TRANSPORTS() {
       this.loading = true;
       const data = await this.$store.dispatch("fetchVehilces/getVehilces", {
         ...this.$route.query,
@@ -378,6 +378,8 @@ export default {
           key: index + 1,
         };
       });
+      this.totalPage = data?.totalElements;
+
     },
 
     addCountries() {
@@ -388,12 +390,12 @@ export default {
     handleOk() {
       this.visible = false;
     },
-    async __POST_REGIONS(data) {
+    async __POST_TRANSPORTS(data) {
       try {
         await this.$store.dispatch("fetchVehilces/postVehilces", data);
         this.notification("success", "success", "Успешно добавлен");
         this.handleOk();
-        this.__GET_REGIONS();
+        this.__GET_TRANSPORTS();
       } catch (e) {
         this.statusFunc(e);
       }
@@ -414,7 +416,7 @@ export default {
       }
 
     },
-    async __GET_REGIONS_BY_ID(targetId) {
+    async __GET_TRANSPORTS_BY_ID(targetId) {
       try {
         const data = await this.$store.dispatch("fetchVehilces/getVehilcesById", targetId);
         this.visible = true;
@@ -448,7 +450,7 @@ export default {
         image: ''
       };
     },
-    async __EDIT_REGIONS(res) {
+    async __EDIT_TRANSPORTS(res) {
       try {
         await this.$store.dispatch("fetchVehilces/editVehilces", {
           id: this.editId,
@@ -456,7 +458,7 @@ export default {
         });
         this.handleOk();
 
-        this.__GET_REGIONS();
+        this.__GET_TRANSPORTS();
         this.notification("success", "success", "Успешно изменена");
       } catch (e) {
         this.statusFunc(e);
@@ -483,7 +485,7 @@ export default {
   },
   watch: {
     async current(val) {
-      this.changePagination(val, "/regions", "__GET_REGIONS");
+      this.changePagination(val,  "__GET_TRANSPORTS");
     },
     visible(val) {
       if (val == false) {

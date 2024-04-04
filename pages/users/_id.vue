@@ -259,21 +259,19 @@
             >
               <FormTitle title="Жалобы" />
               <a-table
-                :columns="columnsComp"
-                :data-source="client?.complaints"
+                :columns="columnsConsumerComp"
+                :data-source="comp"
                 :pagination="false"
                 :loading="loading"
                 align="center"
               >
-                <span
-                  to="/orders/1232/details"
-                  slot="client"
-                  slot-scope="text"
-                  align="center"
-                >
-                  {{ text }}
-                </span>
-                <span slot="orderId" slot-scope="text">#{{ text?.id }}</span>
+
+                  <span slot="orderId" slot-scope="text">#{{ text }}</span>
+                  <span slot="driver" slot-scope="text">
+                    <nuxt-link v-if="text?.driver" :to="`/drivers/${text?.driver?.id}`">{{ text?.driver?.firstName }} #{{text?.driver?.id}}</nuxt-link>
+                     <nuxt-link v-if="text?.company" :to="`/company/${text?.company?.id}`">{{ text?.company?.firstName }} #{{text?.company?.id}}</nuxt-link>
+                  </span>
+                  <span slot="order_id" slot-scope="text"><nuxt-link :to="`/orders/order/${text}`">#{{text}}</nuxt-link></span>
                 <span
                   slot="text"
                   slot-scope="text"
@@ -284,16 +282,8 @@
 
                 <span slot="btns" slot-scope="text">
                   <span
-                    v-if="checkAccess('orders', 'put')"
                     class="action-btn"
-                    @click="$router.push(`/orders/order/${text}`)"
-                    v-html="editIcon"
-                  >
-                  </span>
-                  <span
-                    class="action-btn"
-                    @click="deleteAction(text)"
-                    v-html="deleteIcon"
+                    v-html="eyeIcon"
                   >
                   </span>
                 </span>
@@ -470,7 +460,8 @@ export default {
       sessions: {},
       currentApp: {},
       currentComp: {},
-      orders: []
+      orders: [],
+      comp: []
     };
   },
 
@@ -497,21 +488,20 @@ export default {
         "status-accepted": this.statusValue == "accepted",
       };
     },
+
   },
   async mounted() {
     this.$store.dispatch("getOrders");
     this.__GET_CLIENT_BY_ID();
-    this.__GET_ORDERS_BY_ID()
+      this.getTabBlocks(this.$route.hash)
   },
 
   methods: {
     async handleApp(obj) {
-      console.log(obj);
       this.currentApp = await obj;
       this.visible = true;
     },
     async handleComp(obj) {
-      console.log(obj);
       this.currentComp = await obj;
       this.visibleComp = true;
     },
@@ -539,15 +529,31 @@ export default {
       try {
         const data = await this.$store.dispatch(
           "fetchConsumers/getConsumerOrdersById",
-          this.$route.params.id
+          {id: this.$route.params.id,params: {...this.$route.query}}
         );
         this.orders = data?.content
-        console.log(data);
+        this.totalPage = data?.totalElements;
       } catch (e) {
-        console.log(e);
         this.statusFunc(e);
       }
     },
+      async __GET_COMP_BY_ID(id) {
+          try {
+              const data = await this.$store.dispatch(
+                  "fetchConsumers/getConsumerCompById",
+                  {id: this.$route.params.id,params: {...this.$route.query}}
+              );
+              this.comp = data?.content.map((item,index) => {
+                  return {
+                      ...item,
+                      key: index + 1
+                  }
+              })
+              this.totalPage = data?.totalElements;
+          } catch (e) {
+              this.statusFunc(e);
+          }
+      },
     async __GET_CLIENT_BY_ID(id) {
       try {
         const data = await this.$store.dispatch(
@@ -555,7 +561,6 @@ export default {
           this.$route.params.id
         );
         this.client = data;
-        console.log(data);
         this.statusValue = this.client.active ? 1 : 0;
         this.spinning = false;
       } catch (e) {
@@ -563,9 +568,33 @@ export default {
         this.statusFunc(e);
       }
     },
+    getTabBlocks(val) {
+      switch (val) {
+        case '#applications':
+          this.getFirstData("__GET_ORDERS_BY_ID");
+          break;
+        case '#complaints':
+          this.getFirstData("__GET_COMP_BY_ID");
+          break;
+      }
+  }
   },
-  components: { TitleBlock, FormTitle, BiletCard },
-};
+  watch: {
+    "$route.hash"(val) {
+      this.getTabBlocks(val)
+    },
+    current(val) {
+      switch (this.$route.hash) {
+        case '#applications':
+          this.changePagination(val, "__GET_ORDERS_BY_ID");
+          break;
+        case '#complaints':
+          this.changePagination(val,"__GET_COMP_BY_ID");
+          break;
+      }
+    },},
+  components: { TitleBlock, FormTitle, BiletCard }
+}
 </script>
 <style lang="css" scoped>
 @import "@/assets/css/pages/order.css";

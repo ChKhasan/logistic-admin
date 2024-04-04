@@ -153,11 +153,17 @@ export default {
       addIcon: require("../../assets/svg/add-icon.svg?raw"),
       loading: false,
       search: "",
+      filter: {
+        isActive: undefined,
+        cityId: undefined
+      },
       columns,
       posts: [],
+      cities: []
     };
   },
   async mounted() {
+    this.__GET_CITIES();
     this.getFirstData("/settings/users", "__GET_USERS");
     this.checkAllActions("users");
   },
@@ -166,6 +172,10 @@ export default {
     deleteAction(id) {
       this.__DELETE_GLOBAL(id, "fetchRole/deleteUsers", "Успешно удален", "__GET_USERS");
     },
+    async __GET_CITIES() {
+      const data = await this.$store.dispatch("fetchCities/getCities");
+      this.cities = data?.content;
+    },
     async __GET_USERS() {
       this.loading = true;
       const data = await this.$store.dispatch("fetchRole/getUsers", {
@@ -173,7 +183,6 @@ export default {
       });
       this.loading = false;
       const pageIndex = this.indexPage(data?.users?.current_page, data?.users?.per_page);
-      console.log(pageIndex);
       this.posts = data?.users?.data.map((item, index) => {
         return {
           ...item,
@@ -185,6 +194,14 @@ export default {
     indexPage(current_page, per_page) {
       return (current_page * 1 - 1) * per_page + 1;
     },
+    async onFilterChange(id,name) {
+      if (this.$route.query[name] != id)
+        await this.$router.replace({
+          path: this.$route.path,
+          query: {...this.$route.query, [name]: id},
+        });
+      if (id == this.$route.query[name]) this.__GET_DRIVERS();
+    }
   },
   watch: {
     async current(val) {

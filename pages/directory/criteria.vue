@@ -1,12 +1,12 @@
 <template>
   <div class="">
-    <TitleBlock title="Уведомления" :breadbrumb="['Cправочник']" lastLink="Уведомления">
+    <TitleBlock title="Критерии" :breadbrumb="['Cправочник']" lastLink="Критерии">
       <div class="d-flex">
         <a-button
           class="add-btn add-header-btn btn-primary d-flex align-items-center"
           type="primary"
           @click="addCountries"
-          v-if="checkAccess('regions', 'post')"
+          v-if="checkAccess('countries', 'post')"
         >
           <span v-if="!loadingBtn" class="svg-icon" v-html="addIcon"></span>
           Добавить
@@ -19,49 +19,51 @@
           <div class="prodduct-list-header-grid w-100 align-items-center">
             <SearchInput
               placeholder="Поиск"
-              @changeSearch="changeSearch($event, '/regions', '__GET_NOTIFICATIONS')"
+              @changeSearch="changeSearch($event, '/countries', '__GET_COUNTRIES')"
             />
             <div></div>
             <a-button
-              @click="clearQuery('/regions', '__GET_NOTIFICATIONS')"
+              @click="clearQuery('/countries', '__GET_COUNTRIES')"
               type="primary"
               class="d-flex align-items-center justify-content-center"
               style="height: 38px"
-            >
-              <a-icon type="reload"
-              />
-            </a-button>
+              ><a-icon type="reload"
+            /></a-button>
           </div>
         </div>
         <a-table
           :columns="columns"
           :pagination="false"
-          :data-source="notifications"
+          :data-source="countries"
           :loading="loading"
         >
           <span slot="indexId" slot-scope="text">#{{ text?.key }}</span>
-          <span slot="theme" class="title-link" @click="showNotification(text)" slot-scope="text">
-              {{ text?.theme }}
-          </span>
 
-          <!--          <span slot="id" slot-scope="text">-->
-          <!--            <span-->
-          <!--              class="action-btn"-->
-          <!--              v-if="checkAccess('regions', 'put')"-->
-          <!--              v-html="editIcon"-->
-          <!--              @click="editAction(text)"-->
-          <!--            >-->
-          <!--            </span>-->
-          <!--            <a-popconfirm-->
-          <!--              title="Are you sure delete this row?"-->
-          <!--              ok-text="Yes"-->
-          <!--              cancel-text="No"-->
-          <!--              @confirm="deleteAction(text)"-->
-          <!--              v-if="checkAccess('regions', 'delete')"-->
-          <!--            >-->
-          <!--              <span class="action-btn" v-html="deleteIcon"> </span>-->
-          <!--            </a-popconfirm>-->
-          <!--          </span>-->
+          <span
+              @click="editAction(text.id)"
+              class="title-link"
+              slot="name"
+              slot-scope="text"
+          >{{ text?.name?.ru }}
+          </span>
+          <span slot="id" slot-scope="text">
+            <span
+              class="action-btn"
+              v-if="checkAccess('countries', 'put')"
+              v-html="editIcon"
+              @click="editAction(text)"
+            >
+            </span>
+            <a-popconfirm
+              title="Are you sure delete this row?"
+              ok-text="Yes"
+              cancel-text="No"
+              @confirm="deleteAction(text)"
+              v-if="checkAccess('countries', 'delete')"
+            >
+              <span class="action-btn" v-html="deleteIcon"> </span>
+            </a-popconfirm>
+          </span>
         </a-table>
         <div class="d-flex justify-content-between mt-4">
           <a-select
@@ -69,7 +71,7 @@
             class="table-page-size"
             style="width: 120px"
             @change="
-              ($event) => changePageSizeGlobal($event, '/regions', '__GET_NOTIFICATIONS')
+              ($event) => changePageSizeGlobal($event, '/countries', '__GET_COUNTRIES')
             "
           >
             <a-select-option
@@ -77,7 +79,7 @@
               :key="item.value"
               :label="item.label"
               :value="item.value"
-            >{{ item.label }}
+              >{{ item.label }}
             </a-select-option>
           </a-select>
           <a-pagination
@@ -99,23 +101,29 @@
       @ok="handleOk"
     >
       <div class="d-flex flex-column">
+        <div class="form_tab mb-4 bottom_hr">
+          <span
+            v-for="(item, index) in formTabData"
+            :key="index"
+            @click="formTab = item.index"
+            :class="{ 'avtive-formTab': formTab == item.index }"
+          >
+            {{ item.label }}
+          </span>
+        </div>
         <div
           class="d-flex flex-column"
+          v-for="(item, index) in formTabData"
+          :key="index"
+          v-if="formTab == item.index"
         >
           <a-form-model :model="form" ref="ruleForm" :rules="rules" layout="vertical">
             <a-form-model-item
               class="form-item mb-3"
-              label="Заголовок"
-              prop="theme"
+              label="Название"
+              prop="name.ru"
             >
-              <a-input v-model="form.theme" placeholder="Текст..."/>
-            </a-form-model-item>
-            <a-form-model-item
-              class="form-item mb-3"
-              label="Сообщение"
-              prop="message"
-            >
-              <a-input type="textarea" rows="5" v-model="form.message" placeholder="Текст сообщения..."/>
+              <a-input v-model="form.name[`${item.index}`]" placeholder="Название..." />
             </a-form-model-item>
           </a-form-model>
         </div>
@@ -139,18 +147,6 @@
         </div>
       </template>
     </a-modal>
-    <a-modal
-      v-model="visibleShow"
-      class="text-modal"
-      centered
-      :title="'Уведомление'"
-      width="576px"
-    >
-      <div class="d-flex flex-column">
-       <h4 class="mb-4 notification-title">{{ currentNotification.theme }}</h4>
-        <p>{{currentNotification.message}}</p>
-      </div>
-    </a-modal>
   </div>
 </template>
 
@@ -165,48 +161,39 @@ const columns = [
   {
     title: "№",
     key: "indexId",
-    slots: {title: "customTitle"},
-    scopedSlots: {customRender: "indexId"},
+    slots: { title: "customTitle" },
+    scopedSlots: { customRender: "indexId" },
     className: "column-service",
     align: "left",
     width: 50,
   },
   {
-    title: "Заголовок ",
-    slots: {title: "customTitle"},
-    scopedSlots: {customRender: "theme"},
+    title: "Название ",
+    slots: { title: "customTitle" },
     className: "column-name",
+    scopedSlots: { customRender: "name" },
     align: "left",
   },
+
   {
-    title: "Сообщение ",
-    dataIndex: "message",
-    key: "message",
-    slots: {title: "customTitle"},
-    className: "column-name",
-    align: "left",
+    title: "ДЕЙСТВИЯ",
+    className: "column-btns",
+    dataIndex: "id",
+    key: "id",
+    align: "right",
+    scopedSlots: { customRender: "id" },
+    width: 100,
   },
-  // {
-  //   title: "ДЕЙСТВИЯ",
-  //   className: "column-btns",
-  //   dataIndex: "id",
-  //   key: "id",
-  //   align: "right",
-  //   scopedSlots: {customRender: "id"},
-  //   width: 100,
-  // },
 ];
 
 export default {
   name: "IndexPage",
   head: {
-    title: "Уведомление",
+    title: "Критерии",
   },
   mixins: [status, global, authAccess],
   data() {
     return {
-      currentNotification: {},
-      visibleShow: false,
       headers: {
         authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
@@ -234,49 +221,66 @@ export default {
       addIcon: require("../../assets/svg/add-icon.svg?raw"),
       loading: false,
       columns,
-      notifications: [],
+      countries: [],
       rules: {
-        name_ru: [
-          {required: true, message: "This field is required", trigger: "change"},
+        name:{
+          ru: [
+          { required: true, message: "This field is required", trigger: "change" },
         ],
-        country_id: [
-          {required: true, message: "This field is required", trigger: "change"},
-        ],
+        }
       },
       form: {
-        theme: "",
-        message: ""
+        name: {
+          ru: "",
+          uz: ''
+        }
       },
-      countries: [],
     };
   },
   async mounted() {
-    await this.getFirstData("__GET_NOTIFICATIONS");
+    this.getFirstData("__GET_COUNTRIES");
+    // this.checkAllActions("countries");
   },
   methods: {
-    showNotification(obj) {
-      this.currentNotification = {...obj};
-      this.visibleShow = true
-    },
     saveData() {
-      this.$refs["ruleForm"].validate((valid) => {
-        if (!valid) return false;
-        this.__POST_NOTIFICATIONS(this.form);
+      this.$refs["ruleForm"][0].validate((valid) => {
+        if (valid) {
+          this.editId
+            ? this.__EDIT_COUNTRIES(this.form)
+            : this.__POST_COUNTRIES(this.form);
+        } else {
+          return false;
+        }
       });
     },
 
-    async __GET_NOTIFICATIONS() {
+    editAction(id) {
+      this.title = "Изменить";
+      this.editId = id;
+      this.__GET_COUNTRIES_BY_ID(id);
+    },
+    deleteAction(id) {
+      this.__DELETE_GLOBAL(
+        id,
+        "fetchCriteria/deleteCriteria",
+        "Успешно удален",
+        "__GET_COUNTRIES"
+      );
+    },
+    async __GET_COUNTRIES() {
       this.loading = true;
-      const data = await this.$store.dispatch("fetchNotifications/getNotifications", {
+      const data = await this.$store.dispatch("fetchCriteria/getCriteria", {
         ...this.$route.query,
       });
       this.loading = false;
-      this.notifications = data?.content?.data.map((item, index) => {
+      this.countries = data?.content.map((item, index) => {
         return {
           ...item,
           key: index + 1,
         };
       });
+      this.totalPage = data?.totalElements;
+
     },
 
     addCountries() {
@@ -287,32 +291,46 @@ export default {
     handleOk() {
       this.visible = false;
     },
-    async __POST_NOTIFICATIONS(data) {
+    async __POST_COUNTRIES(data) {
       try {
-        await this.$store.dispatch("fetchNotifications/postNotifications", data);
+        await this.$store.dispatch("fetchCriteria/postCriteria", data);
         this.notification("success", "success", "Успешно добавлен");
         this.handleOk();
-        this.__GET_NOTIFICATIONS();
+        this.__GET_COUNTRIES();
       } catch (e) {
         this.statusFunc(e);
       }
     },
-
+    async __GET_COUNTRIES_BY_ID(targetId) {
+      try {
+        const data = await this.$store.dispatch(
+          "fetchCriteria/getCriteriaById",
+          targetId
+        );
+        this.visible = true;
+        const { created_at, updated_at, id, ...rest } = data;
+        this.form = { ...rest };
+      } catch (e) {
+        this.statusFunc(e);
+      }
+    },
     emptyData() {
       this.form = {
-        theme: "",
-        message: "",
+        name: {
+          ru: "",
+          uz: ""
+        }
       };
     },
-    async __EDIT_REGIONS(res) {
+    async __EDIT_COUNTRIES(res) {
       try {
-        await this.$store.dispatch("fetchRegions/editRegions", {
+        await this.$store.dispatch("fetchCriteria/editCriteria", {
           id: this.editId,
-          data: {...res, _method: "PUT"},
+          data: { ...res },
         });
         this.handleOk();
 
-        this.__GET_NOTIFICATIONS();
+        this.__GET_COUNTRIES();
         this.notification("success", "success", "Успешно изменена");
       } catch (e) {
         this.statusFunc(e);
@@ -321,7 +339,7 @@ export default {
   },
   watch: {
     async current(val) {
-      this.changePagination(val, "/regions", "__GET_NOTIFICATIONS");
+      this.changePagination(val,  "__GET_COUNTRIES");
     },
     visible(val) {
       if (val == false) {
@@ -329,26 +347,15 @@ export default {
       }
     },
   },
-  components: {TitleBlock, SearchInput},
+  components: { TitleBlock, SearchInput },
 };
 </script>
 <style lang="css">
-.notification-title {
-  font-family: "TT Interfaces";
-  font-size: 16px;
-  font-weight: 700;
-}
-.notification-message {
-  font-family: "TT Interfaces";
-  font-size: 14.04px;
-  font-weight: 400;
-}
 .prodduct-list-header-grid {
   display: grid;
   grid-template-columns: 3fr 2fr 40px;
   grid-gap: 8px;
 }
-
 .card_header {
   padding: 16.25px 0;
 }

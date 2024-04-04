@@ -12,9 +12,9 @@
             />
             <div class="input status-select w-100">
               <a-form-model-item class="form-item mb-0">
-                <a-select v-model="filter.region" placeholder="Область">
-                  <a-select-option v-for="filterItem in regions" :key="filterItem?.id">
-                    {{ filterItem?.name_ru }}
+                <a-select v-model="filter.cityId" placeholder="Область" @change="$event => onFilterChange($event,'cityId')">
+                  <a-select-option v-for="filterItem in cities" :key="filterItem?.id" :value="filterItem?.id" >
+                    {{ filterItem?.name.ru }}
                   </a-select-option>
                 </a-select>
               </a-form-model-item>
@@ -22,13 +22,13 @@
 
             <div class="input status-select w-100">
               <a-form-model-item class="form-item mb-0">
-                <a-select v-model="filter.online" placeholder="Статус">
+                <a-select v-model="filter.isActive" placeholder="Статус" @change="$event => onFilterChange($event,'isActive')">
                   <a-select-option
-                    v-for="(filterItem, index) in Object.entries(status)"
+                    v-for="(filterItem, index) in statusFilter"
                     :key="index"
-                    :value="filterItem[0]"
+                    :value="filterItem.id"
                   >
-                    {{ filterItem[1] }}
+                    {{ filterItem.name.ru }}
                   </a-select-option>
                 </a-select>
               </a-form-model-item>
@@ -51,7 +51,7 @@
       <div class="card_block main-table px-4 py-4">
         <a-table
           :columns="columnsUsers"
-          :data-source="freelancers"
+          :data-source="consumers"
           :pagination="false"
           :loading="loading"
           align="center"
@@ -60,7 +60,7 @@
           <span slot="orderId" slot-scope="text">#{{ text?.id }}</span>
           <nuxt-link
             class="title-link"
-            :to="`/freelancers/${text?.id}`"
+            :to="`/consumers/${text?.id}`"
             slot="name"
             slot-scope="text"
           >{{ text?.name }}
@@ -105,7 +105,7 @@
               v-html="eyeIcon"
             >
             </span>
-          
+
           </span>
         </a-table>
         <div class="d-flex justify-content-between mt-4">
@@ -191,38 +191,33 @@ export default {
           name: {
             ru: "Неактивный",
           },
-          id: 2,
+          id: 0,
         },
       ],
 
-      value: undefined,
       filter: {
-        online: undefined,
-        region: undefined,
+        isActive: undefined,
+        cityId: undefined
       },
       pageSize: 10,
       eyeIcon: require("@/assets/svg/Eye.svg?raw"),
       editIcon: require("@/assets/svg/edit.svg?raw"),
       deleteIcon: require("@/assets/svg/delete.svg?raw"),
       loading: false,
-      freelancers: [],
+      consumers: [],
       data: [],
-      status: {
-        1: "В сети",
-        0: "Не в сети",
-      },
-      regions: [],
+      cities: [],
     };
   },
   mounted() {
     this.getFirstData("__GET_CONSUMERS");
     this.checkAllActions("orders");
-    this.__GET_REGIONS();
-    Object.keys(this.$route.query).forEach((elem) => {
-      if (Object.keys(this.filter).includes(elem)) {
-        this.filter[elem] = this.$route.query[elem];
+    this.__GET_CITIES();
+    for(let item in this.filter) {
+      if (Object.keys(this.$route.query).includes(item)) {
+        this.filter[item] = Number(this.$route.query[item]);
       }
-    });
+    }
   },
   computed: {
     baseUrl() {
@@ -233,6 +228,10 @@ export default {
     },
   },
   methods: {
+    async __GET_CITIES() {
+      const data = await this.$store.dispatch("fetchCities/getCities");
+      this.cities = data?.content;
+    },
     moment,
     currentFreelancer(array) {
       this.data = array.map((item) => {
@@ -246,7 +245,6 @@ export default {
     deleteAction(id) {
     },
     clearFilterPage() {
-      this.value = undefined;
       this.filter = {
         online: undefined,
         region: undefined,
@@ -268,17 +266,26 @@ export default {
       });
       this.loading = false;
       const pageIndex = this.indexPage(data?.number, data?.size);
-      this.freelancers = data?.content.map((item, index) => {
+      this.consumers = data?.content.map((item, index) => {
         return {
           ...item,
           key: index + pageIndex,
         };
       });
-      this.totalPage = data?.totalPages;
+      this.totalPage = data?.totalElements;
     },
     indexPage(current_page, per_page) {
       return (current_page * 1 - 1) * per_page + 1;
     },
+    async onFilterChange(id,name) {
+      console.log(id,name)
+      if (this.$route.query[name] != id)
+        await this.$router.replace({
+          path: this.$route.path,
+          query: {...this.$route.query, [name]: id},
+        });
+      if (id == this.$route.query[name]) this.__GET_CONSUMERS();
+    }
   },
   watch: {
     async current(val) {
