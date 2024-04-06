@@ -14,68 +14,68 @@
         <OrderBtns/>
       </div>
     </div>
-    <div class="container_orders app-container pb-4">
-      <div class="card_block main-table px-4 py-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="oroder-filter-grid w-100 align-items-center">
-            <SearchInput
-                placeholder="Поиск"
-                @changeSearch="($event) => changeSearch($event, '__GET_ORDERS')"
-            />
-            <div class="input status-select w-100">
-<!--              <a-form-model-item-->
-<!--                  class="form-item mb-0"-->
-<!--                  :class="{ 'select-placeholder': !value }"-->
-<!--              >-->
-<!--                <a-select v-model="value" placeholder="Статус">-->
-<!--                  <a-select-option-->
-<!--                      v-for="filterItem in statusFilter"-->
-<!--                      :key="filterItem?.id"-->
-<!--                      placeholder="good"-->
-<!--                  >-->
-<!--                    {{ filterItem?.name?.ru }}-->
-<!--                  </a-select-option>-->
-<!--                </a-select>-->
-<!--              </a-form-model-item>-->
-            </div>
-            <div class="input status-select w-100">
-<!--              <a-form-model-item-->
-<!--                  class="form-date mb-0"-->
-<!--                  :class="{ 'select-placeholder': !value }"-->
-<!--              >-->
-<!--                <a-range-picker @change="onChange"/>-->
-<!--             -->
-<!--              </a-form-model-item>-->
-            </div>
-            <div class="input status-select w-100">
-<!--              <a-form-model-item-->
-<!--                  class="form-item mb-0"-->
-<!--                  :class="{ 'select-placeholder': !value }"-->
-<!--              >-->
-<!--                <a-select v-model="value" placeholder="Категория">-->
-<!--                  <a-select-option-->
-<!--                      v-for="filterItem in statusFilter"-->
-<!--                      :key="filterItem?.id"-->
-<!--                      placeholder="good"-->
-<!--                  >-->
-<!--                    {{ filterItem?.name?.ru }}-->
-<!--                  </a-select-option>-->
-<!--                </a-select>-->
-<!--              </a-form-model-item>-->
-            </div>
-            <a-button
-                type="primary"
-                class="d-flex align-items-center justify-content-center"
-                @click="clearQuery('__GET_ORDERS')"
-                style="height: 38px"
-            >
-              <a-icon type="reload"
-              />
-            </a-button>
-          </div>
-        </div>
-      </div>
-    </div>
+<!--    <div class="container_orders app-container pb-4">-->
+<!--      <div class="card_block main-table px-4 py-3">-->
+<!--        <div class="d-flex justify-content-between align-items-center">-->
+<!--          <div class="oroder-filter-grid w-100 align-items-center">-->
+<!--            <SearchInput-->
+<!--                placeholder="Поиск"-->
+<!--                @changeSearch="($event) => changeSearch($event, '__GET_ORDERS')"-->
+<!--            />-->
+<!--            <div class="input status-select w-100">-->
+<!--&lt;!&ndash;              <a-form-model-item&ndash;&gt;-->
+<!--&lt;!&ndash;                  class="form-item mb-0"&ndash;&gt;-->
+<!--&lt;!&ndash;                  :class="{ 'select-placeholder': !value }"&ndash;&gt;-->
+<!--&lt;!&ndash;              >&ndash;&gt;-->
+<!--&lt;!&ndash;                <a-select v-model="value" placeholder="Статус">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <a-select-option&ndash;&gt;-->
+<!--&lt;!&ndash;                      v-for="filterItem in statusFilter"&ndash;&gt;-->
+<!--&lt;!&ndash;                      :key="filterItem?.id"&ndash;&gt;-->
+<!--&lt;!&ndash;                      placeholder="good"&ndash;&gt;-->
+<!--&lt;!&ndash;                  >&ndash;&gt;-->
+<!--&lt;!&ndash;                    {{ filterItem?.name?.ru }}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </a-select-option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </a-select>&ndash;&gt;-->
+<!--&lt;!&ndash;              </a-form-model-item>&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="input status-select w-100">-->
+<!--&lt;!&ndash;              <a-form-model-item&ndash;&gt;-->
+<!--&lt;!&ndash;                  class="form-date mb-0"&ndash;&gt;-->
+<!--&lt;!&ndash;                  :class="{ 'select-placeholder': !value }"&ndash;&gt;-->
+<!--&lt;!&ndash;              >&ndash;&gt;-->
+<!--&lt;!&ndash;                <a-range-picker @change="onChange"/>&ndash;&gt;-->
+<!--&lt;!&ndash;             &ndash;&gt;-->
+<!--&lt;!&ndash;              </a-form-model-item>&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="input status-select w-100">-->
+<!--&lt;!&ndash;              <a-form-model-item&ndash;&gt;-->
+<!--&lt;!&ndash;                  class="form-item mb-0"&ndash;&gt;-->
+<!--&lt;!&ndash;                  :class="{ 'select-placeholder': !value }"&ndash;&gt;-->
+<!--&lt;!&ndash;              >&ndash;&gt;-->
+<!--&lt;!&ndash;                <a-select v-model="value" placeholder="Категория">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <a-select-option&ndash;&gt;-->
+<!--&lt;!&ndash;                      v-for="filterItem in statusFilter"&ndash;&gt;-->
+<!--&lt;!&ndash;                      :key="filterItem?.id"&ndash;&gt;-->
+<!--&lt;!&ndash;                      placeholder="good"&ndash;&gt;-->
+<!--&lt;!&ndash;                  >&ndash;&gt;-->
+<!--&lt;!&ndash;                    {{ filterItem?.name?.ru }}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </a-select-option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </a-select>&ndash;&gt;-->
+<!--&lt;!&ndash;              </a-form-model-item>&ndash;&gt;-->
+<!--            </div>-->
+<!--            <a-button-->
+<!--                type="primary"-->
+<!--                class="d-flex align-items-center justify-content-center"-->
+<!--                @click="clearQuery('__GET_ORDERS')"-->
+<!--                style="height: 38px"-->
+<!--            >-->
+<!--              <a-icon type="reload"-->
+<!--              />-->
+<!--            </a-button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <div class="container_orders app-container main-table">
       <div class="card_block main-table px-4 py-4">
@@ -103,7 +103,7 @@
               tag_success: tags === 'NEW',
               tag_inProgress: tags === 'PROCESS' || tags.status === 3,
               tag_approved: tags === 'COMPLETED',
-              tag_rejected: tags === 'CANCELED_BY_EXECUTOR' || tags === 'CANCELED_BY_CONSUMER',
+              tag_rejected: tags === 'CANCELED_BY_EXECUTOR' || tags === 'CANCELED_BY_CONSUMER' || tags === 'CANCELED_BY_ADMIN',
               tag_mode: tags === 0,
             }"
           >

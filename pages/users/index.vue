@@ -12,7 +12,7 @@
             />
             <div class="input status-select w-100">
               <a-form-model-item class="form-item mb-0">
-                <a-select v-model="filter.cityId" placeholder="Область" @change="$event => onFilterChange($event,'cityId')">
+                <a-select v-model="filter.regionId" placeholder="Область" @change="$event => onFilterChange($event,'regionId')">
                   <a-select-option v-for="filterItem in cities" :key="filterItem?.id" :value="filterItem?.id" >
                     {{ filterItem?.name.ru }}
                   </a-select-option>
@@ -22,7 +22,7 @@
 
             <div class="input status-select w-100">
               <a-form-model-item class="form-item mb-0">
-                <a-select v-model="filter.isActive" placeholder="Статус" @change="$event => onFilterChange($event,'isActive')">
+                <a-select v-model="filter.active" placeholder="Статус" @change="$event => onFilterChange($event,'active')">
                   <a-select-option
                     v-for="(filterItem, index) in statusFilter"
                     :key="index"
@@ -196,8 +196,8 @@ export default {
       ],
 
       filter: {
-        isActive: undefined,
-        cityId: undefined
+        active: undefined,
+        regionId: undefined
       },
       pageSize: 10,
       eyeIcon: require("@/assets/svg/Eye.svg?raw"),

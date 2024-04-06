@@ -377,6 +377,24 @@ export default {
             edit: "settings-vehilces",
             show: true,
           },
+          {
+            key: "30",
+            name: "Роли",
+            to: "/settings/roles",
+            add: "settings-roles",
+            edit: "settings-roles",
+            // show: this.checkShow("roles"),
+            show: true,
+          },
+          {
+            key: "31",
+            name: "Пользователи",
+            to: "/settings/users",
+            add: "settings-users",
+            edit: "settings-users",
+            // show: this.checkShow("users"),
+            show: true
+          },
         ],
       },
     ];

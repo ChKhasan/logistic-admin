@@ -390,7 +390,7 @@
                     class="tags-style"
                     :class="{
               tag_success: tags === 'NEW',
-              tag_inProgress: tags === 'PROCESS' || tags === 'SELECTED',
+              tag_inProgress: tags === 'PROCESS' || tags === 'SELECTED' || tags === 'PENDING',
               tag_approved: tags === 'COMPLETED',
               tag_rejected: tags === 'CANCELED_BY_EXECUTOR' || tags === 'CANCELED_BY_CONSUMER',
               tag_mode: tags === 0,
@@ -527,34 +527,6 @@
 
             </div>
             <div v-if="$route.hash == '#complaints'">
-              <div class="card_block main-table px-4 py-3">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="oroder-filter-grid w-100 align-items-center">
-                    <SearchInput
-                        placeholder="Поиск"
-                        @changeSearch="($event) => changeSearch($event, '__GET_COMP')"
-                    />
-                    <div class="input status-select w-100">
-
-                    </div>
-                    <div class="input status-select w-100">
-
-                    </div>
-                    <div class="input status-select w-100">
-
-                    </div>
-                    <a-button
-                        type="primary"
-                        class="d-flex align-items-center justify-content-center"
-                        @click="clearQuery('__GET_COMP')"
-                        style="height: 38px"
-                    >
-                      <a-icon type="reload"
-                      />
-                    </a-button>
-                  </div>
-                </div>
-              </div>
               <div
                   class="card_block main-table px-4 py-4 mt-3"
 

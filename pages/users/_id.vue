@@ -88,9 +88,7 @@
                             <p class="answer">
                               {{ client?.lastName }}
                               {{ client?.firstName }}
-                              <nuxt-link :to="`/users/${client?.id}`"
-                                >Перейти к клиенту</nuxt-link
-                              >
+
                             </p>
                           </div>
                           <div class="item">
@@ -99,7 +97,7 @@
                           </div>
                           <div class="item">
                             <p class="question">Район</p>
-                            <p class="answer">{{ client?.region || "----" }}</p>
+                            <p class="answer">{{ client?.city?.name || "----" }}</p>
                           </div>
                         </div>
                       </div>

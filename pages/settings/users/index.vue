@@ -5,7 +5,7 @@
         <a-button
           class="add-btn add-header-btn btn-primary d-flex align-items-center"
           type="primary"
-          @click="$router.push('/settings/create-users')"
+          @click="$router.push('/settings/users/add')"
           v-if="checkAccess('users', 'post')"
         >
           <span class="svg-icon" v-html="addIcon"> </span>
@@ -25,7 +25,7 @@
             />
             <div></div>
             <a-button
-              @click="clearQuery('/settings/users', '__GET_USERS')"
+              @click="clearQuery( '__GET_USERS')"
               type="primary"
               class="d-flex align-items-center justify-content-center"
               style="height: 38px"
@@ -48,7 +48,7 @@
               v-if="checkAccess('users', 'put')"
               class="action-btn"
               v-html="editIcon"
-              @click="$router.push(`/settings/edit-users/${text}`)"
+              @click="$router.push(`/settings/users/${text}`)"
             >
             </span>
             <a-popconfirm
@@ -68,7 +68,7 @@
             class="table-page-size"
             style="width: 120px"
             @change="
-              ($event) => changePageSizeGlobal($event, '/settings/users', '__GET_USERS')
+              ($event) => changePageSizeGlobal($event,'',  '__GET_USERS')
             "
           >
             <a-select-option
@@ -93,11 +93,11 @@
 </template>
 
 <script>
-import SearchInput from "../../components/form/Search-input.vue";
-import TitleBlock from "../../components/Title-block.vue";
-import status from "../../mixins/status";
-import global from "../../mixins/global";
-import authAccess from "../../mixins/authAccess";
+import SearchInput from "@/components/form/Search-input.vue";
+import TitleBlock from "@/components/Title-block.vue";
+import status from "@/mixins/status";
+import global from "@/mixins/global";
+import authAccess from "@/mixins/authAccess";
 import moment from "moment";
 
 const columns = [
@@ -147,10 +147,10 @@ export default {
   mixins: [status, global, authAccess],
   data() {
     return {
-      eyeIcon: require("../../assets/svg/Eye.svg?raw"),
-      editIcon: require("../../assets/svg/edit.svg?raw"),
-      deleteIcon: require("../../assets/svg/delete.svg?raw"),
-      addIcon: require("../../assets/svg/add-icon.svg?raw"),
+      eyeIcon: require("@/assets/svg/Eye.svg?raw"),
+      editIcon: require("@/assets/svg/edit.svg?raw"),
+      deleteIcon: require("@/assets/svg/delete.svg?raw"),
+      addIcon: require("@/assets/svg/add-icon.svg?raw"),
       loading: false,
       search: "",
       filter: {
@@ -164,7 +164,7 @@ export default {
   },
   async mounted() {
     this.__GET_CITIES();
-    this.getFirstData("/settings/users", "__GET_USERS");
+    this.getFirstData( "__GET_USERS");
     this.checkAllActions("users");
   },
   methods: {
@@ -183,7 +183,7 @@ export default {
       });
       this.loading = false;
       const pageIndex = this.indexPage(data?.users?.current_page, data?.users?.per_page);
-      this.posts = data?.users?.data.map((item, index) => {
+      this.posts = data?.content.map((item, index) => {
         return {
           ...item,
           key: index + pageIndex,
@@ -205,7 +205,7 @@ export default {
   },
   watch: {
     async current(val) {
-      this.changePagination(val, "/settings/users", "__GET_USERS");
+      this.changePagination(val,  "__GET_USERS");
     },
   },
   components: { TitleBlock, SearchInput },

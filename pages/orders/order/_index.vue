@@ -96,7 +96,7 @@
                           v-for="elem in statusData"
                           :key="elem.value"
                           :disabled="
-                          !activeStatus.includes(elem.value) || order.status !== 'NEW'
+                          !activeStatus.includes(elem.value)
                         "
                       >
                         {{ elem.label }}
@@ -118,7 +118,6 @@
                   </div>
 
                   <a-button
-                      v-if="order.status === 'NEW'"
                       class="py-3 add-btn btn-primary d-flex justify-content-center align-items-center"
                       style="height: 42px"
                       type="primary"
@@ -444,7 +443,7 @@ export default {
     return {
       form: {},
       delayTime: 0,
-      activeStatus: ["NEW", "COMPLETED", "CANCELED_BY_EXECUTOR"],
+      activeStatus: ["COMPLETED","CANCELED_BY_ADMIN"],
       filter: undefined,
       loading: false,
       visible: false,
@@ -473,11 +472,15 @@ export default {
         },
         {
           label: "Отменено администратором",
-          value: "CANCELED_BY_EXECUTOR",
+          value: "CANCELED_BY_ADMIN",
         },
         {
           label: "Отменено клиентом",
           value: "CANCELED_BY_CONSUMER",
+        },
+        {
+          label: "Отменено водителом",
+          value: "CANCELED_BY_EXECUTOR",
         },
       ],
       order: {},

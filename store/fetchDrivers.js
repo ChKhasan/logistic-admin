@@ -14,8 +14,14 @@ export const actions = {
   async getDriverComp({}, {id,params}) {
     return await this.$axios.$get(`/api/admin/drivers/${id}/complains`,{params: {...params}});
   },
+  async getDriverScore({}, {id,params}) {
+    return await this.$axios.$get(`/api/admin/drivers/${id}/scores`,{params: {...params}});
+  },
   async getDriverBalances({}, {id,params}) {
     return await this.$axios.$get(`/api/admin/drivers/${id}/transactions`,{params: {...params}});
+  },
+  async postScore({}, data) {
+    return await this.$axios.post(`/api/admin/changeScore`,data);
   },
   async postDriverBalance({}, {id,data}) {
     const formData = new URLSearchParams();

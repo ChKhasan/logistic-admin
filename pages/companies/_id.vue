@@ -1,9 +1,9 @@
 <template>
   <div class="posts">
     <TitleBlock
-        :title="`Водитель №${this.$route.params.id}`"
+        :title="`Компания №${this.$route.params.id}`"
         :breadbrumb="['Главный']"
-        :lastLink="`Водитель №${this.$route.params.id}`"
+        :lastLink="`Компания №${this.$route.params.id}`"
     >
       <div class="d-flex justify-content-between btn_group">
         <a-button
@@ -90,7 +90,7 @@
                   <div class="wrap">
                     <div class="cardo">
                       <div class="section">
-                        <h4 class="title">О водителе</h4>
+                        <h4 class="title">О компании</h4>
                         <div class="items">
                           <div class="item">
                             <p class="question">Фаолият Тури</p>
@@ -107,6 +107,10 @@
                             </p>
                           </div>
                           <div class="item">
+                            <p class="question">Название компании</p>
+                            <p class="answer"> {{ driver?.companyName }}  </p>
+                          </div>
+                          <div class="item">
                             <p class="question">Имя Фамилия</p>
                             <p class="answer"> {{ driver?.lastName }} {{ driver?.firstName }} </p>
                           </div>
@@ -116,35 +120,18 @@
                           </div>
                           <div class="item">
                             <p class="question">Город</p>
-                            <p class="answer">{{ driver?.city || emptyText }}</p>
+                            <p class="answer">{{ driver?.city?.name || emptyText }}</p>
                           </div>
                         </div>
                       </div>
-                      <div class="section">
-                        <h4 class="title">Транспорт</h4>
-                        <div class="d-flex flex-column">
-                          <div class="item">
-                            <p class="question">Регистрационный номер автомобиля *</p>
-                            <p class="answer">{{ driver?.vehicleCode }}</p>
-                          </div>
-                          <div class="item mt-4">
-                            <p class="question">Тип транспорта</p>
-                            <p class="answer">
-                              {{ driver?.vehicle?.name }} {{ driver?.vehicle?.size }}
-                            </p>
-                          </div>
-
-                        </div>
-                      </div>
-
                       <div class="section">
                         <h4 class="title">Файлы</h4>
                         <div class="files">
-                          <div class="file" @click="showImg(driver?.image)">
+                          <div class="file" @click="showImg(driver?.certificate)">
                             <div class="img">
-                              <img :src="driver?.image" alt=""/>
+                              <img :src="driver?.certificate" alt=""/>
                             </div>
-                            <p class="size">Фотография водителя</p>
+                            <p class="size">Сертификат</p>
                           </div>
                           <div class="file" @click="showImg(driver?.passport)">
                             <div class="img">
@@ -158,17 +145,11 @@
                             </div>
                             <p class="size">Фото на паспорт (Обратная сторона)</p>
                           </div>
-                          <div class="file" @click="showImg(driver?.driverLicenseFront)">
+                          <div class="file" @click="showImg(driver?.license)">
                             <div class="img">
-                              <img :src="driver?.driverLicenseFront" alt=""/>
+                              <img :src="driver?.license" alt=""/>
                             </div>
-                            <p class="size">Ваши водительские права (лицевая сторона)</p>
-                          </div>
-                          <div class="file" @click="showImg(driver?.driverLicenseBack)">
-                            <div class="img">
-                              <img :src="driver?.driverLicenseBack" alt=""/>
-                            </div>
-                            <p class="size">Ваши водительские права (обратная сторона)</p>
+                            <p class="size">Лицензия</p>
                           </div>
                         </div>
                       </div>
@@ -809,7 +790,7 @@ export default {
     },
     async __EDIT_BALANCE(res) {
       try {
-        await this.$store.dispatch("fetchDrivers/postDriverBalance", {
+        await this.$store.dispatch("fetchCompanies/postCompanyBalance", {
           id: this.$route.params.id,
           data: res,
         });
@@ -823,7 +804,7 @@ export default {
     },
     async __EDIT_STATUS(res) {
       try {
-        await this.$store.dispatch("fetchDrivers/patchDriverStatus", {
+        await this.$store.dispatch("fetchCompanies/patchCompaniestatus", {
           id: this.$route.params.id,
           data: res,
         });
@@ -835,7 +816,7 @@ export default {
     async __GET_DRIVER_BY_ID() {
       try {
         const data = await this.$store.dispatch(
-            "fetchDrivers/getDriversById",
+            "fetchCompanies/getCompaniesById",
             this.$route.params.id
         );
         this.driver = data;
@@ -851,7 +832,7 @@ export default {
     async __GET_BALANCES() {
       try {
         const data = await this.$store.dispatch(
-            "fetchDrivers/getDriverBalances",
+            "fetchCompanies/getCompanyBalances",
             {
               id: this.$route.params.id, params: {
                 ...this.$route.query,
@@ -874,7 +855,7 @@ export default {
     async __GET_ORDERS() {
       try {
         const data = await this.$store.dispatch(
-            "fetchDrivers/getDriverOrders",
+            "fetchCompanies/getCompanyOrders",
             {id: this.$route.params.id, params: {...this.$route.query}}
         );
         console.log(data)
@@ -887,7 +868,7 @@ export default {
     async __GET_OFFERS() {
       try {
         const data = await this.$store.dispatch(
-            "fetchDrivers/getDriverOffers",
+            "fetchCompanies/getCompanyOffers",
             {id: this.$route.params.id, params: {...this.$route.query}}
         );
         const pageIndex = this.indexPage(data?.number, data?.size);
@@ -905,7 +886,7 @@ export default {
     async __GET_COMP() {
       try {
         const data = await this.$store.dispatch(
-            "fetchDrivers/getDriverComp",
+            "fetchCompanies/getCompanyComp",
             {id: this.$route.params.id, params: {...this.$route.query}}
         );
         const pageIndex = this.indexPage(data?.number, data?.size);

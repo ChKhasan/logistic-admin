@@ -1,39 +1,42 @@
 export const actions = {
-  async getDrivers({}, payload) {
-    return await this.$axios.$get(`/api/admin/drivers`, payload);
+  async getCompanies({}, payload) {
+    return await this.$axios.$get(`/api/admin/companies`, payload);
   },
-  async getDriversById({}, id) {
-    return await this.$axios.$get(`/api/admin/drivers/${id}`);
+  async getCompaniesById({}, id) {
+    return await this.$axios.$get(`/api/admin/companies/${id}`);
   },
-  async getDriverOrders({}, {id,params}) {
-    return await this.$axios.$get(`/api/admin/drivers/${id}/orders`,{params: {...params}});
+  async getCompanyOrders({}, {id,params}) {
+    return await this.$axios.$get(`/api/admin/companies/${id}/orders`,{params: {...params}});
   },
-  async getDriverOffers({}, {id,params}) {
-    return await this.$axios.$get(`/api/admin/drivers/${id}/offers`,{params: {...params}});
+  async getCompanyOffers({}, {id,params}) {
+    return await this.$axios.$get(`/api/admin/companies/${id}/offers`,{params: {...params}});
   },
-  async getDriverComp({}, {id,params}) {
-    return await this.$axios.$get(`/api/admin/drivers/${id}/complains`,{params: {...params}});
+  async getCompanyComp({}, {id,params}) {
+    return await this.$axios.$get(`/api/admin/companies/${id}/complains`,{params: {...params}});
   },
-  async getDriverBalances({}, {id,params}) {
-    return await this.$axios.$get(`/api/admin/drivers/${id}/transactions`,{params: {...params}});
+  async getCompanyScore({}, {id,params}) {
+    return await this.$axios.$get(`/api/admin/companies/${id}/scores`,{params: {...params}});
   },
-  async postDriverBalance({}, {id,data}) {
+  async getCompanyBalances({}, {id,params}) {
+    return await this.$axios.$get(`/api/admin/companies/${id}/transactions`,{params: {...params}});
+  },
+  async postCompanyBalance({}, {id,data}) {
     const formData = new URLSearchParams();
     for (const key in data) {
       formData.append(key, data[key]);
     }
-    return await this.$axios.post(`/api/admin/drivers/${id}/fillBalance`,formData,{
+    return await this.$axios.post(`/api/admin/companies/${id}/fillBalance`,formData,{
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
     });
   },
-  async patchDriverStatus({}, {id,data}) {
+  async patchCompaniestatus({}, {id,data}) {
     const formData = new URLSearchParams();
     for (const key in data) {
       formData.append(key, data[key]);
     }
-    return await this.$axios.patch(`/api/admin/drivers/${id}/changeStatus`,formData,{
+    return await this.$axios.patch(`/api/admin/companies/${id}/changeStatus`,formData,{
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },

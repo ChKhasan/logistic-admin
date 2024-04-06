@@ -47,7 +47,7 @@ export default {
           });
         if (val.target.value == this.$route.query.search) this[func]();
       } else if (val.target.value.length == 0) {
-        this.clearQuery(this.$route.path, func);
+        this.clearQuery(func);
       }
     },
     async clearQuery(func) {

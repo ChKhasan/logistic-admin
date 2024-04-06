@@ -5,7 +5,7 @@
         <a-button
           class="add-btn add-header-btn btn-primary d-flex align-items-center"
           type="primary"
-          @click="$router.push('/settings/create-role')"
+          @click="$router.push('/settings/roles/add')"
           v-if="checkAccess('roles', 'post')"
         >
           <span class="svg-icon" v-html="addIcon"> </span>
@@ -44,18 +44,18 @@
               class="action-btn"
               v-if="checkAccess('roles', 'put')"
               v-html="editIcon"
-              @click="$router.push(`/settings/edit-role/${text}`)"
+              @click="$router.push(`/settings/roles/${text}`)"
             >
             </span>
-            <a-popconfirm
-              v-if="checkAccess('roles', 'delete')"
-              title="Are you sure delete this row?"
-              ok-text="Yes"
-              cancel-text="No"
-              @confirm="deleteAction(text)"
-            >
-              <span class="action-btn" v-html="deleteIcon"> </span>
-            </a-popconfirm>
+<!--            <a-popconfirm-->
+<!--              v-if="checkAccess('roles', 'delete')"-->
+<!--              title="Are you sure delete this row?"-->
+<!--              ok-text="Yes"-->
+<!--              cancel-text="No"-->
+<!--              @confirm="deleteAction(text)"-->
+<!--            >-->
+<!--              <span class="action-btn" v-html="deleteIcon"> </span>-->
+<!--            </a-popconfirm>-->
           </span>
         </a-table>
         <!-- <div class="d-flex justify-content-between mt-4">
@@ -89,11 +89,11 @@
 </template>
 
 <script>
-import SearchInput from "../../components/form/Search-input.vue";
-import TitleBlock from "../../components/Title-block.vue";
-import status from "../../mixins/status";
-import global from "../../mixins/global";
-import authAccess from "../../mixins/authAccess";
+import SearchInput from "@/components/form/Search-input.vue";
+import TitleBlock from "@/components/Title-block.vue";
+import status from "@/mixins/status";
+import global from "@/mixins/global";
+import authAccess from "@/mixins/authAccess";
 
 import moment from "moment";
 
@@ -109,8 +109,8 @@ const columns = [
   },
   {
     title: "Имя",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "title",
+    key: "title",
     slots: { title: "customTitle" },
     scopedSlots: { customRender: "name" },
     className: "column-name",
@@ -136,10 +136,10 @@ export default {
   mixins: [status, global, authAccess],
   data() {
     return {
-      eyeIcon: require("../../assets/svg/Eye.svg?raw"),
-      editIcon: require("../../assets/svg/edit.svg?raw"),
-      deleteIcon: require("../../assets/svg/delete.svg?raw"),
-      addIcon: require("../../assets/svg/add-icon.svg?raw"),
+      eyeIcon: require("@/assets/svg/Eye.svg?raw"),
+      editIcon: require("@/assets/svg/edit.svg?raw"),
+      deleteIcon: require("@/assets/svg/delete.svg?raw"),
+      addIcon: require("@/assets/svg/add-icon.svg?raw"),
       loading: false,
       search: "",
       columns,
@@ -147,7 +147,7 @@ export default {
     };
   },
   async mounted() {
-    this.getFirstData("/settings/roles", "__GET_ROLES");
+    this.getFirstData( "__GET_ROLES");
     this.checkAllActions("roles");
   },
   methods: {
@@ -161,22 +161,22 @@ export default {
         ...this.$route.query,
       });
       this.loading = false;
-      const pageIndex = this.indexPage(data?.roles?.current_page, data?.roles?.per_page);
-      this.posts = data?.roles?.data.map((item, index) => {
+      const pageIndex = this.indexPage(data?.number, data?.size);
+      this.posts = data?.content?.map((item, index) => {
         return {
           ...item,
           key: index + pageIndex,
         };
       });
-      this.totalPage = data?.roles?.total;
+      this.totalPage = data?.totalElements;
     },
     indexPage(current_page, per_page) {
-      return (current_page * 1 - 1) * per_page + 1;
+      return (current_page * 1) * per_page + 1;
     },
   },
   watch: {
     async current(val) {
-      this.changePagination(val, "/settings/roles", "__GET_ROLES");
+      this.changePagination(val,  "__GET_ROLES");
     },
   },
   components: { TitleBlock, SearchInput },
