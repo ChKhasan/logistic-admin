@@ -51,15 +51,15 @@
               @click="$router.push(`/settings/users/${text}`)"
             >
             </span>
-            <a-popconfirm
-              v-if="checkAccess('users', 'delete')"
-              title="Are you sure delete this row?"
-              ok-text="Yes"
-              cancel-text="No"
-              @confirm="deleteAction(text)"
-            >
-              <span class="action-btn" v-html="deleteIcon"> </span>
-            </a-popconfirm>
+<!--            <a-popconfirm-->
+<!--              v-if="checkAccess('users', 'delete')"-->
+<!--              title="Are you sure delete this row?"-->
+<!--              ok-text="Yes"-->
+<!--              cancel-text="No"-->
+<!--              @confirm="deleteAction(text)"-->
+<!--            >-->
+<!--              <span class="action-btn" v-html="deleteIcon"> </span>-->
+<!--            </a-popconfirm>-->
           </span>
         </a-table>
         <div class="d-flex justify-content-between mt-4">
@@ -110,15 +110,7 @@ const columns = [
     align: "left",
     width: 50,
   },
-  {
-    title: "Имя",
-    dataIndex: "name",
-    key: "name",
-    slots: { title: "customTitle" },
-    scopedSlots: { customRender: "name" },
-    className: "column-name",
-    align: "left",
-  },
+
   {
     title: "Имя пользователя",
     dataIndex: "username",
@@ -182,7 +174,7 @@ export default {
         ...this.$route.query,
       });
       this.loading = false;
-      const pageIndex = this.indexPage(data?.users?.current_page, data?.users?.per_page);
+      const pageIndex = this.indexPage(data?.number, data?.size);
       this.posts = data?.content.map((item, index) => {
         return {
           ...item,
@@ -192,7 +184,7 @@ export default {
       this.totalPage = data?.users?.total;
     },
     indexPage(current_page, per_page) {
-      return (current_page * 1 - 1) * per_page + 1;
+      return (current_page * 1) * per_page + 1;
     },
     async onFilterChange(id,name) {
       if (this.$route.query[name] != id)

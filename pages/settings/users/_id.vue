@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="posts">
-    <UsersTemlate save="Добавить" :isEdit="false"/>
+    <UsersTemlate save="Добавить" :isEdit="true"/>
   </div>
 </template>
 <script>

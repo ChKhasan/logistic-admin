@@ -25,16 +25,16 @@
           <div class="">
             <div class="card_block main-table px-4 py-4">
               <FormTitle title="Создать пользователя" />
-              <a-form-model-item class="form-item mb-3" label="Имя" prop="name">
-                <a-input v-model="form.name" placeholder="Имя..." />
+              <a-form-model-item class="form-item mb-3" label="Имя" prop="username">
+                <a-input v-model="form.username" placeholder="Имя..." />
               </a-form-model-item>
               <a-form-model-item
                 class="form-item mb-3"
                 label="Роль"
               >
-                <a-select v-model="form.role_id" placeholder="Роль...">
+                <a-select v-model="form.roleId" placeholder="Роль...">
                   <a-select-option v-for="(role, index) in roles" :key="role?.id">
-                    {{ role?.name }}
+                    {{ role?.title }}
                   </a-select-option>
                 </a-select>
               </a-form-model-item>
@@ -73,20 +73,6 @@ export default {
   data() {
     return {
       rules: {
-        name: [
-          {
-            required: true,
-            message: "This field is required",
-            trigger: "change",
-          },
-        ],
-        role_id: [
-          {
-            required: true,
-            message: "This field is required",
-            trigger: "change",
-          },
-        ],
         username: [
           {
             required: true,
@@ -94,6 +80,14 @@ export default {
             trigger: "change",
           },
         ],
+        roleId: [
+          {
+            required: true,
+            message: "This field is required",
+            trigger: "change",
+          },
+        ],
+
         password: [
           {
             required: true,
@@ -123,7 +117,7 @@ export default {
     };
   },
   mounted() {
-    if(this.isEdit) this.__GET_USERS_BY_ID();
+    if(this.isEdit) this.__GET_USER();
     this.__GET_ROLES();
   },
   methods: {
@@ -133,17 +127,24 @@ export default {
           if (this.form.password !== this.form.password2) {
             this.confirmPasswordError = 'Passwords do not match';
           } else {
-            this.__POST_USER(this.form);
+            this.isEdit ? this.__EDIT_USER(this.form):this.__POST_USER(this.form);
           }
         }
       });
     },
-    __GET_USERS_BY_ID() {
+    async __GET_USER() {
+      const data = await this.$store.dispatch("fetchRole/getUsersById",this.$route.params.id);
+      this.role = data;
+      for(let elem in this.form) {
+        this.form[elem] = data[elem] ?? this.form[elem]
+      }
+      this.form.roleId = data?.role?.id
     },
     onSubmit() {
       this.$refs["ruleForm"].validate((valid) => {
         if (valid) {
-          this.__POST_USER(this.form);
+          console.log(this.isEdit)
+
         } else {
           return false;
         }
@@ -151,11 +152,23 @@ export default {
     },
     async __GET_ROLES() {
       const data = await this.$store.dispatch("fetchRole/getRole");
-      this.roles = data?.roles?.data;
+      this.roles = data?.content;
+
     },
     async __POST_USER(data) {
+      console.log("post")
       try {
         await this.$store.dispatch("fetchRole/postUser", data);
+        this.$router.push("/settings/users");
+        this.notification("success", "success", "Успешно добавлен");
+      } catch (e) {
+        this.statusFunc(e);
+      }
+    },
+    async __EDIT_USER(data) {
+      console.log("edit")
+      try {
+        await this.$store.dispatch("fetchRole/editUser", {id: this.$route.params.id,data});
         this.$router.push("/settings/users");
         this.notification("success", "success", "Успешно добавлен");
       } catch (e) {

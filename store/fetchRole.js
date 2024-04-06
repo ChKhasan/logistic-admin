@@ -58,6 +58,13 @@ export const actions = {
       },
     });
   },
+  async editUser({}, payload) {
+    return await this.$axios.$put(`/api/admin/admins/${payload.id}`, payload.data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+      },
+    });
+  },
   async deleteRole({}, id) {
     return await this.$axios.$delete(`/api/admin/roles/${id}`, {
       headers: {
