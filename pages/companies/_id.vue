@@ -371,9 +371,9 @@
                     class="tags-style"
                     :class="{
               tag_success: tags === 'NEW',
-              tag_inProgress: tags === 'PROCESS' || tags === 'SELECTED',
+              tag_inProgress: tags === 'PROCESS' || tags === 'SELECTED' || tags === 'PENDING',
               tag_approved: tags === 'COMPLETED',
-              tag_rejected: tags === 'CANCELED_BY_EXECUTOR' || tags === 'CANCELED_BY_CONSUMER',
+              tag_rejected: tags === 'CANCELED_BY_EXECUTOR' || tags === 'CANCELED_BY_CONSUMER' || tags === 'REJECTED',
               tag_mode: tags === 0,
             }"
                 >

@@ -210,22 +210,31 @@
 
                 <div
                     class="card_block main-table px-4 py-4 mt-4"
+                    v-if="driver?.activeOrders?.length > 0"
                 >
                   <FormTitle title="Активный заказ"/>
                   <ul class="driver-info">
-                    <li>
+                    <li v-for="order in driver?.activeOrders" :key="order">
                       <p>Номер заказа:</p>
-                      <p>#5481</p>
-                      <nuxtLink :to="'/'"
+                      <p>#{{ order }}</p>
+                      <nuxtLink :to="`/orders/order/${order}`"
                       >Посмотреть заказ
                       </nuxtLink
                       >
                     </li>
-                    <div class="map">
-                      <iframe
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.134229445218!2d69.24423062643743!3d41.32769444969508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b70de29132d%3A0x4f62d5ff05a9a3dd!2z0JPQsNGE0YPRgCDQk9GD0LvQvtC8!5e0!3m2!1sru!2s!4v1712050717492!5m2!1sru!2s"
-                          height="146" style="border:0;width: 100%" allowfullscreen="" loading="lazy"
-                          referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="map" v-if="coords[0]">
+                      <yandex-map
+                        :coords="coords"
+                        :settings="mapSettings"
+                        class="min-h-[350px]"
+                        style="height: 250px"
+                      >
+                        <ymap-marker :coords="coords" hint-content="some hint" marker-id="123" />
+                      </yandex-map>
+<!--                      <iframe-->
+<!--                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.134229445218!2d69.24423062643743!3d41.32769444969508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b70de29132d%3A0x4f62d5ff05a9a3dd!2z0JPQsNGE0YPRgCDQk9GD0LvQvtC8!5e0!3m2!1sru!2s!4v1712050717492!5m2!1sru!2s"-->
+<!--                          height="146" style="border:0;width: 100%" allowfullscreen="" loading="lazy"-->
+<!--                          referrerpolicy="no-referrer-when-downgrade"></iframe>-->
                     </div>
                   </ul>
                 </div>
@@ -684,6 +693,12 @@ export default {
   },
   data() {
     return {
+      mapSettings: {
+        zoom: 1,
+        maxZoom: 4,
+        minZoom: 4,
+      },
+      coords: [41.311081, 69.240562],
       visibleImg: false,
       emptyText: '----',
       form: {},
@@ -813,6 +828,7 @@ export default {
         this.driver = data;
         // this.formBalance.amount = data?.balance
         this.statusValue = this.driver.isActive ? 1 : 0;
+        this.coords = [data?.driverLocation?.lat,data?.driverLocation?.lon];
       } catch (e) {
         this.statusFunc(e);
       }
