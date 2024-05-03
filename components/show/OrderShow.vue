@@ -63,7 +63,7 @@
         <div class="item">
           <p class="question">Способ оплачен</p>
           <p class="answer">
-            {{ order?.paymentType }}
+            {{ order?.paymentType === 'CACHE' ? 'Наличные':'Оплачено картой' }}
           </p>
         </div>
         <div class="item">

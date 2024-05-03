@@ -241,14 +241,14 @@
                 <div class="card_block main-table px-4 py-4 mt-4">
                   <FormTitle title="Баланс"/>
                   <a-form-model-item class="form-item mb-3" label="Остаток">
-                    <a-input type="text" v-model="formBalance.amount" placeholder="0"/>
+                    <a-input disabled type="text" v-model="driver.balance" placeholder="0"/>
                   </a-form-model-item>
                   <a-button
                       class="py-3 add-btn btn-primary d-flex justify-content-center align-items-center "
                       style="height: 42px"
                       type="primary"
                       :class="{disabledBtn: formBalance.amount === 0}"
-                      @click="onSubmitBalance(formBalance)"
+                      @click="$router.push({ hash: 'balance',query: $route.query })"
                   >
                     Пополнить
                   </a-button>
@@ -803,6 +803,7 @@ export default {
         this.__GET_BALANCES();
         this.__GET_DRIVER_BY_ID();
         this.formBalance.amount = null
+        this.formBalanceMinus.amount = null
         this.notification("success", "success", "Успешно изменена");
       } catch (e) {
         this.statusFunc(e);
@@ -971,7 +972,7 @@ export default {
   color: #18b3bd;
 }
 .balance-card h4 {
-  color: var(--Dark-Blue, #32324D);
+  color: #32324D;
   font-family: 'TT Interfaces';
   font-size: 24px;
   font-style: normal;
@@ -980,7 +981,7 @@ export default {
 }
 
 .balance-card h5 {
-  color: var(--Facebook-blue, #1878F3);
+  color:#1878F3;
   font-family: 'TT Interfaces';
   font-size: 24px;
   font-style: normal;
@@ -996,7 +997,7 @@ export default {
 }
 
 .title {
-  color: var(--dark-blue, #32324d);
+  color: #32324d;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
@@ -1042,7 +1043,7 @@ export default {
 }
 
 .desc p {
-  color: var(--grey-80, #353437);
+  color: #353437;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -1057,7 +1058,7 @@ export default {
 }
 
 .desc a {
-  color: var(--Agro-Blue, #3c4bdc);
+  color: #3c4bdc;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -1080,7 +1081,7 @@ export default {
   height: 166px;
   object-fit: contain;
   border-radius: 4px;
-  border: 1px solid var(--grey-8, #ebebeb);
+  border: 1px solid #ebebeb;
   margin-bottom: 8px;
 }
 
@@ -1092,7 +1093,7 @@ export default {
 }
 
 .name {
-  color: var(--grey-80, #353437);
+  color: #353437;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -1111,9 +1112,9 @@ export default {
 
 .cat {
   border-radius: 22px;
-  background: var(--BG-grey, #f8f9ff);
+  background: #f8f9ff;
   padding: 8px 16px;
-  color: var(--grey-64, #5d5d5f);
+  color: #5d5d5f;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
