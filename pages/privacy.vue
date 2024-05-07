@@ -417,8 +417,7 @@
               margin: 0px;
             "
           >
-            The Application does gather precise information about the location of your
-            mobile device.
+          The app actually collects precise information about the location of your mobile device and when you are not using the app runs in the background. We collect this data solely for the purpose of providing location-based services or features to improve your experience with the Application. Your location information is treated as confidential and is only accessible and used in accordance with our Privacy Policy. We do not share your precise location data with third parties without your explicit consent, except when required to do so by law or to protect the safety of our users or the public. You have control over this data. access your device's location services through your mobile device settings and the ability to revoke your consent to location tracking at any time
           </p>
           <p>
             <br
