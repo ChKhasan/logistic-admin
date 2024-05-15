@@ -283,18 +283,22 @@ export default {
       );
     },
     async __GET_REGIONS() {
-      this.loading = true;
-      const data = await this.$store.dispatch("fetchLoadTypes/getLoadTypes", {
-        ...this.$route.query,
-      });
-      this.loading = false;
-      this.regions = data?.content.map((item, index) => {
-        return {
-          ...item,
-          key: index + 1,
-        };
-      });
-      this.totalPage = data?.totalElements;
+   try {
+     this.loading = true;
+     const data = await this.$store.dispatch("fetchLoadTypes/getLoadTypes", {
+       ...this.$route.query,
+     });
+
+     this.regions = data?.content.map((item, index) => {
+       return {
+         ...item,
+         key: index + 1,
+       };
+     });
+     this.totalPage = data?.totalElements;
+   }finally {
+     this.loading = false;
+   }
 
     },
 

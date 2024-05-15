@@ -10,7 +10,7 @@
           class="add-btn add-header-btn btn-primary d-flex align-items-center mx-4"
           type="primary"
           @click="positionGenerator"
-          >Сохранить позицию
+        >Сохранить позицию
         </a-button>
         <a-button
           class="add-btn add-header-btn btn-primary d-flex align-items-center"
@@ -37,58 +37,58 @@
               class="d-flex align-items-center justify-content-center"
               style="height: 38px"
             >
-              <a-icon type="reload" />
+              <a-icon type="reload"/>
             </a-button>
           </div>
         </div>
         <table class="ant-table ant-table-striped ant-table-scroll-position-left">
           <thead class="ant-table-thead">
-            <tr>
-              <th
-                key="indexId"
-                class="column-service ant-table-align-left ant-table-row-cell-break-word"
-                style="text-align: left"
-              >
+          <tr>
+            <th
+              key="indexId"
+              class="column-service ant-table-align-left ant-table-row-cell-break-word"
+              style="text-align: left"
+            >
                 <span class="ant-table-header-column"
-                  ><div>
+                ><div>
                     <span class="ant-table-column-title">№</span
                     ><span class="ant-table-column-sorter"></span></div
                 ></span>
-              </th>
-              <th
-                key="text_ru"
-                class="column-name ant-table-align-left"
-                style="text-align: left"
-              >
+            </th>
+            <th
+              key="text_ru"
+              class="column-name ant-table-align-left"
+              style="text-align: left"
+            >
                 <span class="ant-table-header-column"
-                  ><div>
+                ><div>
                     <span class="ant-table-column-title">Текст</span
                     ><span class="ant-table-column-sorter"></span></div
                 ></span>
-              </th>
-              <!-- <th
-                key="type"
-                class="column-name ant-table-align-left"
-                style="text-align: left"
-              >
+            </th>
+            <!-- <th
+              key="type"
+              class="column-name ant-table-align-left"
+              style="text-align: left"
+            >
+              <span class="ant-table-header-column"
+                ><div>
+                  <span class="ant-table-column-title">Тип пользователя </span
+                  ><span class="ant-table-column-sorter"></span></div
+              ></span>
+            </th> -->
+            <th
+              key="id"
+              class="column-btns ant-table-align-right ant-table-row-cell-break-word ant-table-row-cell-last"
+              style="text-align: right"
+            >
                 <span class="ant-table-header-column"
-                  ><div>
-                    <span class="ant-table-column-title">Тип пользователя </span
-                    ><span class="ant-table-column-sorter"></span></div
-                ></span>
-              </th> -->
-              <th
-                key="id"
-                class="column-btns ant-table-align-right ant-table-row-cell-break-word ant-table-row-cell-last"
-                style="text-align: right"
-              >
-                <span class="ant-table-header-column"
-                  ><div>
+                ><div>
                     <span class="ant-table-column-title">ДЕЙСТВИЯ</span
                     ><span class="ant-table-column-sorter"></span></div
                 ></span>
-              </th>
-            </tr>
+            </th>
+          </tr>
           </thead>
           <draggable
             :list="specialities"
@@ -110,7 +110,7 @@
               <td class="column-name" style="text-align: left">
                 <!--                {{ reason?.text_ru }}-->
                 <span @click="editAction(reason.id)" class="title-link"
-                  >{{ reason?.name?.ru }}
+                >{{ reason?.name?.ru }}
                 </span>
               </td>
               <!-- <td class="column-name" style="text-align: left">
@@ -132,7 +132,7 @@
                         version="1.1"
                       >
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <polygon points="0 0 24 0 24 24 0 24" />
+                          <polygon points="0 0 24 0 24 24 0 24"/>
                           <path
                             d="M10.4289322,12.3786797 L5.30761184,7.25735931 C4.91708755,6.86683502 4.91708755,6.23367004 5.30761184,5.84314575 C5.69813614,5.45262146 6.33130112,5.45262146 6.72182541,5.84314575 L11.8431458,10.9644661 L18.0355339,4.77207794 C18.4260582,4.38155365 19.0592232,4.38155365 19.4497475,4.77207794 C19.8402718,5.16260223 19.8402718,5.79576721 19.4497475,6.1862915 L13.2573593,12.3786797 L19.4497475,18.5710678 C19.8402718,18.9615921 19.8402718,19.5947571 19.4497475,19.9852814 C19.0592232,20.3758057 18.4260582,20.3758057 18.0355339,19.9852814 L11.8431458,13.7928932 L6.72182541,18.9142136 C6.33130112,19.3047379 5.69813614,19.3047379 5.30761184,18.9142136 C4.91708755,18.5236893 4.91708755,17.8905243 5.30761184,17.5 L10.4289322,12.3786797 Z"
                             fill="#3699FF"
@@ -178,7 +178,7 @@
               :key="item.index"
               :label="item.label"
               :value="item.value"
-              >{{ item.label }}
+            >{{ item.label }}
             </a-select-option>
           </a-select>
           <a-pagination
@@ -222,7 +222,7 @@
               label="Текст причины"
               prop="name.ru"
             >
-              <a-input v-model="form.name[`${item.index}`]" placeholder="Текст..." />
+              <a-input v-model="form.name[`${item.index}`]" placeholder="Текст..."/>
             </a-form-model-item>
           </a-form-model>
         </div>
@@ -261,8 +261,8 @@ const columns = [
   {
     title: "№",
     key: "indexId",
-    slots: { title: "customTitle" },
-    scopedSlots: { customRender: "indexId" },
+    slots: {title: "customTitle"},
+    scopedSlots: {customRender: "indexId"},
     className: "column-service",
     align: "left",
     width: 50,
@@ -271,7 +271,7 @@ const columns = [
     title: "Текст",
     dataIndex: "name",
     key: "name",
-    slots: { title: "customTitle" },
+    slots: {title: "customTitle"},
     customRender: (text) => text?.ru,
     className: "column-name",
     align: "left",
@@ -281,7 +281,7 @@ const columns = [
     title: "Тип пользователя ",
     dataIndex: "type",
     key: "type",
-    slots: { title: "customTitle" },
+    slots: {title: "customTitle"},
     className: "column-name",
     customRender: (text) => (text == 1 ? "Фрилансер" : "Клиент"),
     align: "left",
@@ -293,7 +293,7 @@ const columns = [
     dataIndex: "id",
     key: "id",
     align: "right",
-    scopedSlots: { customRender: "id" },
+    scopedSlots: {customRender: "id"},
     width: 100,
   },
 ];
@@ -344,7 +344,7 @@ export default {
       specialities: [],
       rules: {
         name: {
-          ru: [{ required: true, message: "This field is required", trigger: "change" }],
+          ru: [{required: true, message: "This field is required", trigger: "change"}],
         },
       },
       form: {
@@ -407,18 +407,23 @@ export default {
       );
     },
     async __GET_REASONS() {
-      this.loading = true;
-      const data = await this.$store.dispatch("fetchCancelReasons/getReasons", {
-        ...this.$route.query,
-      });
-      this.loading = false;
-      this.specialities = data?.content?.map((item, index) => {
-        return {
-          ...item,
-          key: index + 1,
-        };
-      });
-      this.totalPage = data?.totalElements;
+      try {
+        this.loading = true;
+        const data = await this.$store.dispatch("fetchCancelReasons/getReasons", {
+          ...this.$route.query,
+        });
+
+        this.specialities = data?.content?.map((item, index) => {
+          return {
+            ...item,
+            key: index + 1,
+          };
+        });
+        this.totalPage = data?.totalElements;
+      } finally {
+        this.loading = false;
+      }
+
     },
 
     addCountries() {
@@ -476,7 +481,7 @@ export default {
   },
   watch: {
     async current(val) {
-      this.changePagination(val,  "__GET_REASONS");
+      this.changePagination(val, "__GET_REASONS");
     },
     visible(val) {
       if (val == false) {
@@ -484,7 +489,7 @@ export default {
       }
     },
   },
-  components: { TitleBlock, SearchInput, draggable },
+  components: {TitleBlock, SearchInput, draggable},
 };
 </script>
 <style lang="css">

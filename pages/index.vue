@@ -350,16 +350,31 @@ export default {
       this.__GET_SCORE(driver?.id);
     },
     async __GET_SCORE(id) {
-      const data = await this.$store.dispatch("fetchDrivers/getDriverScore", {id});
-      this.scores = data?.content
+      try {
+        const data = await this.$store.dispatch("fetchDrivers/getDriverScore", {id});
+        this.scores = data?.content
+      } catch (e) {
+
+      }
+
     },
     async __GET_TRANSPORTS() {
-      const data = await this.$store.dispatch("fetchVehilces/getVehilces",);
-      this.transports = data?.content
+      try {
+        const data = await this.$store.dispatch("fetchVehilces/getVehilces",);
+        this.transports = data?.content
+      } catch (e) {
+
+      }
+
     },
     async __GET_CITIES() {
-      const data = await this.$store.dispatch("fetchCities/getCities");
-      this.cities = data?.content;
+      try {
+        const data = await this.$store.dispatch("fetchCities/getCities");
+        this.cities = data?.content;
+      } catch (e) {
+
+      }
+
     },
     submitScore(position) {
       const data = {
@@ -389,21 +404,26 @@ export default {
       }
     },
     async __GET_DRIVERS() {
-      this.loading = true;
-      const data = await this.$store.dispatch("fetchDrivers/getDrivers", {
-        params: {
-          ...this.$route.query,
-        },
-      });
-      this.loading = false;
-      const pageIndex = this.indexPage(data?.number, data?.size);
-      this.drivers = data?.content.map((item, index) => {
-        return {
-          ...item,
-          key: index + pageIndex,
-        };
-      });
-      this.totalPage = data?.totalElements;
+      try {
+        this.loading = true;
+        const data = await this.$store.dispatch("fetchDrivers/getDrivers", {
+          params: {
+            ...this.$route.query,
+          },
+        });
+
+        const pageIndex = this.indexPage(data?.number, data?.size);
+        this.drivers = data?.content.map((item, index) => {
+          return {
+            ...item,
+            key: index + pageIndex,
+          };
+        });
+        this.totalPage = data?.totalElements;
+
+      } finally {
+        this.loading = false;
+      }
     },
     indexPage(current_page, per_page) {
       return (current_page * 1 - 1) * per_page + 1;

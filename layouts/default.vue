@@ -194,7 +194,7 @@
 import TitleBlock from "../components/Title-block.vue";
 
 export default {
-  middleware: ["auth", "access"],
+  middleware: ["auth"],
 
   data() {
     return {

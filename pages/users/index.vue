@@ -229,8 +229,11 @@ export default {
   },
   methods: {
     async __GET_CITIES() {
-      const data = await this.$store.dispatch("fetchCities/getCities");
-      this.cities = data?.content;
+      try {
+        const data = await this.$store.dispatch("fetchCities/getCities");
+        this.cities = data?.content;
+      } catch (e) {}
+
     },
     moment,
     currentFreelancer(array) {
@@ -252,27 +255,34 @@ export default {
       this.clearQuery("__GET_CONSUMERS");
     },
     async __GET_REGIONS() {
-      const data = await this.$store.dispatch("fetchRegions/getRegions", {
-        ...this.$route.query,
-      });
-      this.regions = data?.content;
+    try {  const data = await this.$store.dispatch("fetchRegions/getRegions", {
+      ...this.$route.query,
+    });
+      this.regions = data?.content;}
+      catch (e) {}
     },
     async __GET_CONSUMERS() {
-      this.loading = true;
-      const data = await this.$store.dispatch("fetchConsumers/getConsumers", {
-        params: {
-          ...this.$route.query,
-        },
-      });
-      this.loading = false;
-      const pageIndex = this.indexPage(data?.number, data?.size);
-      this.consumers = data?.content.map((item, index) => {
-        return {
-          ...item,
-          key: index + pageIndex,
-        };
-      });
-      this.totalPage = data?.totalElements;
+      try {
+        this.loading = true;
+        const data = await this.$store.dispatch("fetchConsumers/getConsumers", {
+          params: {
+            ...this.$route.query,
+          },
+        });
+
+        const pageIndex = this.indexPage(data?.number, data?.size);
+        this.consumers = data?.content.map((item, index) => {
+          return {
+            ...item,
+            key: index + pageIndex,
+          };
+        });
+        this.totalPage = data?.totalElements;
+      }
+      finally {
+        this.loading = false;
+      }
+
     },
     indexPage(current_page, per_page) {
       return (current_page * 1 - 1) * per_page + 1;

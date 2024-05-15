@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="all-orders pb-5">
     <TitleBlock
-        v-if="orderStatus[$route.params.status]"
-        :title="orderStatus[$route.params.status]"
-        :breadbrumb="['Заказы']"
-        :lastLink="orderStatus[$route.params.status]"
+      v-if="orderStatus[$route.params.status]"
+      :title="orderStatus[$route.params.status]"
+      :breadbrumb="['Заказы']"
+      :lastLink="orderStatus[$route.params.status]"
     >
     </TitleBlock>
     <TitleBlock v-else title="Все заказы" :breadbrumb="['Заказы']" lastLink="Все заказы">
@@ -14,92 +14,94 @@
         <OrderBtns/>
       </div>
     </div>
-<!--    <div class="container_orders app-container pb-4">-->
-<!--      <div class="card_block main-table px-4 py-3">-->
-<!--        <div class="d-flex justify-content-between align-items-center">-->
-<!--          <div class="oroder-filter-grid w-100 align-items-center">-->
-<!--            <SearchInput-->
-<!--                placeholder="Поиск"-->
-<!--                @changeSearch="($event) => changeSearch($event, '__GET_ORDERS')"-->
-<!--            />-->
-<!--            <div class="input status-select w-100">-->
-<!--&lt;!&ndash;              <a-form-model-item&ndash;&gt;-->
-<!--&lt;!&ndash;                  class="form-item mb-0"&ndash;&gt;-->
-<!--&lt;!&ndash;                  :class="{ 'select-placeholder': !value }"&ndash;&gt;-->
-<!--&lt;!&ndash;              >&ndash;&gt;-->
-<!--&lt;!&ndash;                <a-select v-model="value" placeholder="Статус">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <a-select-option&ndash;&gt;-->
-<!--&lt;!&ndash;                      v-for="filterItem in statusFilter"&ndash;&gt;-->
-<!--&lt;!&ndash;                      :key="filterItem?.id"&ndash;&gt;-->
-<!--&lt;!&ndash;                      placeholder="good"&ndash;&gt;-->
-<!--&lt;!&ndash;                  >&ndash;&gt;-->
-<!--&lt;!&ndash;                    {{ filterItem?.name?.ru }}&ndash;&gt;-->
-<!--&lt;!&ndash;                  </a-select-option>&ndash;&gt;-->
-<!--&lt;!&ndash;                </a-select>&ndash;&gt;-->
-<!--&lt;!&ndash;              </a-form-model-item>&ndash;&gt;-->
-<!--            </div>-->
-<!--            <div class="input status-select w-100">-->
-<!--&lt;!&ndash;              <a-form-model-item&ndash;&gt;-->
-<!--&lt;!&ndash;                  class="form-date mb-0"&ndash;&gt;-->
-<!--&lt;!&ndash;                  :class="{ 'select-placeholder': !value }"&ndash;&gt;-->
-<!--&lt;!&ndash;              >&ndash;&gt;-->
-<!--&lt;!&ndash;                <a-range-picker @change="onChange"/>&ndash;&gt;-->
-<!--&lt;!&ndash;             &ndash;&gt;-->
-<!--&lt;!&ndash;              </a-form-model-item>&ndash;&gt;-->
-<!--            </div>-->
-<!--            <div class="input status-select w-100">-->
-<!--&lt;!&ndash;              <a-form-model-item&ndash;&gt;-->
-<!--&lt;!&ndash;                  class="form-item mb-0"&ndash;&gt;-->
-<!--&lt;!&ndash;                  :class="{ 'select-placeholder': !value }"&ndash;&gt;-->
-<!--&lt;!&ndash;              >&ndash;&gt;-->
-<!--&lt;!&ndash;                <a-select v-model="value" placeholder="Категория">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <a-select-option&ndash;&gt;-->
-<!--&lt;!&ndash;                      v-for="filterItem in statusFilter"&ndash;&gt;-->
-<!--&lt;!&ndash;                      :key="filterItem?.id"&ndash;&gt;-->
-<!--&lt;!&ndash;                      placeholder="good"&ndash;&gt;-->
-<!--&lt;!&ndash;                  >&ndash;&gt;-->
-<!--&lt;!&ndash;                    {{ filterItem?.name?.ru }}&ndash;&gt;-->
-<!--&lt;!&ndash;                  </a-select-option>&ndash;&gt;-->
-<!--&lt;!&ndash;                </a-select>&ndash;&gt;-->
-<!--&lt;!&ndash;              </a-form-model-item>&ndash;&gt;-->
-<!--            </div>-->
-<!--            <a-button-->
-<!--                type="primary"-->
-<!--                class="d-flex align-items-center justify-content-center"-->
-<!--                @click="clearQuery('__GET_ORDERS')"-->
-<!--                style="height: 38px"-->
-<!--            >-->
-<!--              <a-icon type="reload"-->
-<!--              />-->
-<!--            </a-button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div class="container_orders app-container pb-4">-->
+    <!--      <div class="card_block main-table px-4 py-3">-->
+    <!--        <div class="d-flex justify-content-between align-items-center">-->
+    <!--          <div class="oroder-filter-grid w-100 align-items-center">-->
+    <!--            <SearchInput-->
+    <!--                placeholder="Поиск"-->
+    <!--                @changeSearch="($event) => changeSearch($event, '__GET_ORDERS')"-->
+    <!--            />-->
+    <!--            <div class="input status-select w-100">-->
+    <!--&lt;!&ndash;              <a-form-model-item&ndash;&gt;-->
+    <!--&lt;!&ndash;                  class="form-item mb-0"&ndash;&gt;-->
+    <!--&lt;!&ndash;                  :class="{ 'select-placeholder': !value }"&ndash;&gt;-->
+    <!--&lt;!&ndash;              >&ndash;&gt;-->
+    <!--&lt;!&ndash;                <a-select v-model="value" placeholder="Статус">&ndash;&gt;-->
+    <!--&lt;!&ndash;                  <a-select-option&ndash;&gt;-->
+    <!--&lt;!&ndash;                      v-for="filterItem in statusFilter"&ndash;&gt;-->
+    <!--&lt;!&ndash;                      :key="filterItem?.id"&ndash;&gt;-->
+    <!--&lt;!&ndash;                      placeholder="good"&ndash;&gt;-->
+    <!--&lt;!&ndash;                  >&ndash;&gt;-->
+    <!--&lt;!&ndash;                    {{ filterItem?.name?.ru }}&ndash;&gt;-->
+    <!--&lt;!&ndash;                  </a-select-option>&ndash;&gt;-->
+    <!--&lt;!&ndash;                </a-select>&ndash;&gt;-->
+    <!--&lt;!&ndash;              </a-form-model-item>&ndash;&gt;-->
+    <!--            </div>-->
+    <!--            <div class="input status-select w-100">-->
+    <!--&lt;!&ndash;              <a-form-model-item&ndash;&gt;-->
+    <!--&lt;!&ndash;                  class="form-date mb-0"&ndash;&gt;-->
+    <!--&lt;!&ndash;                  :class="{ 'select-placeholder': !value }"&ndash;&gt;-->
+    <!--&lt;!&ndash;              >&ndash;&gt;-->
+    <!--&lt;!&ndash;                <a-range-picker @change="onChange"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;             &ndash;&gt;-->
+    <!--&lt;!&ndash;              </a-form-model-item>&ndash;&gt;-->
+    <!--            </div>-->
+    <!--            <div class="input status-select w-100">-->
+    <!--&lt;!&ndash;              <a-form-model-item&ndash;&gt;-->
+    <!--&lt;!&ndash;                  class="form-item mb-0"&ndash;&gt;-->
+    <!--&lt;!&ndash;                  :class="{ 'select-placeholder': !value }"&ndash;&gt;-->
+    <!--&lt;!&ndash;              >&ndash;&gt;-->
+    <!--&lt;!&ndash;                <a-select v-model="value" placeholder="Категория">&ndash;&gt;-->
+    <!--&lt;!&ndash;                  <a-select-option&ndash;&gt;-->
+    <!--&lt;!&ndash;                      v-for="filterItem in statusFilter"&ndash;&gt;-->
+    <!--&lt;!&ndash;                      :key="filterItem?.id"&ndash;&gt;-->
+    <!--&lt;!&ndash;                      placeholder="good"&ndash;&gt;-->
+    <!--&lt;!&ndash;                  >&ndash;&gt;-->
+    <!--&lt;!&ndash;                    {{ filterItem?.name?.ru }}&ndash;&gt;-->
+    <!--&lt;!&ndash;                  </a-select-option>&ndash;&gt;-->
+    <!--&lt;!&ndash;                </a-select>&ndash;&gt;-->
+    <!--&lt;!&ndash;              </a-form-model-item>&ndash;&gt;-->
+    <!--            </div>-->
+    <!--            <a-button-->
+    <!--                type="primary"-->
+    <!--                class="d-flex align-items-center justify-content-center"-->
+    <!--                @click="clearQuery('__GET_ORDERS')"-->
+    <!--                style="height: 38px"-->
+    <!--            >-->
+    <!--              <a-icon type="reload"-->
+    <!--              />-->
+    <!--            </a-button>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
 
     <div class="container_orders app-container main-table">
       <div class="card_block main-table px-4 py-4">
         <a-table
-            :columns="columnsOrders"
-            :data-source="orders"
-            :pagination="false"
-            :loading="loading"
-            align="center"
+          :columns="columnsOrders"
+          :data-source="orders"
+          :pagination="false"
+          :loading="loading"
+          align="center"
         >
           <span slot="consumer" slot-scope="text">
           <nuxt-link :to="`/users/${text?.id}`">{{ text ? `${text?.firstName} - ${text?.id}` : "----" }}</nuxt-link>,
           </span>
           <span slot="driver" slot-scope="text">
-          <nuxt-link v-if="text?.driver" :to="`/driver/${text?.id}`">{{ `${text?.driver?.firstName} - ${text?.driver?.id}` }}</nuxt-link>
-          <nuxt-link v-else-if="text?.company" :to="`/company/${text?.id}`">{{ `${text?.company?.firstName} - ${text?.company?.id}`}}</nuxt-link>
+          <nuxt-link v-if="text?.driver"
+                     :to="`/driver/${text?.id}`">{{ `${text?.driver?.firstName} - ${text?.driver?.id}` }}</nuxt-link>
+          <nuxt-link v-else-if="text?.company"
+                     :to="`/company/${text?.id}`">{{ `${text?.company?.firstName} - ${text?.company?.id}` }}</nuxt-link>
             <span v-else>----</span>
           </span>
           <span slot="orderId" slot-scope="text">#{{ text?.id }}</span>
           <span
-              slot="status"
-              slot-scope="tags"
-              class="tags-style"
-              :class="{
+            slot="status"
+            slot-scope="tags"
+            class="tags-style"
+            :class="{
               tag_success: tags === 'NEW',
               tag_inProgress: tags === 'PROCESS' || tags.status === 3,
               tag_approved: tags === 'COMPLETED',
@@ -111,19 +113,19 @@
           </span>
           <span slot="btn" slot-scope="text">
             <span
-                class="action-btn"
-                @click="$router.push(`/orders/order/${text}`)"
-                v-html="eyeIcon"
+              class="action-btn"
+              @click="$router.push(`/orders/order/${text}`)"
+              v-html="eyeIcon"
             >
             </span>
           </span>
         </a-table>
         <div class="d-flex justify-content-between mt-4">
           <a-select
-              v-model="params.pageSize"
-              class="table-page-size"
-              style="width: 120px"
-              @change="
+            v-model="params.pageSize"
+            class="table-page-size"
+            style="width: 120px"
+            @change="
               ($event) =>
                 changePageSizeGlobal(
                   $event,
@@ -133,29 +135,29 @@
             "
           >
             <a-select-option
-                v-for="item in pageSizes"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+              v-for="item in pageSizes"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
             >{{ item.label }}
             </a-select-option>
           </a-select>
           <a-pagination
-              class="table-pagination"
-              :simple="false"
-              v-model.number="current"
-              :total="totalPage"
-              :page-size.sync="params.pageSize"
+            class="table-pagination"
+            :simple="false"
+            v-model.number="current"
+            :total="totalPage"
+            :page-size.sync="params.pageSize"
           />
         </div>
       </div>
     </div>
     <a-modal
-        v-model="visible"
-        class="text-modal"
-        centered
-        :title="'Специальности'"
-        width="720px"
+      v-model="visible"
+      class="text-modal"
+      centered
+      :title="'Специальности'"
+      width="720px"
     >
       <div class="d-flex flex-column">
         <a-list item-layout="horizontal" :data-source="specialities">
@@ -167,16 +169,16 @@
                 }}
               </nuxt-link>
               <a-avatar
-                  shape="square"
-                  v-if="item.icon"
-                  slot="avatar"
-                  :src="`${imgUrl}${item.icon}`"
+                shape="square"
+                v-if="item.icon"
+                slot="avatar"
+                :src="`${imgUrl}${item.icon}`"
               />
               <a-avatar
-                  v-else
-                  slot="avatar"
-                  shape="square"
-                  src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                v-else
+                slot="avatar"
+                shape="square"
+                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
               />
             </a-list-item-meta>
           </a-list-item>
@@ -305,25 +307,29 @@ export default {
       this.__GET_ORDERS();
     },
     async __GET_ORDERS() {
-      this.loading = true;
-      let params = {...this.$route.query};
-      if (this.$route.params.status !== 'all-orders') {
-        params.status = `${this.$route.params.status}`.toUpperCase();
-      } else {
-        delete params.status;
+      try {
+        this.loading = true;
+        let params = {...this.$route.query};
+        if (this.$route.params.status !== 'all-orders') {
+          params.status = `${this.$route.params.status}`.toUpperCase();
+        } else {
+          delete params.status;
+        }
+        const data = await this.$store.dispatch("fetchOrders/getOrders", {
+          ...params,
+        });
+
+        const pageIndex = this.indexPage(data?.meta?.current_page, data?.meta?.per_page);
+        this.orders = data?.content.map((item, index) => {
+          return {
+            ...item,
+            key: index + pageIndex,
+          };
+        });
+        this.totalPage = data?.meta?.total;
+      } finally {
+        this.loading = false;
       }
-      const data = await this.$store.dispatch("fetchOrders/getOrders", {
-        ...params,
-      });
-      this.loading = false;
-      const pageIndex = this.indexPage(data?.meta?.current_page, data?.meta?.per_page);
-      this.orders = data?.content.map((item, index) => {
-        return {
-          ...item,
-          key: index + pageIndex,
-        };
-      });
-      this.totalPage = data?.meta?.total;
     },
     indexPage(current_page, per_page) {
       return (current_page * 1 - 1) * per_page + 1;

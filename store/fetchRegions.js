@@ -1,31 +1,31 @@
 export const actions = {
   async getRegions({}, payload) {
-    const res = await this.$axios.$get(`/api/admin/regions`, {
+    const res = await this.$axiosInstance.$get(`/api/admin/regions`, {
       params: payload,
     });
     return res;
   },
   async getAllRegions() {
-    const res = await this.$axios.$get(`/api/admin/regions/all`);
+    const res = await this.$axiosInstance.$get(`/api/admin/regions/all`);
     return res;
   },
   async getRegionsById({}, id) {
-    const res = await this.$axios.$get(`/api/admin/regions/${id}`);
+    const res = await this.$axiosInstance.$get(`/api/admin/regions/${id}`);
     return res;
   },
   async postRegions({}, data) {
-    const res = await this.$axios.$post(`/api/admin/regions`, data);
+    const res = await this.$axiosInstance.$post(`/api/admin/regions`, data);
     return res;
   },
   async editRegions({}, payload) {
-    const res = await this.$axios.$put(
+    const res = await this.$axiosInstance.$put(
       `/api/admin/regions/${payload.id}`,
       payload.data
     );
     return res;
   },
   async deleteRegions({}, id) {
-    const res = await this.$axios.$delete(`/api/admin/regions/${id}`);
+    const res = await this.$axiosInstance.$delete(`/api/admin/regions/${id}`);
     return res;
   },
 };

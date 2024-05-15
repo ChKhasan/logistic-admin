@@ -407,18 +407,23 @@ export default {
       );
     },
     async __GET_REASONS() {
-      this.loading = true;
-      const data = await this.$store.dispatch("fetchReasons/getReasons", {
-        ...this.$route.query,
-      });
-      this.loading = false;
-      this.specialities = data?.content?.map((item, index) => {
-        return {
-          ...item,
-          key: index + 1,
-        };
-      });
-      this.totalPage = data?.totalElements;
+      try {
+        this.loading = true;
+        const data = await this.$store.dispatch("fetchReasons/getReasons", {
+          ...this.$route.query,
+        });
+        this.loading = false;
+        this.specialities = data?.content?.map((item, index) => {
+          return {
+            ...item,
+            key: index + 1,
+          };
+        });
+        this.totalPage = data?.totalElements;
+      } catch (e) {
+
+      }
+
     },
 
     addCountries() {

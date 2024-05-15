@@ -1,13 +1,13 @@
 export const actions = {
   async getConsumers({}, payload) {
-    return await this.$axios.$get(`/api/admin/consumers`, payload);
+    return await this.$axiosInstance.$get(`/api/admin/consumers`, payload);
   },
   async putConsumer({}, { id, data }) {
     const formData = new URLSearchParams();
     for (const key in data) {
       formData.append(key, data[key]);
     }
-    return await this.$axios.patch(
+    return await this.$axiosInstance.patch(
       `/api/admin/consumers/${id}/changeStatus`,
       formData,
       {
@@ -18,12 +18,12 @@ export const actions = {
     );
   },
   async getConsumerById({}, id) {
-    return await this.$axios.$get(`/api/admin/consumers/${id}`);
+    return await this.$axiosInstance.$get(`/api/admin/consumers/${id}`);
   },
   async getConsumerOrdersById({}, {id,params}) {
-    return await this.$axios.$get(`/api/admin/consumers/${id}/orders`,{params: {...params}});
+    return await this.$axiosInstance.$get(`/api/admin/consumers/${id}/orders`,{params: {...params}});
   },
     async getConsumerCompById({}, {id,params}) {
-        return await this.$axios.$get(`/api/admin/consumers/${id}/complains`,{params: {...params}});
+        return await this.$axiosInstance.$get(`/api/admin/consumers/${id}/complains`,{params: {...params}});
     },
 };

@@ -27,8 +27,10 @@
               type="primary"
               class="d-flex align-items-center justify-content-center"
               style="height: 38px"
-              ><a-icon type="reload"
-            /></a-button>
+            >
+              <a-icon type="reload"
+              />
+            </a-button>
           </div>
         </div>
         <a-table
@@ -40,10 +42,10 @@
           <span slot="indexId" slot-scope="text">#{{ text?.key }}</span>
 
           <span
-              @click="editAction(text.id)"
-              class="title-link"
-              slot="name"
-              slot-scope="text"
+            @click="editAction(text.id)"
+            class="title-link"
+            slot="name"
+            slot-scope="text"
           >{{ text?.name?.ru }}
           </span>
           <span slot="id" slot-scope="text">
@@ -79,7 +81,7 @@
               :key="item.value"
               :label="item.label"
               :value="item.value"
-              >{{ item.label }}
+            >{{ item.label }}
             </a-select-option>
           </a-select>
           <a-pagination
@@ -123,7 +125,7 @@
               label="Название"
               prop="name.ru"
             >
-              <a-input v-model="form.name[`${item.index}`]" placeholder="Название..." />
+              <a-input v-model="form.name[`${item.index}`]" placeholder="Название..."/>
             </a-form-model-item>
           </a-form-model>
         </div>
@@ -161,17 +163,17 @@ const columns = [
   {
     title: "№",
     key: "indexId",
-    slots: { title: "customTitle" },
-    scopedSlots: { customRender: "indexId" },
+    slots: {title: "customTitle"},
+    scopedSlots: {customRender: "indexId"},
     className: "column-service",
     align: "left",
     width: 50,
   },
   {
     title: "Название ",
-    slots: { title: "customTitle" },
+    slots: {title: "customTitle"},
     className: "column-name",
-    scopedSlots: { customRender: "name" },
+    scopedSlots: {customRender: "name"},
     align: "left",
   },
 
@@ -181,7 +183,7 @@ const columns = [
     dataIndex: "id",
     key: "id",
     align: "right",
-    scopedSlots: { customRender: "id" },
+    scopedSlots: {customRender: "id"},
     width: 100,
   },
 ];
@@ -223,10 +225,10 @@ export default {
       columns,
       countries: [],
       rules: {
-        name:{
+        name: {
           ru: [
-          { required: true, message: "This field is required", trigger: "change" },
-        ],
+            {required: true, message: "This field is required", trigger: "change"},
+          ],
         }
       },
       form: {
@@ -268,18 +270,23 @@ export default {
       );
     },
     async __GET_COUNTRIES() {
-      this.loading = true;
-      const data = await this.$store.dispatch("fetchCriteria/getCriteria", {
-        ...this.$route.query,
-      });
-      this.loading = false;
-      this.countries = data?.content.map((item, index) => {
-        return {
-          ...item,
-          key: index + 1,
-        };
-      });
-      this.totalPage = data?.totalElements;
+      try {
+        this.loading = true;
+        const data = await this.$store.dispatch("fetchCriteria/getCriteria", {
+          ...this.$route.query,
+        });
+
+        this.countries = data?.content.map((item, index) => {
+          return {
+            ...item,
+            key: index + 1,
+          };
+        });
+        this.totalPage = data?.totalElements;
+      } finally {
+        this.loading = false;
+      }
+
 
     },
 
@@ -308,8 +315,8 @@ export default {
           targetId
         );
         this.visible = true;
-        const { created_at, updated_at, id, ...rest } = data;
-        this.form = { ...rest };
+        const {created_at, updated_at, id, ...rest} = data;
+        this.form = {...rest};
       } catch (e) {
         this.statusFunc(e);
       }
@@ -326,7 +333,7 @@ export default {
       try {
         await this.$store.dispatch("fetchCriteria/editCriteria", {
           id: this.editId,
-          data: { ...res },
+          data: {...res},
         });
         this.handleOk();
 
@@ -339,7 +346,7 @@ export default {
   },
   watch: {
     async current(val) {
-      this.changePagination(val,  "__GET_COUNTRIES");
+      this.changePagination(val, "__GET_COUNTRIES");
     },
     visible(val) {
       if (val == false) {
@@ -347,7 +354,7 @@ export default {
       }
     },
   },
-  components: { TitleBlock, SearchInput },
+  components: {TitleBlock, SearchInput},
 };
 </script>
 <style lang="css">
@@ -356,6 +363,7 @@ export default {
   grid-template-columns: 3fr 2fr 40px;
   grid-gap: 8px;
 }
+
 .card_header {
   padding: 16.25px 0;
 }

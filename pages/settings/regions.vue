@@ -137,6 +137,15 @@
                 <ymap-marker :coords="coords" hint-content="some hint" marker-id="123" />
               </yandex-map>
             </a-form-model-item>
+            <div class="grid-2">
+              <a-form-model-item label="Широта"  class="form-item mb-3">
+                <a-input v-model="coords[0]" placeholder="0" />
+              </a-form-model-item>
+              <a-form-model-item label="Долгота"  class="form-item mb-3">
+                <a-input v-model="coords[1]" placeholder="0" />
+              </a-form-model-item>
+            </div>
+
             <a-form-model-item label="Города" prop="cityId" class="form-item mb-3">
               <a-select v-model="form.cityId" placeholder="please select your zone">
                 <a-select-option
@@ -285,6 +294,8 @@ export default {
       this.form.lon = this.coords[1];
     },
     saveData() {
+      this.form.lat = this.coords[0];
+      this.form.lon = this.coords[1];
       this.$refs["ruleForm"][0].validate((valid) => {
         if (valid) {
           this.editId ? this.__EDIT_REGIONS(this.form) : this.__POST_REGIONS(this.form);
@@ -308,18 +319,22 @@ export default {
       );
     },
     async __GET_REGIONS() {
-      this.loading = true;
-      const data = await this.$store.dispatch("fetchRegions/getRegions", {
-        ...this.$route.query,
-      });
-      this.loading = false;
-      this.regions = data?.content.map((item, index) => {
-        return {
-          ...item,
-          key: index + 1,
-        };
-      });
-      this.totalPage = data?.totalElements;
+     try {
+       this.loading = true;
+       const data = await this.$store.dispatch("fetchRegions/getRegions", {
+         ...this.$route.query,
+       });
+
+       this.regions = data?.content.map((item, index) => {
+         return {
+           ...item,
+           key: index + 1,
+         };
+       });
+       this.totalPage = data?.totalElements;
+     } finally {
+       this.loading = false;
+     }
     },
 
     addCountries() {
@@ -403,5 +418,10 @@ export default {
 
 .card_header {
   padding: 16.25px 0;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 </style>

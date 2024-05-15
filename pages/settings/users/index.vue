@@ -169,19 +169,23 @@ export default {
       this.cities = data?.content;
     },
     async __GET_USERS() {
-      this.loading = true;
-      const data = await this.$store.dispatch("fetchRole/getUsers", {
-        ...this.$route.query,
-      });
-      this.loading = false;
-      const pageIndex = this.indexPage(data?.number, data?.size);
-      this.posts = data?.content.map((item, index) => {
-        return {
-          ...item,
-          key: index + pageIndex,
-        };
-      });
-      this.totalPage = data?.users?.total;
+     try {
+       this.loading = true;
+       const data = await this.$store.dispatch("fetchRole/getUsers", {
+         ...this.$route.query,
+       });
+
+       const pageIndex = this.indexPage(data?.number, data?.size);
+       this.posts = data?.content.map((item, index) => {
+         return {
+           ...item,
+           key: index + pageIndex,
+         };
+       });
+       this.totalPage = data?.users?.total;
+     }finally {
+       this.loading = false;
+     }
     },
     indexPage(current_page, per_page) {
       return (current_page * 1) * per_page + 1;

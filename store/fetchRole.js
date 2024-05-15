@@ -1,6 +1,6 @@
 export const actions = {
   async getRole({}, payload) {
-    return await this.$axios.$get(`/api/admin/roles`, {
+    return await this.$axiosInstance.$get(`/api/admin/roles`, {
       params: payload,
       headers: {
         Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
@@ -8,7 +8,7 @@ export const actions = {
     });
   },
   async getUsers({}, payload) {
-    return await this.$axios.$get(`/api/admin/admins`, {
+    return await this.$axiosInstance.$get(`/api/admin/admins`, {
       params: payload,
       headers: {
         Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
@@ -16,14 +16,14 @@ export const actions = {
     });
   },
   async getPermissions({}, payload) {
-    return await this.$axios.$get(`/api/admin/permissions`, {
+    return await this.$axiosInstance.$get(`/api/admin/permissions`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
     });
   },
   async getRoleById({}, id) {
-      return await this.$axios.$get(`/api/admin/roles/${id}`, {
+      return await this.$axiosInstance.$get(`/api/admin/roles/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
         },
@@ -31,49 +31,49 @@ export const actions = {
 
   },
   async getUsersById({}, id) {
-      return await this.$axios.$get(`/api/admin/admins/${id}`, {
+      return await this.$axiosInstance.$get(`/api/admin/admins/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
         },
       });
   },
   async postRole({}, data) {
-    return await this.$axios.$post(`/api/admin/roles`, data, {
+    return await this.$axiosInstance.$post(`/api/admin/roles`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
     });
   },
   async postUser({}, data) {
-    return await this.$axios.$post(`/api/admin/admins`, data, {
+    return await this.$axiosInstance.$post(`/api/admin/admins`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
     });
   },
   async editRole({}, payload) {
-    return await this.$axios.$put(`/api/admin/roles/${payload.id}`, payload.data, {
+    return await this.$axiosInstance.$put(`/api/admin/roles/${payload.id}`, payload.data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
     });
   },
   async editUser({}, payload) {
-    return await this.$axios.$put(`/api/admin/admins/${payload.id}`, payload.data, {
+    return await this.$axiosInstance.$put(`/api/admin/admins/${payload.id}`, payload.data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
     });
   },
   async deleteRole({}, id) {
-    return await this.$axios.$delete(`/api/admin/roles/${id}`, {
+    return await this.$axiosInstance.$delete(`/api/admin/roles/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
     });
   },
   async deleteUsers({}, id) {
-    return await this.$axios.$delete(`/api/admin/admins/${id}`, {
+    return await this.$axiosInstance.$delete(`/api/admin/admins/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },

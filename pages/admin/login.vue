@@ -8,13 +8,13 @@
         <a-form-model :model="form" ref="ruleForm" :rules="rules" layout="vertical">
           <div class="login_input mb-10">
             <label for="">Имя пользователя</label>
-            <a-form-model-item prop="email" class="mb-0">
+            <a-form-model-item prop="username" class="mb-0">
               <a-input
                 @keyup.enter="login"
                 type="text"
                 class="input"
-                placeholder="email"
-                v-model="form.email"
+                placeholder="Username"
+                v-model="form.username"
               />
             </a-form-model-item>
             <!-- <input type="text" class="input" v-model="form.username" /> -->
@@ -67,13 +67,13 @@ export default {
     return {
       showError: false,
       rules: {
-        email: [{ required: true, message: "This field is required", trigger: "change" }],
+        username: [{ required: true, message: "This field is required", trigger: "change" }],
         password: [
           { required: true, message: "This field is required", trigger: "change" },
         ],
       },
       form: {
-        email: "",
+        username: "",
         password: "",
       },
     };
@@ -83,8 +83,7 @@ export default {
     async __AUTH(data) {
       try {
         const res = await this.$store.dispatch("fetchAuth/auth", data);
-        console.log(res);
-        localStorage.setItem("auth_token", res.content.accessToken);
+        localStorage.setItem("auth_token", res.accessToken);
         this.$store.commit("logIn");
         this.$router.push("/");
       } catch (e) {

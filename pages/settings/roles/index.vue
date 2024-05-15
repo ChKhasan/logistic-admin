@@ -156,19 +156,24 @@ export default {
       this.__DELETE_GLOBAL(id, "fetchRole/deleteRole", "Успешно удален", "__GET_ROLES");
     },
     async __GET_ROLES() {
-      this.loading = true;
-      const data = await this.$store.dispatch("fetchRole/getRole", {
-        ...this.$route.query,
-      });
-      this.loading = false;
-      const pageIndex = this.indexPage(data?.number, data?.size);
-      this.posts = data?.content?.map((item, index) => {
-        return {
-          ...item,
-          key: index + pageIndex,
-        };
-      });
-      this.totalPage = data?.totalElements;
+      try {
+        this.loading = true;
+        const data = await this.$store.dispatch("fetchRole/getRole", {
+          ...this.$route.query,
+        });
+
+        const pageIndex = this.indexPage(data?.number, data?.size);
+        this.posts = data?.content?.map((item, index) => {
+          return {
+            ...item,
+            key: index + pageIndex,
+          };
+        });
+        this.totalPage = data?.totalElements;
+      }finally {
+        this.loading = false;
+      }
+
     },
     indexPage(current_page, per_page) {
       return (current_page * 1) * per_page + 1;
