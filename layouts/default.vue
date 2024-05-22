@@ -34,22 +34,22 @@
               :open-keys.sync="openKeys"
               :inline-collapsed="collapsed"
           >
-<!--            <a-menu-item-->
-<!--                class="menu_item"-->
-<!--                v-if="menuList.dashboard.show"-->
-<!--                :key="menuList.dashboard.key"-->
-<!--                @click="$router.push(menuList.dashboard.to)"-->
-<!--                :class="{-->
-<!--                'is-active': $route.name == 'dashboard',-->
-<!--              }"-->
-<!--            >-->
-<!--              <a-icon v-html="menuList.dashboard.icon"></a-icon>-->
-<!--              <span>-->
-<!--                <nuxt-link :to="menuList.dashboard.to">-->
-<!--                  <span>{{ d(menuList.dashboard) }}</span>-->
-<!--                </nuxt-link>-->
-<!--              </span>-->
-<!--            </a-menu-item>-->
+            <!--            <a-menu-item-->
+            <!--                class="menu_item"-->
+            <!--                v-if="menuList.dashboard.show"-->
+            <!--                :key="menuList.dashboard.key"-->
+            <!--                @click="$router.push(menuList.dashboard.to)"-->
+            <!--                :class="{-->
+            <!--                'is-active': $route.name == 'dashboard',-->
+            <!--              }"-->
+            <!--            >-->
+            <!--              <a-icon v-html="menuList.dashboard.icon"></a-icon>-->
+            <!--              <span>-->
+            <!--                <nuxt-link :to="menuList.dashboard.to">-->
+            <!--                  <span>{{ d(menuList.dashboard) }}</span>-->
+            <!--                </nuxt-link>-->
+            <!--              </span>-->
+            <!--            </a-menu-item>-->
             <a-menu-item
                 class="menu_item"
                 v-if="menuList.freelancers.show"
@@ -408,6 +408,7 @@ export default {
   },
 
   methods: {
+
     checkShow(val) {
       // if (this.$store.state.permissions.length > 0) {
       // const target = this.$store.state.permissions.find((item) => item.url == val);
@@ -416,14 +417,17 @@ export default {
       // } else {
       //   return true;
       // }
-    },
+    }
+    ,
     removeToken() {
       localStorage.removeItem('auth_token');
       this.$router.push("/admin/login");
-    },
+    }
+    ,
     onCollapse(collapsed, type) {
       this.collapsed = !this.collapsed;
-    },
+    }
+    ,
     async logOut() {
       try {
         const data = await this.$store.dispatch("fetchAuth/logOut");
@@ -432,7 +436,8 @@ export default {
         await this.removeToken();
         this.statusFunc(e);
       }
-    },
+    }
+    ,
     checkDefaultOpen() {
       if (this.$route.name.includes("settings")) {
         this.openKeys = ["6"];
@@ -440,7 +445,8 @@ export default {
       if (this.$route.name.includes("directory")) {
         this.openKeys = ["7"];
       }
-    },
+    }
+    ,
     d(item) {
       switch (item.index) {
         case "31":
@@ -458,27 +464,38 @@ export default {
         default:
           return item.name;
       }
-    },
+    }
+    ,
     success() {
       this.$message.success("You are online");
-    },
+    }
+    ,
     error() {
       this.$message.error("You are offline");
-    },
+    }
+    ,
   },
   watch: {
     "$nuxt.isOffline"(val) {
       val && this.error();
-    },
+    }
+    ,
     "$nuxt.isOnline"(val) {
       val && this.success();
-    },
+    }
+    ,
     routerName() {
       this.checkDefaultOpen();
-    },
-  },
-  components: {TitleBlock},
-};
+    }
+    ,
+  }
+  ,
+  components: {
+    TitleBlock
+  }
+  ,
+}
+;
 </script>
 <style lang="css">
 @import "../assets/css/layout/default.css";

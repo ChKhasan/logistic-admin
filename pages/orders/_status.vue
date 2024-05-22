@@ -328,14 +328,16 @@ export default {
           ...params,
         });
 
-        const pageIndex = this.indexPage(data?.meta?.current_page, data?.meta?.per_page);
+        const pageIndex = this.indexPage(data?.number, data?.size);
         this.orders = data?.content.map((item, index) => {
           return {
             ...item,
             key: index + pageIndex,
           };
         });
-        this.totalPage = data?.meta?.total;
+        console.log(data);
+        console.log(this.orders)
+        this.totalPage = data?.totalElements;
       } finally {
         this.loading = false;
       }

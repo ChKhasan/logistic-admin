@@ -5,10 +5,7 @@ export const actions = {
     });
     return res;
   },
-  async getOrdersCount() {
-    // const res = await this.$axiosInstanceInstance.$get(`/api/admin/orders/counts`);
-    // return res;
-  },
+
   async getBookedOrders({}, payload) {
     const res = await this.$axiosInstance.$get(`/api/admin/tariffs/number_of_books`, {
       params: payload,

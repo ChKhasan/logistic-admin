@@ -2,12 +2,13 @@ export const state = () => ({
   authenticated: false,
   services: [],
   orders: {
-    new: "0",
-    in_process: "0",
-    accepted: "0",
-    canceled: "0",
-    all: "0",
-    is_edited: "0",
+    canceledByAdminCount: 0,
+    canceledByConsumerCount: 0,
+    canceledByExecutorCount: 0,
+    completed: 0,
+    newCount: 0,
+    processCount: 0,
+    all: 0
   },
   permissions: [],
   operator: {
@@ -26,12 +27,14 @@ export const mutations = {
   },
   orders(state, payload) {
     state.orders.all =
-      payload.in_process + payload.accepted + payload.canceled + payload.new;
-    state.orders.new = payload.new;
-    state.orders.in_process = payload.in_process ? payload.in_process : 0;
-    state.orders.accepted = payload.accepted;
-    state.orders.canceled = payload.canceled;
-    state.orders.is_edited = payload.edited;
+      payload.canceledByAdminCount + payload.canceledByConsumerCount + payload.canceledByExecutorCount + payload.newCount + payload.processCount + payload.completed;
+
+    state.orders.canceledByAdminCount = payload.canceledByAdminCount;
+    state.orders.canceledByConsumerCount = payload.canceledByConsumerCount;
+    state.orders.canceledByExecutorCount = payload.canceledByExecutorCount;
+    state.orders.newCount = payload.newCount;
+    state.orders.processCount = payload.processCount;
+    state.orders.completed = payload.completed;
   },
   permissions(state, payload) {
     if (payload) {
@@ -56,8 +59,8 @@ export const mutations = {
 };
 export const actions = {
   async getOrders({ commit }, payload) {
-    // const res = await this.$axiosInstance.$get(`/api/admin/orders/counts`, {});
-    // commit("orders", res?.counts);
+    const res = await this.$axiosInstance.$get(`/api/admin/orders/countByStatus`, {});
+    commit("orders", res);
   },
   async getPermissions({ commit }, payload) {
     try {
