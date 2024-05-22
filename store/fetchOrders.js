@@ -5,7 +5,9 @@ export const actions = {
     });
     return res;
   },
-
+  async getAllComp({}, {id,params}) {
+    return await this.$axiosInstance.$get(`/api/admin/complains/orderComplains`,{params: {...params}});
+  },
   async getBookedOrders({}, payload) {
     const res = await this.$axiosInstance.$get(`/api/admin/tariffs/number_of_books`, {
       params: payload,

@@ -114,7 +114,22 @@
                 </nuxt-link>
               </span>
             </a-menu-item>
-
+            <a-menu-item
+                class="menu_item"
+                v-if="menuList.complains.show"
+                :key="menuList.complains.key"
+                @click="$router.push(menuList.complains.to)"
+                :class="{
+                'is-active': 'orders-status' == $route.name,
+              }"
+            >
+              <a-icon v-html="menuList.complains.icon"></a-icon>
+              <span>
+                <nuxt-link :to="menuList.complains.to"
+                ><span>{{ d(menuList.complains) }}</span>
+                </nuxt-link>
+              </span>
+            </a-menu-item>
             <!--            <a-menu-item-->
             <!--              class="menu_item"-->
             <!--              v-if="menuList.transactions.show"-->
@@ -237,6 +252,13 @@ export default {
           name: "Все заказы",
           key: "5",
           to: "/orders/all-orders",
+          icon: require("../assets/svg/orderIcon.svg?raw"),
+          show: true,
+        },
+        complains: {
+          name: "Жалобы",
+          key: "6",
+          to: "/complains",
           icon: require("../assets/svg/orderIcon.svg?raw"),
           show: true,
         },

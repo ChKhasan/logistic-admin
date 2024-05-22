@@ -334,6 +334,70 @@ export default {
         },
 
       ],
+      columnsAllComp: [
+        {
+          title: "№",
+          dataIndex: "key",
+          slots: {title: "customTitle"},
+          scopedSlots: {customRender: "orderId"},
+          className: "column-service",
+        },
+        {
+          title: "Заказ ID",
+          dataIndex: 'orderId',
+          scopedSlots: {customRender: "order_id"},
+          className: "column-name cursor-pointer",
+          key: "order_id",
+        },
+        {
+          title: "Водитель",
+          dataIndex: "driver",
+          customRender: (text) => text ? `${text.firstName} ${text.lastName}`:'---',
+          className: "column-name",
+          key: "driver",
+        },
+        {
+          title: "Компания",
+          dataIndex: "company",
+          customRender: (text) => text ? `${text.firstName} ${text.lastName}`:'---',
+          className: "column-name",
+          key: "company",
+        },
+        {
+          title: "Клиент",
+          dataIndex: "consumer",
+          scopedSlots: {customRender: "client"},
+          customRender: (text) => `${text.firstName} ${text.lastName}`,
+          className: "column-name",
+          key: "consumer",
+        },
+        {
+          title: "Время отправки",
+          dataIndex: "createdAt",
+          scopedSlots: {customRender: "createdAt"},
+          className: "column-date",
+          customRender: (text) => moment(text).format("DD.MM.YYYY"),
+          key: "createdAt",
+        },
+        {
+          title: "Причина джалоби",
+          dataIndex: "complain",
+          scopedSlots: {customRender: "complain"},
+          className: "column-name",
+          key: "complain",
+          width: '30%'
+        },
+        // {
+        //   fixed: "right",
+        //   title: "ДЕЙСТВИЯ",
+        //   key: "id",
+        //   dataIndex: "id",
+        //   scopedSlots: {customRender: "btns"},
+        //   className: "column-btns",
+        //   width: "100px",
+        //   align: "center",
+        // },
+      ],
       columnsDriverComp: [
         {
           title: "№",
