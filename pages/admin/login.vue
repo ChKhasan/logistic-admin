@@ -84,6 +84,7 @@ export default {
       try {
         const res = await this.$store.dispatch("fetchAuth/auth", data);
         localStorage.setItem("auth_token", res.accessToken);
+        localStorage.setItem("refresh_token", res.refreshToken);
         this.$store.commit("logIn");
         this.$router.push("/");
       } catch (e) {

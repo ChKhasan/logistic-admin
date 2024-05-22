@@ -4,6 +4,8 @@ export const actions = {
 
   },
   async logOut({}, data) {
-    return this.$axiosInstance.$get(`/api/admin/auth/logout`);
+    const refreshToken = localStorage.getItem("refresh_token")
+    if(refreshToken)
+    return this.$axiosInstance.post(`/api/admin/auth/logout`,{refreshToken: refreshToken});
   },
 };

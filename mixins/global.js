@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      page: 0,
+      page: 1,
       current: 0,
       pageSizes: [
         {
@@ -23,7 +23,7 @@ export default {
       ],
       totalPage: 1,
       params: {
-        page: 0,
+        page: 1,
         pageSize: 10,
       },
       searchVal: "",
@@ -43,7 +43,7 @@ export default {
           await this.$router.replace({
             path: this.$route.path,
             hash: this.$route.hash,
-            query: { ...this.$route.query, search: val.target.value, page: 0 },
+            query: { ...this.$route.query, search: val.target.value, page: 1 },
           });
         if (val.target.value == this.$route.query.search) this[func]();
       } else if (val.target.value.length == 0) {
@@ -52,8 +52,8 @@ export default {
     },
     async clearQuery(func) {
       this.value = undefined;
-      const query = { pageSize: this.params.pageSize, page: 0 };
-      this.current = 0;
+      const query = { pageSize: this.params.pageSize, page: 1 };
+      this.current = 1;
       if (Object.keys(this.$route.query).length > 2) {
         await this.$router.replace({
           path: this.$route.path,
@@ -67,7 +67,7 @@ export default {
       this.$message.error("Click on No");
     },
     async changePageSizeGlobal(e, link, data) {
-      this.current = 0;
+      this.current = 1;
       if (this.$route.query.pageSize != e) {
         await this.$router.replace({
           path: this.$route.path,
