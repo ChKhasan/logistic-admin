@@ -110,7 +110,6 @@
             }"
           >
           {{status[tags]}}
-<!--              {{ tags.split("_").join(' ').toLowerCase() }}-->
           </span>
           <span slot="btn" slot-scope="text">
             <span

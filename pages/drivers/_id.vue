@@ -562,13 +562,13 @@
                   >Посмотреть текст</span
                   >
 
-                  <span slot="btns" slot-scope="text">
-                  <span
-                      class="action-btn"
-                      v-html="eyeIcon"
-                  >
-                  </span>
-                </span>
+<!--                  <span slot="btns" slot-scope="text">-->
+<!--                  <span-->
+<!--                      class="action-btn"-->
+<!--                      v-html="eyeIcon"-->
+<!--                  >-->
+<!--                  </span>-->
+<!--                </span>-->
                 </a-table>
                 <div class="d-flex justify-content-between mt-4">
                   <a-select

@@ -270,21 +270,21 @@
                      <nuxt-link v-if="text?.company" :to="`/companies/${text?.company?.id}`">{{ text?.company?.firstName }} #{{text?.company?.id}}</nuxt-link>
                   </span>
                   <span slot="order_id" slot-scope="text"><nuxt-link :to="`/orders/order/${text}`">#{{text}}</nuxt-link></span>
-                <span
-                  slot="text"
-                  slot-scope="text"
-                  class="app-text"
-                  @click="handleComp(text)"
-                  >Посмотреть текст</span
-                >
+<!--                <span-->
+<!--                  slot="text"-->
+<!--                  slot-scope="text"-->
+<!--                  class="app-text"-->
+<!--                  @click="handleComp(text)"-->
+<!--                  >Посмотреть текст</span-->
+<!--                >-->
 
-                <span slot="btns" slot-scope="text">
-                  <span
-                    class="action-btn"
-                    v-html="eyeIcon"
-                  >
-                  </span>
-                </span>
+<!--                <span slot="btns" slot-scope="text">-->
+<!--                  <span-->
+<!--                    class="action-btn"-->
+<!--                    v-html="eyeIcon"-->
+<!--                  >-->
+<!--                  </span>-->
+<!--                </span>-->
               </a-table>
               <div class="d-flex justify-content-between mt-4">
                 <a-select
