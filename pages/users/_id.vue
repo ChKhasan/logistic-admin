@@ -267,7 +267,7 @@
                   <span slot="orderId" slot-scope="text">#{{ text }}</span>
                   <span slot="driver" slot-scope="text">
                     <nuxt-link v-if="text?.driver" :to="`/drivers/${text?.driver?.id}`">{{ text?.driver?.firstName }} #{{text?.driver?.id}}</nuxt-link>
-                     <nuxt-link v-if="text?.company" :to="`/company/${text?.company?.id}`">{{ text?.company?.firstName }} #{{text?.company?.id}}</nuxt-link>
+                     <nuxt-link v-if="text?.company" :to="`/companies/${text?.company?.id}`">{{ text?.company?.firstName }} #{{text?.company?.id}}</nuxt-link>
                   </span>
                   <span slot="order_id" slot-scope="text"><nuxt-link :to="`/orders/order/${text}`">#{{text}}</nuxt-link></span>
                 <span

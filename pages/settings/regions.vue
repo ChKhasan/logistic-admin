@@ -134,15 +134,15 @@
                 style="height: 350px"
                 @click="onClick"
               >
-                <ymap-marker :coords="coords" hint-content="some hint" marker-id="123" />
+                <ymap-marker :coords="coords"  marker-id="123" />
               </yandex-map>
             </a-form-model-item>
             <div class="grid-2">
               <a-form-model-item label="Широта"  class="form-item mb-3">
-                <a-input v-model="coords[0]" placeholder="0" />
+                <a-input v-model="coords[0]" @input="$event => onChangeCoords($event,0)" type="number" placeholder="0" />
               </a-form-model-item>
               <a-form-model-item label="Долгота"  class="form-item mb-3">
-                <a-input v-model="coords[1]" placeholder="0" />
+                <a-input v-model="coords[1]" @input="$event => onChangeCoords($event,1)" type="number"  placeholder="0" />
               </a-form-model-item>
             </div>
 
@@ -288,6 +288,11 @@ export default {
     // this.checkAllActions("regions");
   },
   methods: {
+    onChangeCoords(e,number) {
+      this.coords[0] = this.coords[0] * 1;
+      this.coords[1] = this.coords[1] * 1;
+      this.coords = [...this.coords]
+    },
     onClick(e) {
       this.coords = e.get("coords");
       this.form.lat = this.coords[0];
