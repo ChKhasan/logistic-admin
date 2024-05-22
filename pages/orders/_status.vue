@@ -109,7 +109,8 @@
               tag_mode: tags === 0,
             }"
           >
-            {{ tags.split("_").join(' ').toLowerCase() }}
+          {{status[tags]}}
+<!--              {{ tags.split("_").join(' ').toLowerCase() }}-->
           </span>
           <span slot="btn" slot-scope="text">
             <span
@@ -236,11 +237,20 @@ export default {
           status: "active",
         },
       ],
+        // NEW,
+        // PROCESS,
+        // COMPLETED,
+        // CANCELED_BY_CONSUMER,
+        // CANCELED_BY_EXECUTOR,
+        //
+        // CANCELED_BY_ADMIN,
       status: {
-        new: "В модерации",
-        in_process: "Активные",
-        accepted: "В процессе",
-        canceled: "Отмененные",
+          NEW: "Новый",
+          COMPLETED: "Завершенный",
+          PROCESS: "В процессе",
+          CANCELED_BY_EXECUTOR: "Отменено исполнителем",
+          CANCELED_BY_CONSUMER: "Отмена клиентом",
+          CANCELED_BY_ADMIN: 'Отменено администратором'
       },
       orderStatus: {
         in_process: "В процессе",
