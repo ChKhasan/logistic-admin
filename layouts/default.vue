@@ -120,7 +120,7 @@
                 :key="menuList.complains.key"
                 @click="$router.push(menuList.complains.to)"
                 :class="{
-                'is-active': 'orders-status' == $route.name,
+                'is-active': 'complains' == $route.name,
               }"
             >
               <a-icon v-html="menuList.complains.icon"></a-icon>
