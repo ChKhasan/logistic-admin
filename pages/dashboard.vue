@@ -1,24 +1,24 @@
 <template>
   <div>
     <TitleBlock title="Dashboard" :breadbrumb="['Каталог']" lastLink="Dashboard">
-      <div class="d-flex justify-content-between w-100">
-        <div
-          class="add-btn add-header-btn add-header-btn-padding btn-primary"
-          @click="visible = true"
-        >
-          Изменить дату
-        </div>
-      </div>
+<!--      <div class="d-flex justify-content-between w-100">-->
+<!--        <div-->
+<!--          class="add-btn add-header-btn add-header-btn-padding btn-primary"-->
+<!--          @click="visible = true"-->
+<!--        >-->
+<!--          Изменить дату-->
+<!--        </div>-->
+<!--      </div>-->
     </TitleBlock>
     <div class="container_xl app-container pb-5">
 <!--      <Loader v-if="loading" />-->
-      <div class="chart-grid-3">
+      <div class="chart-grid-4">
         <div class="card_block py-5">
           <div class="price-title">
             <h1>Количество заказов на сегодня</h1>
           </div>
           <div class="price">
-            <h1 class="color-blue">{{ dashboadData?.today_orders_count ?? 0 }}</h1>
+            <h1 class="color-blue">{{ dashboadData?.ordersCount?.today ?? 0 }}</h1>
           </div>
         </div>
         <div class="card_block py-5">
@@ -28,11 +28,8 @@
           <div class="price">
             <h1 class="color-light-green">
               {{
-                dashboadData?.today_orders_amount
-                  ? `${dashboadData?.today_orders_amount}`.replace(
-                    /\B(?=(\d{3})+(?!\d))/g,
-                    " "
-                  )
+                dashboadData?.ordersAmount?.today
+                  ? `${dashboadData?.ordersAmount?.today}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
                   : 0
               }}
               сум
@@ -44,14 +41,22 @@
             <h1>Новый пользователь на сегодня</h1>
           </div>
           <div class="price">
-            <h1 class="color-violet">{{ dashboadData?.today_users_count ?? 0 }}</h1>
+            <h1 class="color-violet">{{ dashboadData?.consumersCount?.today ?? 0 }}</h1>
+          </div>
+        </div>
+        <div class="card_block py-5">
+          <div class="price-title">
+            <h1>Количество водителей </h1>
+          </div>
+          <div class="price">
+            <h1 class="color-violet">{{ dashboadData?.driversCount?.overall ?? 0 }}</h1>
           </div>
         </div>
         <div class="card_block mt-0 py-5">
           <div class="price2-title">
             <p>Всего заказов</p>
             <h1>
-              {{ dashboadData?.orders_count ?? 0 }}
+              {{ dashboadData?.ordersCount?.overall ?? 0 }}
             </h1>
           </div>
         </div>
@@ -60,8 +65,8 @@
             <p>Сумма заказов на вес период</p>
             <h1>
               {{
-                dashboadData?.orders_amount
-                  ? `${dashboadData?.orders_amount}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+                dashboadData?.ordersAmount?.overall
+                  ? `${dashboadData?.ordersAmount?.overall}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
                   : 0
               }}
               сум
@@ -71,7 +76,13 @@
         <div class="card_block mt-0 py-5">
           <div class="price2-title">
             <p>Количество пользователей</p>
-            <h1>{{ dashboadData?.users_count ?? 0 }}</h1>
+            <h1>{{ dashboadData?.consumersCount?.overall ?? 0 }}</h1>
+          </div>
+        </div>
+        <div class="card_block mt-0 py-5">
+          <div class="price2-title">
+            <p>Количество кампаний</p>
+            <h1>{{ dashboadData?.companiesCount?.overall ?? 0 }}</h1>
           </div>
         </div>
       </div>
@@ -80,88 +91,56 @@
           <div class="price2-title">
             <p class="status-light-blue">Новые</p>
             <h1>
-              {{ $store.state.orders["new"] }}
+              {{ $store.state.orders["newCount"] }}
             </h1>
           </div>
         </div>
         <div class="card_block mt-0 py-0 status_block">
           <div class="price2-title">
-            <p class="status-blue">Принятые</p>
+            <p class="status-blue">Завершенный </p>
             <h1>
-              {{ $store.state.orders["accepted"] }}
+              {{ $store.state.orders["completed"] }}
             </h1>
           </div>
         </div>
         <div class="card_block mt-0 py-0 status_block">
           <div class="price2-title">
-            <p class="status-yellow">Ожидание</p>
-            <h1>{{ $store.state.orders["pending"] }}</h1>
+            <p class="status-yellow">В процессе</p>
+            <h1>{{ $store.state.orders["processCount"] }}</h1>
           </div>
         </div>
         <div class="card_block mt-0 py-0 status_block">
           <div class="price2-title">
-            <p class="status-green">В Доставке</p>
+            <p class="status-green">Отмена (исполнителем)</p>
             <h1>
-              {{ $store.state.orders["on_the_way"] }}
+              {{ $store.state.orders["canceledByExecutorCount"] }}
             </h1>
           </div>
         </div>
         <div class="card_block mt-0 py-0 status_block">
           <div class="price2-title">
-            <p class="status-dark-green">Доставленные</p>
+            <p class="status-dark-green">Отмена (модератор)</p>
             <h1>
-              {{ $store.state.orders["done"] }}
+              {{ $store.state.orders["canceledByAdminCount"] }}
             </h1>
           </div>
         </div>
         <div class="card_block mt-0 py-0 status_block">
           <div class="price2-title">
-            <p class="status-red">Отмененные</p>
-            <h1>{{ $store.state.orders["canceled"] }}</h1>
+            <p class="status-red">Отмена (клиент)</p>
+            <h1>{{ $store.state.orders["canceledByConsumerCount"] }}</h1>
           </div>
         </div>
-        <div class="card_block mt-0 py-0 status_block">
-          <div class="price2-title">
-            <p class="color-violet">Возврат</p>
-            <h1>
-              {{ $store.state.orders["returned"] }}
-            </h1>
-          </div>
-        </div>
+<!--        <div class="card_block mt-0 py-0 status_block">-->
+<!--          <div class="price2-title">-->
+<!--            <p class="color-violet">Возврат</p>-->
+<!--            <h1>-->
+<!--              {{ $store.state.orders["returned"] }}-->
+<!--            </h1>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
       <div class="dashboard-grid">
-        <div class="card_block py-5">
-          <section class="pt-4">
-            <div class="chart">
-              <apexchart
-                v-if="
-                  chartOptionsBar.xaxis.categories.length > 0 &&
-                  priceSeries[0].data.length > 0
-                "
-                width="100%"
-                type="bar"
-                :options="chartOptionsBar"
-                :series="priceSeries"
-              ></apexchart>
-            </div>
-          </section>
-        </div>
-        <div class="card_block py-5">
-          <section class="pt-4">
-            <div class="chart">
-              <apexchart
-                v-if="
-                  chartOptionsLine.xaxis.categories.length > 0 &&
-                  ordersSeries[0].data.length > 0
-                "
-                width="100%"
-                type="line"
-                :options="chartOptionsLine"
-                :series="ordersSeries"
-              ></apexchart>
-            </div>
-          </section>
-        </div>
         <div class="card_block py-5">
           <section class="pt-4 h-100">
             <div class="chart h-100">
@@ -334,11 +313,11 @@ export default {
 
       seriesOrderClient: [
         {
-          name: "Клиенты",
+          name: "Точка А",
           data: [],
         },
         {
-          name: "Заказы",
+          name: "Точка Б",
           data: [],
         },
       ],
@@ -348,7 +327,7 @@ export default {
           type: "bar",
         },
         title: {
-          text: "Клиенты и заказы по регионам",
+          text: "Заказы по регионам",
           align: "left",
           style: {
             fontSize: "19px",
@@ -400,12 +379,27 @@ export default {
         },
       },
       dashboadData: {},
+      regions: []
     };
   },
   mounted() {
-    // this.__GET_DASHBOARD();
+    this.__GET_DASHBOARD();
+    this.__GET_REGIONS()
   },
   methods: {
+    async __GET_REGIONS() {
+      try {
+        this.loading = true;
+        const data = await this.$store.dispatch("fetchRegions/getRegions");
+
+        this.regions = data?.content;
+        this.chartOptionsHorizontal.xaxis.categories = data?.content.map(
+          (item) => item?.name?.ru
+        );
+      } finally {
+        this.loading = false;
+      }
+    },
     async changeDate() {
       let begin = moment(this.value1[0]).format("YYYY-MM-DD");
       let end = moment(this.value1[1]).format("YYYY-MM-DD");
@@ -431,16 +425,25 @@ export default {
       const data = await this.$store.dispatch("fetchDashboard/getDashboard", {
         ...this.$route.query,
       });
-      this.dashboadData = data;
-      this.ordersSeries[0].data = data?.statistic.map((item) => item.all_orders);
-      this.priceSeries[0].data = data?.statistic.map((item) => item.completed_orders_sum);
-      this.seriesOrderClient[0].data = data?.clients_from.map((item) => item.clients);
-      this.seriesOrderClient[1].data = data?.clients_from.map((item) => item.orders);
-      this.chartOptionsBar.xaxis.categories = data?.statistic.map((item) => item.date);
-      this.chartOptionsLine.xaxis.categories = data?.statistic.map((item) => item.date);
-      this.chartOptionsHorizontal.xaxis.categories = data?.clients_from.map(
-        (item) => item.region?.name?.ru
+      this.dashboadData = data?.data;
+      this.chartOptionsHorizontal.xaxis.categories = data?.data?.cityOrderStatistics.map(
+        (item) => item?.name
       );
+      console.log(data?.data)
+      // this.ordersSeries[0].data = data?.statistic.map((item) => item.all_orders);
+      // this.priceSeries[0].data = data?.statistic.map((item) => item.completed_orders_sum);
+      this.seriesOrderClient[0].data = data?.data?.cityOrderStatistics.map(
+        (item) => item?.firstCount
+      );
+      this.seriesOrderClient[1].data = data?.data?.cityOrderStatistics.map(
+        (item) => item?.secondCount
+      );
+      // this.seriesOrderClient[1].data = data?.clients_from.map((item) => item.orders);
+      // this.chartOptionsBar.xaxis.categories = data?.statistic.map((item) => item.date);
+      // this.chartOptionsLine.xaxis.categories = data?.statistic.map((item) => item.date);
+      // this.chartOptionsHorizontal.xaxis.categories = data?.clients_from.map(
+      //   (item) => item.region?.name?.ru
+      // );
       this.loading = false;
     },
   },
@@ -448,6 +451,18 @@ export default {
 </script>
 
 <style scoped>
+.card_block {
+  border: 0;
+  padding-top: 0 !important;
+  padding-bottom: 1.25rem !important;
+  border-radius: 7.125px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-top: 25px;
+  padding: 0 24px;
+}
 .top-products {
   min-height: 900px;
 }
@@ -507,9 +522,15 @@ export default {
   gap: 8px;
   color: rgba(54, 153, 255);
 }
+.chart-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  color: rgba(54, 153, 255);
+}
 .grid-status {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
   margin-top: 24px;
 }
@@ -522,7 +543,7 @@ export default {
   height: 100%;
 }
 .price-title h1 {
-  font-size: 1.275rem;
+  font-size: 16px;
   color: #181c32;
   line-height: 1.2;
   font-weight: 600;
@@ -533,7 +554,7 @@ export default {
   color: #878787;
   font-family: "Poppins", Helvetica, "sans-serif";
   margin-top: 0.25rem;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;

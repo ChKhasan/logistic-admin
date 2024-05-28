@@ -17,6 +17,7 @@ export default ({ $axios, redirect, error }, inject) => {
   });
 
   axiosInstance.onError(async (e) => {
+    console.log(e)
     if(e.response.status === 401) {
       localStorage.removeItem(tokenKey);
       redirect('/admin/login')
