@@ -143,7 +143,7 @@
       <div class="dashboard-grid">
         <div class="card_block py-5">
           <section class="pt-4 h-100">
-            <div class="chart h-100">
+            <div class="chart">
               <apexchart
                 v-if="
                   chartOptionsHorizontal.xaxis.categories.length > 0 &&
@@ -157,36 +157,21 @@
             </div>
           </section>
         </div>
-        <div class="card_block py-5 top-products">
-          <div class="title-products pt-4">
-            <FormTitle title="Топ товаров" />
-          </div>
-          <div class="product-list">
-            <!-- <div class="product-item" v-for="product in dashboadData?.top_sales_products"> -->
-            <div
-              class="product-item"
-              v-for="(product, index) in dashboadData?.top_sales_products?.slice(0, 10)"
-              :key="index"
-            >
-              <div class="image">
-                <img
-                  v-if="product?.images[0]?.sm_img"
-                  class="table-image"
-                  :src="product?.images[0]?.sm_img"
-                  alt=""
-                />
-                <img
-                  v-else
-                  class="table-image"
-                  src="../assets/images/photo_2023-03-04_13-28-58.jpg"
-                  alt=""
-                />
-              </div>
-              <div class="name">
-                <h6 class="column">{{ product?.name?.ru }}</h6>
-              </div>
+        <div class="card_block py-5">
+          <section class="pt-4 h-100">
+            <div class="chart">
+              <apexchart
+                v-if="
+                  chartOptionsHorizontalDirver.xaxis.categories.length > 0 &&
+                  seriesDriverCompany[0].data.length > 0
+                "
+                type="bar"
+                height="100%"
+                :options="chartOptionsHorizontalDirver"
+                :series="seriesDriverCompany"
+              ></apexchart>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>
@@ -233,84 +218,6 @@ export default {
       loading: false,
       value1: "",
       visible: false,
-      ordersSeries: [
-        {
-          name: "Заказы",
-          data: [],
-        },
-      ],
-      priceSeries: [
-        {
-          name: "Цена",
-          data: [],
-        },
-      ],
-      chartOptionsBar: {
-        chart: {
-          id: "vuechart-example",
-          height: 1000,
-        },
-
-        dataLabels: {
-          enabled: true,
-        },
-        title: {
-          text: "Заработок",
-          align: "left",
-          style: {
-            fontSize: "19px",
-            fontWeight: "600",
-            fontFamily: "TT Interfaces",
-            color: "#263238",
-          },
-        },
-        xaxis: {
-          type: "datetime",
-          categories: [],
-        },
-        tooltip: {
-          x: {
-            format: "dd/MM/yy HH:mm",
-          },
-          y: {
-            show: true,
-            formatter: (val) => {
-              return `${val}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-            },
-          },
-        },
-      },
-      chartOptionsLine: {
-        chart: {
-          id: "vuechart-example",
-        },
-        title: {
-          text: "Заказы",
-          align: "left",
-          style: {
-            fontSize: "19px",
-            fontWeight: "600",
-            fontFamily: "TT Interfaces",
-            color: "#263238",
-          },
-        },
-        xaxis: {
-          type: "datetime",
-          categories: [],
-        },
-        tooltip: {
-          x: {
-            format: "dd/MM/yy HH:mm",
-          },
-          y: {
-            show: true,
-            formatter: (val) => {
-              return val.toFixed();
-            },
-          },
-        },
-      },
-
       seriesOrderClient: [
         {
           name: "Точка А",
@@ -378,6 +285,73 @@ export default {
           categories: [],
         },
       },
+      seriesDriverCompany: [
+        {
+          name: "Драйверы",
+          data: [],
+        },
+        {
+          name: "Компании",
+          data: [],
+        },
+      ],
+      chartOptionsHorizontalDirver: {
+        chart: {
+          height: 1000,
+          type: "bar",
+        },
+        title: {
+          text: "Водители и компании по регионам",
+          align: "left",
+          style: {
+            fontSize: "19px",
+            fontWeight: "600",
+            fontFamily: "TT Interfaces",
+            color: "#263238",
+          },
+        },
+
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            dataLabels: {
+              position: "top",
+            },
+          },
+        },
+        dataLabels: {
+          enabled: true,
+          offsetX: -6,
+          style: {
+            fontSize: "12px",
+            colors: ["#fff"],
+          },
+        },
+        stroke: {
+          show: true,
+          width: 1,
+          colors: ["#fff"],
+        },
+        tooltip: {
+          shared: true,
+          intersect: false,
+          y: {
+            show: true,
+            formatter: (val) => {
+              return val.toFixed();
+            },
+          },
+        },
+        colors: ['#FFDB5C', '#E440FF'],
+        legend: {
+          position: "top",
+          horizontalAlign: "center",
+          offsetX: 40,
+        },
+        xaxis: {
+          categories: [],
+        },
+      },
       dashboadData: {},
       regions: []
     };
@@ -416,12 +390,8 @@ export default {
     },
     async __GET_DASHBOARD() {
       this.loading = true;
-      this.ordersSeries[0].data = [];
-      this.priceSeries[0].data = [];
       this.seriesOrderClient[0].data = [];
       this.seriesOrderClient[1].data = [];
-      this.chartOptionsBar.xaxis.categories = [];
-      this.chartOptionsLine.xaxis.categories = [];
       const data = await this.$store.dispatch("fetchDashboard/getDashboard", {
         ...this.$route.query,
       });
@@ -429,21 +399,21 @@ export default {
       this.chartOptionsHorizontal.xaxis.categories = data?.data?.cityOrderStatistics.map(
         (item) => item?.name
       );
-      console.log(data?.data)
-      // this.ordersSeries[0].data = data?.statistic.map((item) => item.all_orders);
-      // this.priceSeries[0].data = data?.statistic.map((item) => item.completed_orders_sum);
       this.seriesOrderClient[0].data = data?.data?.cityOrderStatistics.map(
         (item) => item?.firstCount
       );
       this.seriesOrderClient[1].data = data?.data?.cityOrderStatistics.map(
         (item) => item?.secondCount
       );
-      // this.seriesOrderClient[1].data = data?.clients_from.map((item) => item.orders);
-      // this.chartOptionsBar.xaxis.categories = data?.statistic.map((item) => item.date);
-      // this.chartOptionsLine.xaxis.categories = data?.statistic.map((item) => item.date);
-      // this.chartOptionsHorizontal.xaxis.categories = data?.clients_from.map(
-      //   (item) => item.region?.name?.ru
-      // );
+      this.chartOptionsHorizontalDirver.xaxis.categories = data?.data?.cityExecutorStatistics.map(
+        (item) => item?.name
+      );
+      this.seriesDriverCompany[0].data = data?.data?.cityExecutorStatistics.map(
+        (item) => item?.firstCount
+      );
+      this.seriesDriverCompany[1].data = data?.data?.cityExecutorStatistics.map(
+        (item) => item?.secondCount
+      );
       this.loading = false;
     },
   },
@@ -451,6 +421,9 @@ export default {
 </script>
 
 <style scoped>
+.chart {
+  height: 700px
+}
 .card_block {
   border: 0;
   padding-top: 0 !important;

@@ -39,9 +39,7 @@
               v-if="menuList.dashboard.show"
               :key="menuList.dashboard.key"
               @click="$router.push(menuList.dashboard.to)"
-              :class="{
-                            'is-active': $route.name == 'dashboard',
-                          }"
+              :class="{'is-active': $route.name === 'dashboard'}"
             >
               <a-icon v-html="menuList.dashboard.icon"></a-icon>
               <span>
@@ -295,14 +293,14 @@ export default {
         sub: "7",
         icon: require("../assets/svg/derictory.svg?raw"),
         menuItems: [
-          // {
-          //   key: "71",
-          //   name: "Cправочник",
-          //   to: "/directory/directory",
-          //   add: "directory-directory",
-          //   edit: "directory-directory",
-          //   show: true,
-          // },
+          {
+            key: "71",
+            name: "СМС рассылка",
+            to: "/by-sms",
+            add: "by-sms",
+            edit: "by-sms",
+            show: true,
+          },
           {
             key: "72",
             name: "Причины отказа ( Водитель )",

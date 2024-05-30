@@ -22,38 +22,57 @@
     <a-form-model :model="form" ref="ruleForm" :rules="rules" layout="vertical">
       <div class="pb-5 pt-5">
         <div class="container_xl app-container d-flex flex-column">
+          <div class="form_tab">
+            <div>
+              <span
+                v-for="(item, index) in formTabData"
+                :key="index"
+                @click="formTab = item.index"
+                :class="{ 'avtive-formTab': formTab === item.index }"
+              >
+                {{ item.label }}
+              </span>
+            </div>
+          </div>
           <div>
-            <div class="card_block main-table px-4 py-4">
-              <a-form-model-item class="form-item mb-3" prop="message" label="Сообщение">
+            <div class="card_block main-table px-4 py-4"
+                 v-for="(item, index) in formTabData"
+                 :key="index"
+                 v-if="formTab === item.index"
+            >
+              <a-form-model-item class="form-item mb-3" label="Заголовок" prop="title.ru">
+                <a-input v-model="form.title[item.index]" placeholder="Заголовок..."/>
+              </a-form-model-item>
+
+              <a-form-model-item class="form-item mb-3" prop="message.ru" label="Сообщение">
                 <a-input
                   type="textarea"
                   rows="5"
-                  v-model="form.message"
+                  v-model="form.message[item.index]"
                   placeholder="Сообщение..."
                 />
               </a-form-model-item>
-              <a-form-model-item class="form-item mb-3" label="Пользователи">
+              <a-form-model-item class="form-item mb-3" label="Пользователи" prop="userType">
                 <a-select
-                  v-model="form.clients"
-                  mode="multiple"
-                  class="pxy-0"
+                  :disabled="checkValue"
+                  v-model="form.userType"
                   style="width: 100%"
-                  placeholder="Пользователи..."
+                  placeholder="Выберите, кому отправить"
                   option-label-prop="label"
                 >
                   <a-select-option
-                    :value="client?.id"
-                    :label="client?.name"
-                    :key="client.id"
-                    v-for="client in clients"
+                    :value="option.value"
+                    :label="option.label"
+                    :key="option.value"
+                    v-for="option in options"
                   >
-                    {{ client?.name }}
+                    {{ option.label }}
                   </a-select-option>
                 </a-select>
               </a-form-model-item>
               <div class="form-item">
-                <label for="">Отправить всем пользователям</label>
-                <a-checkbox class="mx-3" @change="onChange"></a-checkbox>
+                <label for="">Отправить всем</label>
+                <a-checkbox :checked="checkValue" class="mx-3" @change="checkValue = !checkValue"></a-checkbox>
               </div>
             </div>
           </div>
@@ -78,84 +97,96 @@ export default {
   },
   data() {
     return {
+      checkValue: true,
+      options: [{
+        value: 'DRIVER',
+        label: 'Водителям'
+      }, {
+        value: 'COMPANY',
+        label: 'Компаниям'
+      }, {
+        value: 'CONSUMER',
+        label: 'Клиентам'
+      }
+      ],
+      formTabData: [
+        {
+          label: "Русский",
+          index: "ru",
+        },
+        {
+          label: "O'zbek",
+          index: "uz",
+        },
+      ],
+      formTab: "ru",
       value: [],
       rules: {
-        message: [
-          {
-            required: true,
-            message: "This field is required",
-            trigger: "change",
-          },
-          {min: 12, message: "Min length 12", trigger: "blur"},
-        ],
+        message: {
+          ru: [
+            {
+              required: true,
+              message: "This field is required",
+              trigger: "change",
+            },
+          ]
+        },
+        title: {
+          ru: [
+            {
+              required: true,
+              message: "This field is required",
+              trigger: "change",
+            },
+          ]
+        },
+
       },
       form: {
-        clients: [],
-        message: "",
+        userType: undefined,
+        title: {ru: "", uz: ""},
+        message: {ru: "", uz: ""}
       },
       clients: [],
     };
   },
-  mounted() {
-    // this.__GET_CLIENTS();
-  },
   methods: {
     onSubmit() {
-      this.$refs["ruleForm"].validate((valid) => {
-        if (valid) {
-          if (this.form.clients.length > 0) {
-            this.__POST_MAILING(this.form);
-          }
-        } else {
-          return false;
-        }
-      });
-    },
-    onChange(e) {
-      if (e) {
-        this.form.clients = this.clients.map((item) => item.id);
-      } else {
-        this.form.clients = [];
+      const data = {
+        ...this.form,
+        userType: this.checkValue ? null : this.form.userType
       }
+      this.$refs["ruleForm"].validate((valid) => valid && this.__POST_MAILING(data));
     },
-    async __GET_CLIENTS() {
-      const data = await this.$store.dispatch("fetchClients/getClients", {
-        ...this.$route.query,
-      });
-      this.clients = data?.clients?.data;
+    onChange() {
+      this.form.userType = null
     },
     async __POST_MAILING(data) {
       try {
-        await this.$store.dispatch("fetchClients/postMailing", data);
+        await this.$store.dispatch("fetchNotifications/postNotifications", data);
         this.notification("success", "success", "Успешно отправлен");
+        this.formReset()
       } catch (e) {
         this.statusFunc(e);
       }
     },
+    formReset() {
+      this.form = {
+        userType: undefined,
+        title: {ru: "", uz: ""},
+        message: {ru: "", uz: ""}
+      }
+    }
+  },
+  watch: {
+    checkValue(val) {
+      val ? this.form.userType = undefined : this.form.userType = undefined
+    }
   },
   components: {TitleBlock, FormTitle},
 };
 </script>
 <style lang="css">
-.posts-grid {
-  display: grid;
-  grid-gap: 13px;
-  grid-template-columns: 5fr 2fr;
-}
 
-.posts .ant-upload.ant-upload-select-picture-card,
-.posts .ant-upload-list-picture-card .ant-upload-list-item,
-.posts .ant-upload-list-picture-card-container {
-  width: 100% !important;
-  height: 150px !important;
-}
-
-.pxy-0 .ant-select-selection {
-  padding: 0 !important;
-}
-
-.pxy-0 .ant-select-selection__rendered {
-  width: 100%;
-}
 </style>
 
