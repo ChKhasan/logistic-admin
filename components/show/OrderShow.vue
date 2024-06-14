@@ -29,12 +29,12 @@
         <div class="d-flex flex-column">
           <div class="item">
             <p class="question">Откуда</p>
-            <p class="answer">{{ order?.fromAddress }}</p>
+            <p class="answer">{{ order?.fromAddress || '----' }}</p>
           </div>
           <div class="item mt-4">
             <p class="question">Куда</p>
             <p class="answer">
-              {{order?.toAddress}}
+              {{order?.toAddress || '----'}}
             </p>
           </div>
 
@@ -46,7 +46,8 @@
         <div class="files">
           <div class="file" v-for="image in order?.vehicles">
             <div class="img">
-              <img :src="image.image" alt="" />
+              <img v-if="image.image?.showUrl" :src="image.image?.showUrl" alt="" />
+              <img v-else src="../../assets/images/photo_2023-03-04_13-28-58.jpg" alt="" />
             </div>
             <p class="name">{{ image?.name }}</p>
              <p class="size">{{ image?.size }}</p>

@@ -56,19 +56,19 @@
   background: #000;
 }
 .order-blue {
-  background: rgb(27, 69, 236);
+  background: #3699ff;
 }
 .order-yellow {
-  background: rgb(206, 243, 18);
+  background: #ffa909;
 }
 .order-purple {
   background: rgb(243, 18, 213);
 }
 .order-green {
-  background: rgb(11, 95, 55);
+  background: #18b3bd;
 }
 .order-red {
-  background: rgb(243, 18, 18);
+  background: #f65160;
 }
 .order-links-grid {
   display: flex;

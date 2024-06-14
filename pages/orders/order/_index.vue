@@ -112,7 +112,7 @@
                           v-for="reason in order?.cancelReasons"
                           :key="reason?.id"
                       >
-                        {{ reason }}
+                        {{ reason?.name }}
                       </li>
                     </ul>
                   </div>

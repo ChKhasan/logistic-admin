@@ -116,7 +116,7 @@
                           </div>
                           <div class="item">
                             <p class="question">Город</p>
-                            <p class="answer">{{ driver?.city || emptyText }}</p>
+                            <p class="answer">{{ driver?.city?.name || emptyText }}</p>
                           </div>
                         </div>
                       </div>

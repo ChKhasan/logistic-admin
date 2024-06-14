@@ -12,7 +12,7 @@
       :class="{ 'active-orders': $route.params.status === 'all-orders' }"
       to="/orders/all-orders"
     >
-      <span class="order-light-blue"></span> Все заказы ({{
+      <span class="order-purple"></span> Все заказы ({{
         `${$store.state.orders.all}`
       }})
     </nuxt-link>
@@ -30,7 +30,7 @@
       :class="{ 'active-orders': $route.params.status === 'process' }"
       to="/orders/process"
     >
-      <span class="order-black"></span> В процессе ({{
+      <span class="order-yellow"></span> В процессе ({{
         `${$store.state.orders.processCount}`
       }})
     </nuxt-link>
@@ -40,7 +40,7 @@
       :class="{ 'active-orders': $route.params.status === 'canceled_by_executor' }"
       to="/orders/canceled_by_executor"
     >
-      <span class="order-yellow"></span> Отмена - исполнителем ({{
+      <span class="order-red"></span> Отмена - исполнителем ({{
         `${$store.state.orders.canceledByExecutorCount}`
       }})
     </nuxt-link>
