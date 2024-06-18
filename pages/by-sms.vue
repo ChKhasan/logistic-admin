@@ -40,11 +40,11 @@
                  :key="index"
                  v-if="formTab === item.index"
             >
-              <a-form-model-item class="form-item mb-3" label="Заголовок" prop="title.ru">
+              <a-form-model-item class="form-item mb-3" label="Заголовок" prop="title.uz">
                 <a-input v-model="form.title[item.index]" placeholder="Заголовок..."/>
               </a-form-model-item>
 
-              <a-form-model-item class="form-item mb-3" prop="message.ru" label="Сообщение">
+              <a-form-model-item class="form-item mb-3" prop="message.uz" label="Сообщение">
                 <a-input
                   type="textarea"
                   rows="5"
@@ -111,19 +111,19 @@ export default {
       ],
       formTabData: [
         {
-          label: "Русский",
-          index: "ru",
-        },
-        {
           label: "O'zbek",
           index: "uz",
         },
+        {
+          label: "Русский",
+          index: "ru",
+        },
       ],
-      formTab: "ru",
+      formTab: "uz",
       value: [],
       rules: {
         message: {
-          ru: [
+          uz: [
             {
               required: true,
               message: "This field is required",
@@ -132,7 +132,7 @@ export default {
           ]
         },
         title: {
-          ru: [
+          uz: [
             {
               required: true,
               message: "This field is required",
