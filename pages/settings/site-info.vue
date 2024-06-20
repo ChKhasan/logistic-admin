@@ -33,117 +33,64 @@
                 </span>
               </div>
             </div>
-            <div class="posts-grid">
+            <div >
               <div
                   class="card_block main-table px-4 py-4 border-left-radius"
                   v-for="(item, index) in formTabData"
                   :key="index"
-                  v-if="formTab == item.index"
+                  v-if="formTab === item.index"
               >
-                <div class="d-flex gx-5" style="gap: 16px">
-                  <a-form-model-item
+                <div class="grid-2">
+                  <div class="d-flex gx-5" style="gap: 16px">
+                    <a-form-model-item
                       class="form-item mb-3 w-100"
                       label="Заголовок"
-                      prop="title_ru"
-                  >
-                    <a-input v-model="form[`title_${item.index}`]" placeholder="Заголовок"/>
-                  </a-form-model-item>
+                      prop="title.ru"
+                    >
+                      <a-input v-model="form.title[item.index]" placeholder="Заголовок"/>
+                    </a-form-model-item>
 
-                </div>
+                  </div>
+                  <div class="d-flex gx-5" style="gap: 16px">
+                    <a-form-model-item
+                      class="form-item mb-3 w-100"
+                      label="Заголовок ( Водитель )"
+                      prop="titleDriver.ru"
+                    >
+                      <a-input v-model="form.titleDriver[item.index]" placeholder="Заголовок"/>
+                    </a-form-model-item>
 
-                <a-form-model-item class="form-item mb-3" label="Описание">
-                  <quill-editor
-                      v-model="form[`desc_${item.index}`]"
+                  </div>
+                  <a-form-model-item class="form-item mb-3" label="Описание">
+                    <quill-editor
+                      v-model="form.description[item.index]"
                       class="product-editor mt-1"
                       :options="editorOption"
-                  />
-                </a-form-model-item>
-                <a-form-model-item class="form-item mb-3 w-100" label="Номер телефона">
-                  <div class="d-flex flex-column numbers">
-                    <span v-for="(number,index) in form.phone_numbers" :key="number.id">
-                       <a-input placeholder="(___) ___-____" v-model="number.value"/>
-                    </span>
-                  </div>
-                </a-form-model-item>
+                    />
+                  </a-form-model-item>
+                  <a-form-model-item class="form-item mb-3" label="Описание ( Водитель )">
+                    <quill-editor
+                      v-model="form.descriptionDriver[item.index]"
+                      class="product-editor mt-1"
+                      :options="editorOption"
+                    />
+                  </a-form-model-item>
+                  <div class="d-flex gx-5" style="gap: 16px">
+                    <a-form-model-item
+                      class="form-item mb-3 w-100"
+                      label="Номер телефона"
+                    >
+                      <a-input v-model="form.phoneNumber" placeholder="(___) ___-____"/>
+                    </a-form-model-item>
 
-                <div class="create-inner-variant" @click="addNumber('phone_numbers')">
-                  Добавить номер
+                  </div>
+
                 </div>
+
+
 
               </div>
               <span>
-                <div class="card_block px-4 py-4">
-                  <a-form-model-item class="form-item mb-3" label="Email">
-                    <div class="d-flex flex-column numbers">
-                    <span v-for="email in form.emails" :key="email.id">
-                    <a-input v-model="email.value" placeholder="link"/>
-                    </span>
-                    </div>
-                  </a-form-model-item>
-                   <div class="create-inner-variant" @click="addNumber('emails')">
-                    Добавить почту
-                  </div>
-                  <!--                  <a-form-model-item class="form-item mb-3" label="Instagram">-->
-                  <!--                    <a-input v-model="form.instagram" placeholder="link" />-->
-                  <!--                  </a-form-model-item>-->
-                  <!--                  <a-form-model-item class="form-item mb-3" label="Telegram">-->
-                  <!--                    <a-input v-model="form.telegram" placeholder="link" />-->
-                  <!--                  </a-form-model-item>-->
-                  <!--                  <a-form-model-item class="form-item mb-3" label="Facebook">-->
-                  <!--                    <a-input v-model="form.facebook" placeholder="link" />-->
-                  <!--                  </a-form-model-item>-->
-                  <!--                  <a-form-model-item class="form-item mb-3" label="YouTube">-->
-                  <!--                    <a-input v-model="form.youtube" placeholder="link" />-->
-                  <!--                  </a-form-model-item>-->
-                  <!--                  <a-form-model-item-->
-                  <!--                    class="form-item mb-3"-->
-                  <!--                    label="Втсавить карту(iframe)"-->
-                  <!--                  >-->
-                  <!--                    <a-input v-model="form.map" placeholder="iframe"/>-->
-                  <!--                  </a-form-model-item>-->
-                  <div class="clearfix d-flex">
-                    <a-form-model-item class="form-item mb-3 w-100" label="Лого">
-                      <a-upload
-                          list-type="picture-card"
-                          :file-list="fileListLogo"
-                          :remove="($event) => handleRemove($event,'fileListLogo')"
-                          :before-upload="handleBeforeUpload"
-                          @preview="previewVisible = true"
-                          :custom-request="($event) => customRequest($event,'fileListLogo')"
-                          accept=".jpg, .png, .jpeg, .webp"
-                      >
-                    <div v-if="fileListLogo.length < 1">
-                      <a-icon type="plus"/>
-                      <div class="ant-upload-text">Загрузить изображение</div>
-                    </div>
-                  </a-upload>
-
-                    </a-form-model-item>
-                    <a-form-model-item class="form-item mb-3 w-100" label="Favicon">
-                       <a-upload
-                           list-type="picture-card"
-                           :file-list="fileListIcon"
-                           :remove="($event) => handleRemove($event,'fileListIcon')"
-                           :before-upload="handleBeforeUpload"
-                           @preview="previewVisible = true"
-                           :custom-request="($event) => customRequest($event,'fileListIcon')"
-                           accept=".jpg, .png, .jpeg, .webp"
-                       >
-                    <div v-if="fileListIcon.length < 1">
-                      <a-icon type="plus"/>
-                      <div class="ant-upload-text">Загрузить изображение</div>
-                    </div>
-                  </a-upload>
-                    </a-form-model-item>
-                    <a-modal
-                        :visible="previewVisible"
-                        :footer="null"
-                        @cancel="handleCancel"
-                    >
-                      <img alt="example" style="width: 100%" :src="previewImage"/>
-                    </a-modal>
-                  </div>
-            </div>
             </span>
             </div>
           </div>
@@ -255,10 +202,10 @@ export default {
           label: "O'zbek",
           index: "uz",
         },
-        {
-          label: "English",
-          index: "en",
-        },
+        // {
+        //   label: "English",
+        //   index: "en",
+        // },
       ],
       rules: {
         title: {
@@ -270,22 +217,22 @@ export default {
             },
           ],
         },
+        titleDriver: {
+          ru: [
+            {
+              required: true,
+              message: "This field is required",
+              trigger: "change",
+            },
+          ],
+        },
       },
       form: {
-        title_uz: "",
-        title_ru: "",
-        desc_ru: "",
-        desc_uz: "",
-        phone_numbers: [{
-          value: "",
-          id: 1,
-        }],
-        emails: [
-          {
-            value: "",
-            id: 1,
-          }
-        ],
+        phoneNumber: "",
+        title: {ru: "", uz: ""},
+        description: {ru: "", uz: ""},
+        titleDriver: {ru: "", uz: ""},
+        descriptionDriver: {ru: "", uz: ""}
       },
       previewVisible: false,
       previewImage: "",
@@ -294,7 +241,7 @@ export default {
     };
   },
   mounted() {
-    this.__GET_STATIC_INFO();
+    this.__GET_STATIC_INFO()
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   },
@@ -308,35 +255,10 @@ export default {
   },
   methods: {
     onSubmit() {
-      let formData = new FormData();
-
-      const data = {
-        ...this.form,
-      }
-      delete data.phone_numbers
-      delete data.emails
-      delete data.logo
-      delete data.icon
-      Object.keys(data).forEach((elem) => {
-        formData.append(elem, data[elem]);
-      })
-      this.form.emails.forEach((elem) => {
-        formData.append('emails[]', elem.value);
-      })
-      this.form.phone_numbers.forEach((elem) => {
-        formData.append('phone_numbers[]', elem.value);
-      })
-      if (this.fileListIcon.at(-1)?.originFileObj)
-        formData.append("favicon", this.fileListIcon.at(-1).originFileObj);
-      // if (this.form.icon)
-      //   formData.append("icon", this.form.icon);
-      if (this.fileListLogo.at(-1)?.originFileObj)
-        formData.append("logo", this.fileListLogo.at(-1).originFileObj);
-      // if (this.form.logo)
-      //   formData.append("logo", this.form.logo);
+      const data = {...this.form}
       this.$refs["ruleForm"].validate((valid) => {
-        if (!valid) return false;
-        this.__POST_STATIC_INFO(formData);
+        if(!valid) return false
+        this.__POST_STATIC_INFO(data);
       });
     },
     async __POST_STATIC_INFO(data) {
@@ -352,84 +274,15 @@ export default {
         this.spinning = true;
         const data = await this.$store.dispatch("fetchStaticInfo/getStaticInfo");
         Object.keys(this.form).forEach(elem => {
-          this.form[elem] = data?.content[elem]
+          this.form[elem] = data[elem]
         })
-        this.form.phone_numbers = JSON.parse(data?.content?.phone_numbers).map((item,index) => {
-          return {
-            id: index + 1,
-            value: item
-          }
-        })
-        this.form.emails = JSON.parse(data?.content?.emails).map((item,index) => {
-          return {
-            id: index + 1,
-            value: item
-          }
-        })
-        if (data?.content?.favicon){
-          this.form.icon = data?.content?.favicon;
-          this.fileListIcon = [
-            {
-              uid: "-1",
-              name: "image.png",
-              status: "done",
-              oldImg: true,
-              url: this.imgUrl + data?.content?.favicon,
-            },
-          ];
-        }
-
-        if (data?.content?.logo) {
-          this.form.logo = data?.content?.logo;
-          this.fileListLogo = [
-            {
-              uid: "-1",
-              name: "image.png",
-              status: "done",
-              oldImg: true,
-              url: this.imgUrl + data?.content?.logo,
-            },
-          ];
-        }
-
-        this.spinning = false;
       } catch (e) {
         this.statusFunc(e);
+      } finally {
         this.spinning = false;
+
       }
     },
-    addNumber(name) {
-      this.form[name].push({
-        value: '',
-        id: this.form[name].length + 1
-      })
-    },
-    handleBeforeUpload(file) {
-      return true;
-    },
-    handleRemove(e, name) {
-      this[name] = [];
-    },
-    customRequest({onSuccess, onError, file}, name) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const uploadedFile = {
-          uid: file.uid,
-          name: file.name,
-          originFileObj: file,
-          url: reader.result,
-        };
-        this[name].push(uploadedFile);
-        this.previewImage = reader.result;
-        onSuccess();
-      };
-      reader.onerror = () => {
-        console.error("Error reading file as binary data");
-        onError(new Error("Error reading file"));
-      };
-      reader.readAsDataURL(file); // Use readAsDataURL to get Base64 data
-    },
-
     handleCancel() {
       this.previewVisible = false;
     },
@@ -437,16 +290,14 @@ export default {
   components: {TitleBlock, FormTitle},
 };
 </script>
-<style lang="css">
-.posts-grid {
+<style lang="css" scoped>
+.grid-2 {
   display: grid;
-  grid-gap: 13px;
-  grid-template-columns: 5fr 2fr;
+  grid-gap: 16px;
+  grid-template-columns: repeat(2,1fr);
 }
 
-.numbers {
-  gap: 16px;
-}
+
 
 .posts .ant-upload.ant-upload-select-picture-card,
 .posts .ant-upload-list-picture-card .ant-upload-list-item,
@@ -455,13 +306,5 @@ export default {
   height: 150px !important;
 }
 
-.site-info .galleries-grid-1 .ant-upload.ant-upload-select-picture-card,
-.site-info .galleries-grid-2 .ant-upload.ant-upload-select-picture-card,
-.site-info .galleries-grid-1 .ant-upload-list-picture-card-container,
-.site-info .galleries-grid-2 .ant-upload-list-picture-card-container,
-.site-info .galleries-grid-1 .ant-upload-list-picture-card .ant-upload-list-item,
-.site-info .galleries-grid-2 .ant-upload-list-picture-card .ant-upload-list-item {
-  width: 100%;
-  height: 180px;
-}
+
 </style>

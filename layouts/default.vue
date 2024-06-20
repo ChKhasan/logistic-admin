@@ -340,14 +340,14 @@ export default {
         sub: "6",
         icon: require("../assets/svg/settings.svg?raw"),
         menuItems: [
-          // {
-          //   key: "23",
-          //   name: "Общие данные",
-          //   to: "/settings/site-info",
-          //   add: "settings-site-info",
-          //   edit: "settings-site-info",
-          //   show: true,
-          // },
+          {
+            key: "23",
+            name: "Общие данные",
+            to: "/settings/site-info",
+            add: "settings-site-info",
+            edit: "settings-site-info",
+            show: true,
+          },
           // {
           //   key: "24",
           //   name: "Переводы",
