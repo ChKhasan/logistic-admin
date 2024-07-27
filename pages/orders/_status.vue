@@ -91,9 +91,9 @@
           </span>
           <span slot="driver" slot-scope="text">
           <nuxt-link v-if="text?.driver"
-                     :to="`/driver/${text?.id}`">{{ `${text?.driver?.firstName} - ${text?.driver?.id}` }}</nuxt-link>
+                     :to="`/drivers/${text?.driver?.id}`">{{ `${text?.driver?.firstName} - ${text?.driver?.id}` }}</nuxt-link>
           <nuxt-link v-else-if="text?.company"
-                     :to="`/company/${text?.id}`">{{ `${text?.company?.firstName} - ${text?.company?.id}` }}</nuxt-link>
+                     :to="`/companies/${text?.company?.id}`">{{ `${text?.company?.firstName} - ${text?.company?.id}` }}</nuxt-link>
             <span v-else>----</span>
           </span>
           <span slot="orderId" slot-scope="text">#{{ text?.id }}</span>

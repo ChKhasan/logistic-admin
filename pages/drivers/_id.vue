@@ -229,7 +229,7 @@
                         class="min-h-[350px]"
                         style="height: 250px"
                       >
-                        <ymap-marker :coords="coords" hint-content="some hint" marker-id="123" />
+                        <ymap-marker :coords="coords" :hint-content="`${driver?.lastName} ${driver?.firstName}`" marker-id="123" />
                       </yandex-map>
 <!--                      <iframe-->
 <!--                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.134229445218!2d69.24423062643743!3d41.32769444969508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b70de29132d%3A0x4f62d5ff05a9a3dd!2z0JPQsNGE0YPRgCDQk9GD0LvQvtC8!5e0!3m2!1sru!2s!4v1712050717492!5m2!1sru!2s"-->
