@@ -29,12 +29,12 @@
         <div class="d-flex flex-column">
           <div class="item">
             <p class="question">Откуда</p>
-            <p class="answer">{{ order?.fromAddress || '----' }}</p>
+            <p class="answer">{{ order?.regionFrom || '----' }}</p>
           </div>
           <div class="item mt-4">
             <p class="question">Куда</p>
             <p class="answer">
-              {{order?.toAddress || '----'}}
+              {{order?.regionTo || '----'}}
             </p>
           </div>
 
